@@ -296,4 +296,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     this.sendDisabled = false;
     this.snackBar.open('Tapahtui virhe!', 'Sulje');
   }
+
+  openBusinessCard(): void {
+    window.open('/#/jaa/' + this.user.handle, '_blank');
+  }
 }

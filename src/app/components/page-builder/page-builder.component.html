@@ -1,7 +1,16 @@
 <form [formGroup]="editFormGroup">
   <mat-toolbar *ngIf="authService.isAuthenticated()">
     <h2 class="text-white">Omien tietojen muokkaaminen</h2>
-    <button mat-raised-button color="primary" (click)="save()">Tallenna</button>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" class="me-2" (click)="openBusinessCard()">
+        <span>Avaa käyntikorttisi</span>
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" (click)="save()">
+        <span>Tallenna</span>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
 
   <div class="my-4">
@@ -68,6 +77,7 @@
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="user">
       <mat-label>Kahvani</mat-label>
       <input matInput type="text" formControlName="handle" autocomplete="off" maxlength="300" (focusout)="validateHandle()">
+      <mat-icon matSuffix matTooltip="Kahvasi näkyy käyntikorttisi jakolinkissä.">info</mat-icon>
       <mat-error *ngIf="editForm.handle.errors?.required">Tieto on pakollinen</mat-error>
       <mat-error *ngIf="editForm.handle.errors?.alreadyExists">Kahva on jo käytössä</mat-error>
     </mat-form-field>
