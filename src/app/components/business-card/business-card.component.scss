@@ -1,0 +1,261 @@
+.max-width-400 {
+  max-width: 400px;
+}
+
+.transparent-background {
+  background-color: transparent;
+}
+
+.bio-item {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+
+  span {
+    margin-left: 0.3rem;
+  }
+}
+
+.social-buttons {
+  text-align: center;
+
+  a {
+    font-size: 1.5rem;
+  }
+}
+
+.share-button {
+  margin-bottom: 10px;
+}
+
+.image-container {
+  width: 100%;
+  text-align: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.business-card-header {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .container {
+    border-radius: 4px;
+
+    .bg-info {
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+    }
+
+    .main-content {
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+  }
+}
+
+.bg-info {
+  h1 {
+    margin-bottom: 0;
+  }
+}
+
+.row {
+  border-radius: 4px;
+}
+
+.main-content {
+  padding-bottom: 10px;
+
+  .description {
+    white-space: pre-wrap;
+  }
+
+  .detailed-information {
+    margin-top: 2rem;
+    padding-top: 1rem;
+  }
+
+  .information-row {
+    display: flex;
+    padding: 0 10px;
+  }
+
+  .information-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem 0;
+
+    h3, h4 {
+      margin: 0;
+    }
+
+    h3 {
+      font-weight: 550;
+      text-transform: uppercase;
+    }
+
+    h4 {
+      font-style: italic;
+      margin-bottom: 5px;
+    }
+  }
+
+  .information-icon-container {
+    display: flex;
+    flex: 0 0 7rem;
+    align-items: center;
+    flex-direction: column;
+
+    .horizontal-line {
+      width: 0.5rem;
+      height: 100%;
+    }
+
+    .horizontal-line-green {
+      background-color: #16DB93;
+    }
+
+    .horizontal-line-orange {
+      background-color: #FFBB93;
+    }
+
+    .information-icon {
+      border: 8px solid;
+      border-radius: 50%;
+      flex: 0 0 5rem 5rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      mat-icon {
+        font-size: 2rem;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .information-icon-green {
+      border-color: #16DB93;
+      color: #008F47;
+    }
+
+    .information-icon-orange {
+      border-color: #FFBB93;
+      color: #F96E46;
+    }
+  }
+}
+
+.light {
+  .share-button {
+    color: #FFFFFF;
+  }
+
+  .bio {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .social-buttons {
+    a {
+      color: #FFFFFF;
+    }
+  }
+
+  .image-container {
+    img {
+      border: 3px solid #FFFFFF;
+      border-radius: 5%;
+    }
+  }
+
+  .bg-info {
+    background-color: #025174;
+    background-image: linear-gradient(
+        -225deg, #025174 0%, #3584A7 51%, #30D2BE 100%);
+
+    a {
+      color: #FFFFFF;
+    }
+  }
+
+  .main-content {
+    background-color: #FFFFFF;
+
+    .detailed-information {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.dark {
+  .share-button {
+    color: #FFFFFF;
+  }
+
+  .bio {
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .social-buttons {
+    a {
+      color: #E6E6E6;
+    }
+  }
+
+  .image-container {
+    .rounded-circle {
+      border: 3px solid #FFFFFF;
+    }
+  }
+
+  .bg-info {
+    background-color: #1D3E48 !important;
+
+    a {
+      color: #E6E6E6;
+    }
+  }
+
+  .main-content {
+    background-color: #3A4042;
+    color: #E6E6E6;
+
+    .detailed-information {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.share-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 999999;
+  background-color: rgba(0, 0, 0, 0.8);
+  right: 0;
+  left: 0;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  align-items: center;
+}

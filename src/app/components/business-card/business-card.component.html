@@ -1,0 +1,107 @@
+<div class="share-overlay" *ngIf="isShareMode" (click)="toggleShare()">
+  <ngx-qrcode
+    [elementType]="qrElementType"
+    [errorCorrectionLevel]="qrCorrectionLevel"
+    [value]="qrValue"></ngx-qrcode>
+</div>
+<div class="container" *ngIf="user" [ngClass]="getContainerClasses()">
+  <div class="row">
+    <div class="col-md-4 bg-info col-sm-12 pt-3" [ngClass]="{'col-12 max-width-400': !hasMainContent(), 'col-md-4': hasMainContent()}">
+      <div class="business-card-header">
+        <button mat-icon-button class="share-button" (click)="toggleShare()">
+          <mat-icon>share</mat-icon>
+        </button>
+
+        <span class="text-white">@{{user.handle}}</span>
+      </div>
+
+      <div class="image-container mb-4">
+        <img [src]="user.image" alt="" />
+      </div>
+
+      <h1 class="text-center text-white">{{getUserName()}}</h1>
+      <h5 class="text-center text-white">{{user.title}}</h5>
+
+      <div class="bio text-white p-3">
+        <div *ngIf="user.email" class="bio-item"><mat-icon>email</mat-icon><span><a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></span></div>
+        <div *ngIf="user.website" class="bio-item"><mat-icon>web</mat-icon><span><a [href]="user.website" target="_blank">{{user.website}}</a></span></div>
+        <div *ngIf="user.phone" class="bio-item"><mat-icon>phone</mat-icon><span><a href="tel:{{user.phone}}">{{user.phone}}</a></span></div>
+        <div *ngIf="user.location" class="bio-item"><mat-icon>location_on</mat-icon><span>{{user.location}}</span></div>
+      </div>
+
+      <div class="social-buttons p-3">
+        <a mat-icon-button color="accent" [href]="getFacebookLink(user.socialMediaLinks)" target="_blank" *ngIf="getFacebookLink(user.socialMediaLinks)">
+          <fa-icon [icon]="faFacebook"></fa-icon>
+        </a>
+        <a mat-icon-button color="accent" [href]="getTwitterLink(user.socialMediaLinks)" target="_blank" *ngIf="getTwitterLink(user.socialMediaLinks)">
+          <fa-icon [icon]="faTwitter"></fa-icon>
+        </a>
+        <a mat-icon-button color="accent" [href]="getLinkedinLink(user.socialMediaLinks)" target="_blank" *ngIf="getLinkedinLink(user.socialMediaLinks)">
+          <fa-icon [icon]="faLinkedin"></fa-icon>
+        </a>
+        <a mat-icon-button color="accent" [href]="getGithubLink(user.socialMediaLinks)" target="_blank" *ngIf="getGithubLink(user.socialMediaLinks)">
+          <fa-icon [icon]="faGithub"></fa-icon>
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content col-md-8 col-sm-12" *ngIf="hasMainContent()">
+      <h2 class="mt-2" *ngIf="user.description">{{user.accountType === 'user' ? 'Minusta' : 'Yrityksestämme'}} lyhyesti</h2>
+      <div class="description">{{user.description}}</div>
+
+      <div class="detailed-information mb-4" *ngIf="user.specialSkills">
+        <h2>{{user.accountType === 'user' ? 'Erityisosaaminen' : 'Palvelut'}}</h2>
+        <div class="information-row">
+          <mat-chip-list>
+            <mat-chip *ngFor="let specialSkill of getSpecialSkills(user.specialSkills)">{{specialSkill}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div class="detailed-information" *ngIf="user.workHistories?.length > 0">
+        <h2>Työhistoria</h2>
+        <div class="information-row" *ngFor="let workHistory of user.workHistories">
+          <div class="information-icon-container">
+            <div class="horizontal-line horizontal-line-green"></div>
+            <div class="information-icon information-icon-green">
+              <mat-icon>business_center</mat-icon>
+            </div>
+            <div class="horizontal-line horizontal-line-green"></div>
+          </div>
+          <div class="information-content">
+            <h3>{{workHistory.title}}</h3>
+            <h4>{{workHistory.workplace}} (2007-2020)</h4>
+            <span>{{workHistory.description}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detailed-information" *ngIf="user.educations?.length > 0">
+        <h2>Koulutus</h2>
+        <div class="information-row" *ngFor="let education of user.educations">
+          <div class="information-icon-container">
+            <div class="horizontal-line horizontal-line-orange"></div>
+            <div class="information-icon information-icon-orange">
+              <mat-icon>history_edu</mat-icon>
+            </div>
+            <div class="horizontal-line horizontal-line-orange"></div>
+          </div>
+          <div class="information-content">
+            <h3>{{education.title}}</h3>
+            <h4>{{education.educationPlace}} (2007-2020)</h4>
+            <span>{{education.description}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detailed-information mb-4" *ngIf="user.languages">
+        <h2>Kielet</h2>
+        <div class="information-row">
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip *ngFor="let language of getLanguages(user.languages)">{{language}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

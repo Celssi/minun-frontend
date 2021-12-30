@@ -1,0 +1,7 @@
+<app-navbar *ngIf="!isOnSharePage"></app-navbar>
+
+<div class="wrapper" [ngClass]="{'logged-in-wrapper': !isOnSharePage}">
+  <div class="container p-1" [ngClass]="{'login-container': isOnLoginPage}">
+    <router-outlet></router-outlet>
+  </div>
+</div>

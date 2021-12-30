@@ -1,0 +1,35 @@
+<div class="image-selector mb-2">
+  <img *ngIf="croppedImage" [src]="croppedImage" alt="imagePreview" class="image-preview">
+  <input #hiddenFileInput (change)="imageChanged($event)" accept="image/*" style="display: none" type="file"/>
+
+  <div class="mt-2">
+    <button (click)="fetchRandomImage()" class="me-2 mat-elevation-z2" color="primary" mat-mini-fab matTooltip="Uusi satunnainen kuva">
+      <mat-icon>refresh</mat-icon>
+    </button>
+
+    <button (click)="hiddenFileInput.click()" class="me-2 mat-elevation-z2" color="primary" mat-mini-fab matTooltip="Valitse kuva koneeltasi">
+      <mat-icon>camera_alt</mat-icon>
+    </button>
+
+    <button (click)="deleteImage()" class="mat-elevation-z2" color="warn" mat-mini-fab *ngIf="croppedImage" matTooltip="Poista kuva">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template #imagePickerModal>
+  <div class="modal-body">
+    <div class="image-cropper-container">
+      <image-cropper
+        (imageCropped)="imageCropped($event)"
+        [imageBase64]="image"
+        [imageChangedEvent]="imageChanged"
+        [resizeToHeight]="320"
+        format="png"
+      ></image-cropper>
+    </div>
+    <div class="mt-2 centered">
+      <button (click)="applyCrop()" mat-raised-button color="primary">Tallenna</button>
+    </div>
+  </div>
+</ng-template>

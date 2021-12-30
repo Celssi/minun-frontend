@@ -1,0 +1,9 @@
+FROM node:17
+EXPOSE 5000
+RUN mkdir /home/node/app
+RUN yarn global add serve @angular/cli
+COPY ./ /home/node/app
+WORKDIR /home/node/app
+RUN cp src/environments/environment.dev.ts src/environments/environment.ts
+RUN yarn install && ng build
+ENTRYPOINT ["serve", "dist/minun-frontend/"]
