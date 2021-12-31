@@ -300,7 +300,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   openBusinessCard(): void {
-    window.open('/#/jaa/' + this.user.handle, '_blank');
+    window.open('/jaa/' + this.user.handle, '_blank');
   }
 
   moveUp(list: FormArray, index: number): void {

@@ -2,7 +2,7 @@
 FROM node:latest as node
 
 # expose port
-EXPOSE 5000
+EXPOSE 80
 
 # set working directory
 WORKDIR /app
