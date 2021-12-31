@@ -8,6 +8,7 @@ EXPOSE 5000
 WORKDIR /app
 
 # install and cache app dependencies
+RUN yarn global add serve @angular/cli
 COPY . .
 RUN yarn install
 RUN ng build --configuration production
