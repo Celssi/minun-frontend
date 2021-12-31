@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://localhost:3000/api/'
+  backendUrl: 'https://minun-backend-prod-liq43pp4qa-lz.a.run.app/api/'
 };
