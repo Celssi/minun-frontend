@@ -16,4 +16,4 @@ RUN ng build --configuration production
 FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/* && rm -rf /etc/nginx/nginx.conf
 COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY --from=node /app/dist /usr/share/nginx/html
+COPY --from=node /app/dist/minun-frontend /usr/share/nginx/html
