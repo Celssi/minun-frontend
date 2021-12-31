@@ -1,8 +1,18 @@
-FROM node:17
+# base image
+FROM node:latest as node
+
+# expose port
 EXPOSE 5000
-RUN mkdir /home/node/app
-RUN yarn global add serve @angular/cli
-COPY ./ /home/node/app
-WORKDIR /home/node/app
-RUN yarn install && ng build --configuration production
-ENTRYPOINT ["serve", "dist/minun-frontend/"]
+
+# set working directory
+WORKDIR /app
+
+# install and cache app dependencies
+COPY . .
+RUN yarn install
+RUN ng build --configuration production
+
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/* && rm -rf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY --from=node /app/dist /usr/share/nginx/html

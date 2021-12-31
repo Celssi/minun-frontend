@@ -183,6 +183,12 @@
       <div class="work-history" formArrayName="workHistories" *ngFor="let workHistory of workHistories.controls; let i = index" [ngClass]="{'mb-4': i < workHistories.controls.length - 1}">
         <mat-card class="mat-elevation-z0">
           <mat-card-actions>
+            <button (click)="moveUp(workHistories, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä ylemmäksi" *ngIf="i - 1 >= 0">
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button (click)="moveDown(workHistories, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä alemmaksi" *ngIf="i + 1 < educations.controls.length">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
             <button (click)="removeFromList(workHistories, i)" class="mat-elevation-z2" color="warn" mat-mini-fab matTooltip="Poista työhistoria">
               <mat-icon>delete</mat-icon>
             </button>
@@ -199,6 +205,11 @@
               <mat-label>Titteli</mat-label>
               <input matInput type="text" autocomplete="organization-title" formControlName="title" maxlength="300">
               <mat-error *ngIf="workHistory.get('title').errors?.required">Tieto on pakollinen</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>Ajankohta</mat-label>
+              <input matInput type="text" autocomplete="off" formControlName="period" maxlength="300">
+              <mat-error *ngIf="workHistory.get('period').errors?.required">Tieto on pakollinen</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="width-all-available">
               <mat-label>Kuvaus</mat-label>
@@ -223,7 +234,13 @@
       <div class="education" formArrayName="educations" *ngFor="let education of educations.controls; let i = index" [ngClass]="{'mb-4': i < educations.controls.length - 1}">
         <mat-card class="mat-elevation-z0">
           <mat-card-actions>
-            <button (click)="removeFromList(educations, i)" class="mat-elevation-z2" color="warn" mat-mini-fab matTooltip="Poista koulutus">
+            <button (click)="moveUp(educations, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä ylemmäksi" *ngIf="i - 1 >= 0">
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button (click)="moveDown(educations, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä alemmaksi" *ngIf="i + 1 < educations.controls.length">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <button (click)="removeFromList(educations, i)" class="mat-elevation-z2 mx-1" color="warn" mat-mini-fab matTooltip="Poista koulutus">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
@@ -239,6 +256,11 @@
               <mat-label>Tutkinto</mat-label>
               <input matInput type="text" autocomplete="off" formControlName="title" maxlength="300">
               <mat-error *ngIf="education.get('title').errors?.required">Tieto on pakollinen</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>Ajankohta</mat-label>
+              <input matInput type="text" autocomplete="off" formControlName="period" maxlength="300">
+              <mat-error *ngIf="education.get('period').errors?.required">Tieto on pakollinen</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="width-all-available">
               <mat-label>Kuvaus</mat-label>

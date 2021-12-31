@@ -140,6 +140,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     const workHistoryGroup = this.formBuilder.group({
       workplace: [workHistory?.workplace ?? '', Validators.required],
       title: [workHistory?.title ?? '', Validators.required],
+      period: [workHistory?.period ?? '', Validators.required],
       description: [workHistory?.description ?? '', Validators.required]
     });
 
@@ -150,6 +151,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     const educationGroup = this.formBuilder.group({
       educationPlace: [education?.educationPlace ?? '', Validators.required],
       title: [education?.title ?? '', Validators.required],
+      period: [education?.period ?? '', Validators.required],
       description: [education?.description ?? '', Validators.required]
     });
 
@@ -299,5 +301,17 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   openBusinessCard(): void {
     window.open('/#/jaa/' + this.user.handle, '_blank');
+  }
+
+  moveUp(list: FormArray, index: number): void {
+    if (index - 1 >= 0) {
+      [list.controls[index], list.controls[index - 1]] = [list.controls[index - 1], list.controls[index]];
+    }
+  }
+
+  moveDown(list: FormArray, index: number): void {
+    if (list.length > index + 1) {
+      [list.controls[index], list.controls[index + 1]] = [list.controls[index + 1], list.controls[index]];
+    }
   }
 }
