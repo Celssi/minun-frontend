@@ -15,6 +15,15 @@ import {WorkHistory} from '../../models/workHistory';
 import {Router} from '@angular/router';
 import {ImageSelectorComponent} from '../image-selector/image-selector.component';
 
+// TODO PWA nimi vaihtaminen
+// TODO Helpompi tapa lisätä työpaikkoja
+// TODO Työpaikkojen järjestäminen
+// TODO Yrityskortti
+// TODO Hakutoiminnot
+// TODO Tilin muuttaminen ei julkiseksi
+// TODO Mainokset
+// TODO Kuukausimaksu
+
 @Component({
   selector: 'app-page-builder',
   templateUrl: './page-builder.component.html',
@@ -236,6 +245,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       this.dataService.save(values).subscribe({
         next: (result) => {
           this.sendDisabled = false;
+          this.user.handle = this.editForm.handle.value;
 
           this.snackBar.open(this.user ?
             'Muutokset tallennettu!' :

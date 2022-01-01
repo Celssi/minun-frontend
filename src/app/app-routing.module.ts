@@ -11,11 +11,11 @@ const routes: Routes = [
   {path: '', redirectTo: '/etusivu', pathMatch: 'full'},
   {path: 'etusivu', component: FrontPageComponent},
   {path: 'etusivu/:id', component: BusinessCardComponent},
-  {path: 'jaa/:handle', component: BusinessCardComponent},
   {path: 'etsi', component: SearchPageComponent},
   {path: 'kirjaudu', component: LoginComponent},
   {path: 'tutustu', component: InfoPageComponent},
-  {path: 'logout', component: LogoutComponent}
+  {path: 'logout', component: LogoutComponent},
+  {path: ':handle', component: BusinessCardComponent}
 ];
 
 @NgModule({
