@@ -1,3 +1,11 @@
+<ng-container *ngIf="loadingService.isLoading$ | async">
+  <div class="spinner-overlay">
+    <div class="spinner">
+      <mat-progress-spinner diameter=200 mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+</ng-container>
+
 <app-navbar *ngIf="!isOnSharePage"></app-navbar>
 
 <div class="wrapper" [ngClass]="{'logged-in-wrapper': !isOnSharePage}">

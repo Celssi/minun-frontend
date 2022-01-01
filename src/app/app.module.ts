@@ -38,6 +38,13 @@ import {NgxQRCodeModule} from '@techiediaries/ngx-qrcode';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ImageSelectorComponent} from './components/image-selector/image-selector.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {LoadingInterceptor} from './interceptors/load.interceptor';
+import {LoadingService} from './services/loading.service';
+import * as WebFont from 'webfontloader';
+
+WebFont.load({
+  custom: { families: ['Material Icons', 'Material Icons Outline'], }
+});
 
 @NgModule({
   declarations: [
@@ -84,7 +91,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   providers: [
     AuthService,
     MatSnackBar,
+    LoadingService,
     {provide: HTTP_INTERCEPTORS, useClass: NotLoggedInInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {
         duration: 5000,

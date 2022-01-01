@@ -127,11 +127,23 @@
       height: 100%;
     }
 
-    .horizontal-line-green {
+    .vertical-line {
+      width: 3rem;
+      height: 0.3rem;
+      min-height: 0.3rem;
+      margin-left: 2.5rem;
+    }
+
+    .vertical-line-half-height {
+      height: calc(0.3rem / 2);
+      min-height: calc(0.3rem / 2);
+    }
+
+    .horizontal-line-green, .vertical-line-green {
       background-color: #16DB93;
     }
 
-    .horizontal-line-orange {
+    .horizontal-line-orange, .vertical-line-orange {
       background-color: #FFBB93;
     }
 

@@ -60,13 +60,15 @@
 
       <div class="detailed-information" *ngIf="user.workHistories?.length > 0">
         <h2>Työhistoria</h2>
-        <div class="information-row" *ngFor="let workHistory of user.workHistories">
+        <div class="information-row" *ngFor="let workHistory of user.workHistories; let i = index">
           <div class="information-icon-container">
+            <div class="vertical-line vertical-line-green" [ngClass]="{'vertical-line-half-height': i > 0}"></div>
             <div class="horizontal-line horizontal-line-green"></div>
             <div class="information-icon information-icon-green">
               <mat-icon>business_center</mat-icon>
             </div>
             <div class="horizontal-line horizontal-line-green"></div>
+            <div class="vertical-line vertical-line-green" [ngClass]="{'vertical-line-half-height': i < (user.workHistories.length - 1)}"></div>
           </div>
           <div class="information-content">
             <small>{{workHistory.period}}</small>
@@ -79,13 +81,15 @@
 
       <div class="detailed-information" *ngIf="user.educations?.length > 0">
         <h2>Koulutus</h2>
-        <div class="information-row" *ngFor="let education of user.educations">
+        <div class="information-row" *ngFor="let education of user.educations; let i  = index">
           <div class="information-icon-container">
+            <div class="vertical-line vertical-line-orange" [ngClass]="{'vertical-line-half-height': i > 0}"></div>
             <div class="horizontal-line horizontal-line-orange"></div>
             <div class="information-icon information-icon-orange">
               <mat-icon>history_edu</mat-icon>
             </div>
             <div class="horizontal-line horizontal-line-orange"></div>
+            <div class="vertical-line vertical-line-orange" [ngClass]="{'vertical-line-half-height': i < (user.educations.length - 1)}"></div>
           </div>
           <div class="information-content">
             <small>{{education.period}}</small>
