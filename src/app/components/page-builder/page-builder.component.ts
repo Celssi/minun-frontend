@@ -14,6 +14,8 @@ import {WorkHistory} from '../../models/workHistory';
 import {Router} from '@angular/router';
 import {ImageSelectorComponent} from '../image-selector/image-selector.component';
 
+// TODO Scroll
+// TODO Aukioloajat
 // TODO Yrityskortti
 // TODO Hakutoiminnot
 // TODO Tilin muuttaminen ei julkiseksi
@@ -83,9 +85,9 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         phone: [this.user ? this.user.phone : '', PhoneNumberValidator('FI')],
         website: [this.user ? this.user.website : ''],
         location: [this.user ? this.user.location : ''],
-        description: [this.user.description ? this.user.description : '', [Validators.max(1000)]],
-        image: [this.user.image],
-        theme: [this.user.theme],
+        description: [this.user ? this.user.description : '', [Validators.max(1000)]],
+        image: [this.user ? this.user.image : ''],
+        theme: [this.user ? this.user.theme : ''],
         facebook: [this.user ? this.getSocialMediaLink(this.user, LinkType.Facebook) : ''],
         twitter: [this.user ? this.getSocialMediaLink(this.user, LinkType.Twitter) : ''],
         github: [this.user ? this.getSocialMediaLink(this.user, LinkType.Github) : ''],
@@ -93,20 +95,20 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         handle: [this.user ? this.user.handle : '']
       });
 
-      this.image = this.user.image;
-      this.languages = this.user.languages?.split(', ').filter(Boolean) ?? [];
-      this.specialSkills = this.user.specialSkills?.split(', ').filter(Boolean) ?? [];
+      this.image = this.user?.image;
+      this.languages = this.user?.languages?.split(', ').filter(Boolean) ?? [];
+      this.specialSkills = this.user?.specialSkills?.split(', ').filter(Boolean) ?? [];
 
-      this.user.workHistories?.forEach((workHistory: WorkHistory) => {
+      this.user?.workHistories?.forEach((workHistory: WorkHistory) => {
         this.addWorkHistoryFormGroup(workHistory);
       });
 
-      this.user.educations?.forEach((education: Education) => {
+      this.user?.educations?.forEach((education: Education) => {
         this.addEducationFormGroup(education);
       });
 
-      this.sortByOrder(this.workHistories.controls);
-      this.sortByOrder(this.educations.controls);
+      this.sortByOrder(this.workHistories?.controls);
+      this.sortByOrder(this.educations?.controls);
 
       this.editFormGroup.get('accountType').disable();
       this.editFormGroup.get('email').disable();
@@ -242,13 +244,12 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       values.specialSkills = this.specialSkills.join(', ');
       values.id = this.user?.id;
 
-      this.setOrderNumbers(this.workHistories.controls);
-      this.setOrderNumbers(this.educations.controls);
+      this.setOrderNumbers(this.workHistories?.controls);
+      this.setOrderNumbers(this.educations?.controls);
 
       this.dataService.save(values).subscribe({
         next: (result) => {
           this.sendDisabled = false;
-          this.user.handle = this.editForm.handle.value;
 
           this.snackBar.open(this.user ?
             'Muutokset tallennettu!' :
@@ -258,9 +259,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
             this.dataService.setToken(result.token);
             this.authService.setUser(result.user);
             this.initForm();
-            setTimeout(() => {
-              window.scroll(0, 0);
-            }, 100);
+          } else {
+            this.user.handle = this.editForm.handle.value;
           }
         },
         error: (error) => {
@@ -329,11 +329,16 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   sortByOrder(items: Array<any>): void {
-    items.sort((a, b) => (a.value.order > b.value.order) ? 1 : ((b.value.order > a.value.order) ? -1 : 0));
+    if (items) {
+      items.sort((a, b) => (a.value.order > b.value.order) ? 1 : ((b.value.order > a.value.order) ? -1 : 0));
+    }
   }
+
   setOrderNumbers(items: Array<any>): void {
-    for (let i = 0; i < items.length; i++) {
-      items[i].value.order = i;
+    if (items) {
+      for (let i = 0; i < items.length; i++) {
+        items[i].value.order = i;
+      }
     }
   }
 }
