@@ -10,7 +10,6 @@ import {BusinessCardComponent} from './components/business-card/business-card.co
 const routes: Routes = [
   {path: '', redirectTo: '/etusivu', pathMatch: 'full'},
   {path: 'etusivu', component: FrontPageComponent},
-  {path: 'etusivu/:id', component: BusinessCardComponent},
   {path: 'etsi', component: SearchPageComponent},
   {path: 'kirjaudu', component: LoginComponent},
   {path: 'tutustu', component: InfoPageComponent},

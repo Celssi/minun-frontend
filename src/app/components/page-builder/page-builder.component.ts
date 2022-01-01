@@ -313,7 +313,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   openBusinessCard(): void {
-    window.open('/jaa/' + this.user.handle, '_blank');
+    window.open('/' + this.user.handle, '_blank');
   }
 
   moveUp(list: FormArray, index: number): void {
@@ -329,7 +329,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   sortByOrder(items: Array<any>): void {
-    console.log(items);
     items.sort((a, b) => (a.value.order > b.value.order) ? 1 : ((b.value.order > a.value.order) ? -1 : 0));
   }
   setOrderNumbers(items: Array<any>): void {

@@ -40,11 +40,6 @@ import {ImageSelectorComponent} from './components/image-selector/image-selector
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {LoadingInterceptor} from './interceptors/load.interceptor';
 import {LoadingService} from './services/loading.service';
-import * as WebFont from 'webfontloader';
-
-WebFont.load({
-  custom: { families: ['Material Icons', 'Material Icons Outline'], }
-});
 
 @NgModule({
   declarations: [

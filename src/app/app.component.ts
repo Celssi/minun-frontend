@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, Renderer2} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {LoadingService} from './services/loading.service';
+import * as FontFaceObserver from 'fontfaceobserver';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent {
   constructor(
     private router: Router,
     public loadingService: LoadingService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef,
   ) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
@@ -21,5 +24,9 @@ export class AppComponent {
         this.isOnSharePage = val.url.startsWith('/jaa');
       }
     });
+
+    const materialIcons = new FontFaceObserver('Material Icons');
+    materialIcons.load(null, 10000)
+      .then(() => this.renderer.addClass(this.elementRef.nativeElement, 'material-icons-loaded'));
   }
 }
