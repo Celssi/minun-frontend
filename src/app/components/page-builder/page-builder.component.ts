@@ -7,7 +7,6 @@ import {PhoneNumberValidator} from '../../helpers/PhoneNumberValidator';
 import {User} from '../../models/user';
 import {LinkType} from '../../models/socialMediaLink';
 import {faFacebook, faGithub, faLinkedin, faTwitter} from '@fortawesome/free-brands-svg-icons';
-import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Education} from '../../models/education';
@@ -15,9 +14,6 @@ import {WorkHistory} from '../../models/workHistory';
 import {Router} from '@angular/router';
 import {ImageSelectorComponent} from '../image-selector/image-selector.component';
 
-// TODO PWA nimi vaihtaminen
-// TODO Helpompi tapa lisätä työpaikkoja
-// TODO Työpaikkojen järjestäminen
 // TODO Yrityskortti
 // TODO Hakutoiminnot
 // TODO Tilin muuttaminen ei julkiseksi
@@ -43,7 +39,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   faTwitter = faTwitter;
   faGithub = faGithub;
   faLinkedin = faLinkedin;
-  faPlus = faPlus;
   languages = [];
   specialSkills = [];
 
@@ -110,6 +105,9 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         this.addEducationFormGroup(education);
       });
 
+      this.sortByOrder(this.workHistories.controls);
+      this.sortByOrder(this.educations.controls);
+
       this.editFormGroup.get('accountType').disable();
       this.editFormGroup.get('email').disable();
     }
@@ -150,7 +148,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       workplace: [workHistory?.workplace ?? '', Validators.required],
       title: [workHistory?.title ?? '', Validators.required],
       period: [workHistory?.period ?? '', Validators.required],
-      description: [workHistory?.description ?? '', Validators.required]
+      description: [workHistory?.description ?? '', Validators.required],
+      order: [workHistory?.order ?? 0]
     });
 
     this.workHistories.push(workHistoryGroup);
@@ -161,7 +160,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       educationPlace: [education?.educationPlace ?? '', Validators.required],
       title: [education?.title ?? '', Validators.required],
       period: [education?.period ?? '', Validators.required],
-      description: [education?.description ?? '', Validators.required]
+      description: [education?.description ?? '', Validators.required],
+      order: [education?.order ?? 0]
     });
 
     this.educations.push(educationGroup);
@@ -241,6 +241,9 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       values.languages = this.languages.join(', ');
       values.specialSkills = this.specialSkills.join(', ');
       values.id = this.user?.id;
+
+      this.setOrderNumbers(this.workHistories.controls);
+      this.setOrderNumbers(this.educations.controls);
 
       this.dataService.save(values).subscribe({
         next: (result) => {
@@ -322,6 +325,16 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   moveDown(list: FormArray, index: number): void {
     if (list.length > index + 1) {
       [list.controls[index], list.controls[index + 1]] = [list.controls[index + 1], list.controls[index]];
+    }
+  }
+
+  sortByOrder(items: Array<any>): void {
+    console.log(items);
+    items.sort((a, b) => (a.value.order > b.value.order) ? 1 : ((b.value.order > a.value.order) ? -1 : 0));
+  }
+  setOrderNumbers(items: Array<any>): void {
+    for (let i = 0; i < items.length; i++) {
+      items[i].value.order = i;
     }
   }
 }

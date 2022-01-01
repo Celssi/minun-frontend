@@ -5,4 +5,5 @@ export class WorkHistory {
   period: string;
   description: string;
   userId: number;
+  order: number;
 }

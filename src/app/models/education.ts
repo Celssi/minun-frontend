@@ -5,4 +5,5 @@ export class Education {
   period: string;
   description: string;
   userId: number;
+  order: number;
 }

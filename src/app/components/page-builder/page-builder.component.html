@@ -173,12 +173,7 @@
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated() && isUserForm()">
     <div class="work-histories">
-      <h2>
-        Työhistoria
-        <button mat-icon-button (click)="addWorkHistoryFormGroup()">
-          <fa-icon [icon]="faPlus"></fa-icon>
-        </button>
-      </h2>
+      <h2>Työhistoria</h2>
 
       <div class="work-history" formArrayName="workHistories" *ngFor="let workHistory of workHistories.controls; let i = index" [ngClass]="{'mb-4': i < workHistories.controls.length - 1}">
         <mat-card class="mat-elevation-z0">
@@ -220,16 +215,16 @@
         </mat-card>
       </div>
     </div>
+    <div class="button-row my-3">
+      <button mat-raised-button color="primary" class="add-button" (click)="addWorkHistoryFormGroup()">
+        Lisää työhistoria
+      </button>
+    </div>
   </mat-card>
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated() && isUserForm()">
     <div class="educations">
-      <h2>
-        Koulutus
-        <button mat-icon-button (click)="addEducationFormGroup()">
-          <fa-icon [icon]="faPlus"></fa-icon>
-        </button>
-      </h2>
+      <h2>Koulutus</h2>
 
       <div class="education" formArrayName="educations" *ngFor="let education of educations.controls; let i = index" [ngClass]="{'mb-4': i < educations.controls.length - 1}">
         <mat-card class="mat-elevation-z0">
@@ -270,6 +265,11 @@
           </div>
         </mat-card>
       </div>
+    </div>
+    <div class="button-row my-3">
+      <button mat-raised-button color="primary" class="add-button" (click)="addEducationFormGroup()">
+        Lisää koulutus
+      </button>
     </div>
   </mat-card>
 
