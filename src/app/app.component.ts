@@ -3,8 +3,13 @@ import {NavigationEnd, Router} from '@angular/router';
 import {LoadingService} from './services/loading.service';
 
 import WebFont from 'webfontloader';
-import {Subscription} from 'rxjs';
-import {NgcCookieConsentService, NgcInitializeEvent, NgcNoCookieLawEvent, NgcStatusChangeEvent} from 'ngx-cookieconsent';
+import {filter, Subscription} from 'rxjs';
+import {NgcCookieConsentService, NgcStatusChangeEvent} from 'ngx-cookieconsent';
+import {CookieService} from 'ngx-cookie';
+import {environment} from '../environments/environment';
+
+// tslint:disable-next-line:ban-types
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -15,12 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isOnLoginPage = false;
   isOnSharePage = false;
 
-  private popupOpenSubscription: Subscription;
-  private popupCloseSubscription: Subscription;
-  private initializeSubscription: Subscription;
   private statusChangeSubscription: Subscription;
-  private revokeChoiceSubscription: Subscription;
-  private noCookieLawSubscription: Subscription;
 
   @ViewChild('wrapper')
   private wrapperDiv!: ElementRef<HTMLElement>;
@@ -28,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private ccService: NgcCookieConsentService,
+    private cookieService: CookieService,
     public loadingService: LoadingService
   ) {
     router.events.subscribe((val) => {
@@ -46,54 +47,38 @@ export class AppComponent implements OnInit, OnDestroy {
       },
     });
 
-    console.log(this.ccService)
-    // subscribe to cookieconsent observables to react to main events
-    this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(() => {
-      // you can use this.ccService.getConfig() to do stuff...
-    });
-
-    this.popupCloseSubscription = this.ccService.popupClose$.subscribe(() => {
-      // you can use this.ccService.getConfig() to do stuff...
-    });
-
-    this.initializeSubscription = this.ccService.initialize$.subscribe(
-      (event: NgcInitializeEvent) => {
-        // you can use this.ccService.getConfig() to do stuff...
-      }
-    );
-
     this.statusChangeSubscription = this.ccService.statusChange$.subscribe(
       (event: NgcStatusChangeEvent) => {
-        // you can use this.ccService.getConfig() to do stuff...
+        this.setUpAnalytics();
       }
     );
 
-    this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(
-      () => {
-        // you can use this.ccService.getConfig() to do stuff...
-      }
-    );
-
-    this.noCookieLawSubscription = this.ccService.noCookieLaw$.subscribe(
-      (event: NgcNoCookieLawEvent) => {
-        // you can use this.ccService.getConfig() to do stuff...
-      }
-    );
+    const consent = this.cookieService.get('cookieconsent_status');
+    if (consent) {
+      this.setUpAnalytics();
+    }
   }
 
   ngOnDestroy(): void {
-    // unsubscribe to cookieconsent observables to prevent memory leaks
-    this.popupOpenSubscription.unsubscribe();
-    this.popupCloseSubscription.unsubscribe();
-    this.initializeSubscription.unsubscribe();
     this.statusChangeSubscription.unsubscribe();
-    this.revokeChoiceSubscription.unsubscribe();
-    this.noCookieLawSubscription.unsubscribe();
   }
 
   onActivate($event: any): void {
     if (this.wrapperDiv) {
       (this.wrapperDiv.nativeElement as HTMLElement).scrollTop = 0;
+    }
+  }
+
+  setUpAnalytics(): void {
+    if (environment.useAnalytics) {
+      this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe((event: NavigationEnd) => {
+          gtag('config', 'G-GEPNC6YNVY',
+            {
+              page_path: event.urlAfterRedirects
+            }
+          );
+        });
     }
   }
 }

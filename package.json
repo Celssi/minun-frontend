@@ -36,6 +36,7 @@
     "moment": "^2.29.1",
     "ng-business-hours": "^0.1.0",
     "ngx-bootstrap": "^7.1.2",
+    "ngx-cookie": "^5.0.2",
     "ngx-cookieconsent": "^2.2.3",
     "ngx-image-cropper": "^5.0.1",
     "ngx-material-timepicker": "^5.5.3",

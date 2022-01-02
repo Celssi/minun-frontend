@@ -46,12 +46,13 @@ import localeFI from '@angular/common/locales/fi';
 import {registerLocaleData} from '@angular/common';
 import {LocaleService} from './services/locale.service';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+import {CookieModule} from 'ngx-cookie';
 
 registerLocaleData(localeFI);
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
-    domain: 'minun.info'
+    domain: environment.domain
   },
   position: 'bottom',
   theme: 'edgeless',
@@ -116,7 +117,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     NgxMaterialTimepickerModule.setLocale('fi-FI'),
     MatToolbarModule,
     NgBusinessHoursModule,
-    NgcCookieConsentModule.forRoot(cookieConfig)
+    NgcCookieConsentModule.forRoot(cookieConfig),
+    CookieModule.forRoot()
   ],
   providers: [
     AuthService,

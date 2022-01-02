@@ -4878,6 +4878,13 @@ ngx-bootstrap@^7.1.2:
   dependencies:
     tslib "^2.0.0"
 
+ngx-cookie@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-cookie/-/ngx-cookie-5.0.2.tgz#cb658180b786d511d0ef163cfe195061d0a0e0e1"
+  integrity sha512-auivWhAhC5bW1HssvtQild1TREHWb1JtcKO0e+VGe9T7LHrfi5w2qcP8C58ly64PT+brZHQBvT1Azb7a6goHZA==
+  dependencies:
+    tslib "^2.0.0"
+
 ngx-cookieconsent@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/ngx-cookieconsent/-/ngx-cookieconsent-2.2.3.tgz#52b44f37557b74841cd332905c94b72bb29fdd82"
