@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -40,6 +40,41 @@ import {ImageSelectorComponent} from './components/image-selector/image-selector
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {LoadingInterceptor} from './interceptors/load.interceptor';
 import {LoadingService} from './services/loading.service';
+import {NgBusinessHoursModule} from 'ng-business-hours';
+
+import localeFI from '@angular/common/locales/fi';
+import {registerLocaleData} from '@angular/common';
+import {LocaleService} from './services/locale.service';
+import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+
+registerLocaleData(localeFI);
+
+const cookieConfig: NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'minun.info'
+  },
+  position: 'bottom',
+  theme: 'edgeless',
+  palette: {
+    popup: {
+      background: '#23232E',
+      text: '#FFFFFF'
+    },
+    button: {
+      background: '#607D8B',
+      text: '#FFFFFF'
+    }
+  },
+  type: 'info',
+  content: {
+    message: 'Sivusto käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi.',
+    dismiss: 'Selvä juttu!',
+    deny: 'Refuse cookies',
+    link: 'Lue lisää',
+    href: 'https://cookiesandyou.com',
+    policy: 'Cookie Policy'
+  }
+};
 
 @NgModule({
   declarations: [
@@ -52,8 +87,6 @@ import {LoadingService} from './services/loading.service';
     InfoPageComponent,
     PageBuilderComponent,
     BusinessCardComponent,
-    ImageSelectorComponent,
-    ImageSelectorComponent,
     ImageSelectorComponent
   ],
   imports: [
@@ -81,7 +114,9 @@ import {LoadingService} from './services/loading.service';
     MatButtonToggleModule,
     NgxQRCodeModule,
     NgxMaterialTimepickerModule.setLocale('fi-FI'),
-    MatToolbarModule
+    MatToolbarModule,
+    NgBusinessHoursModule,
+    NgcCookieConsentModule.forRoot(cookieConfig)
   ],
   providers: [
     AuthService,
@@ -95,6 +130,12 @@ import {LoadingService} from './services/loading.service';
         horizontalPosition: 'center',
         verticalPosition: 'top'
       }
+    },
+    LocaleService,
+    {
+      provide: LOCALE_ID,
+      deps: [LocaleService],
+      useFactory: (localeService: LocaleService) => localeService.locale
     }
   ],
   exports: [

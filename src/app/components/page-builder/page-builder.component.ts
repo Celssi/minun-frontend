@@ -13,14 +13,17 @@ import {Education} from '../../models/education';
 import {WorkHistory} from '../../models/workHistory';
 import {Router} from '@angular/router';
 import {ImageSelectorComponent} from '../image-selector/image-selector.component';
+import {NgBusinessHoursDaySettings} from 'ng-business-hours';
+import {BusinessHour} from '../../models/businessHour';
 
-// TODO Scroll
-// TODO Aukioloajat
-// TODO Yrityskortti
 // TODO Hakutoiminnot
 // TODO Tilin muuttaminen ei julkiseksi
 // TODO Mainokset
 // TODO Kuukausimaksu
+// TODO Kartta
+// TODO Cookie Concent
+// TODO Käännöskirjasto
+// TODO Ota yhteyttä
 
 @Component({
   selector: 'app-page-builder',
@@ -43,6 +46,15 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   faLinkedin = faLinkedin;
   languages = [];
   specialSkills = [];
+  businessHours: NgBusinessHoursDaySettings[] = [
+    {open: true, from: '08:00', to: '16:00'},
+    {open: true, from: '08:00', to: '16:00'},
+    {open: true, from: '08:00', to: '16:00'},
+    {open: true, from: '08:00', to: '16:00'},
+    {open: true, from: '08:00', to: '16:00'},
+    {open: false, from: '08:00', to: '16:00'},
+    {open: false, from: '08:00', to: '16:00'}
+  ];
 
   get editForm(): any {
     return this.editFormGroup ? this.editFormGroup.controls : undefined;
@@ -61,7 +73,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     private dataService: DataService,
     public authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar
+  ) {
   }
 
   ngOnInit(): void {
@@ -111,7 +124,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       this.sortByOrder(this.educations?.controls);
 
       this.editFormGroup.get('accountType').disable();
-      this.editFormGroup.get('email').disable();
     }
   }
 
@@ -189,7 +201,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.dataService.checkEmailExists(this.editForm.email.value).subscribe({
+    this.dataService.checkEmailExists(this.editForm.email.value, this.user?.id).subscribe({
       next: (emailExists) => {
         if (emailExists) {
           this.editForm.email.setErrors({alreadyExists: true});
@@ -246,6 +258,10 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
       this.setOrderNumbers(this.workHistories?.controls);
       this.setOrderNumbers(this.educations?.controls);
+
+      const modifiedBusinessHours = this.businessHours.map(businessHour => new BusinessHour(businessHour));
+      this.setOrderNumbers(modifiedBusinessHours);
+      values.businessHours = modifiedBusinessHours;
 
       this.dataService.save(values).subscribe({
         next: (result) => {
@@ -335,9 +351,15 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   setOrderNumbers(items: Array<any>): void {
-    if (items) {
-      for (let i = 0; i < items.length; i++) {
+    if (!items) {
+      return;
+    }
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].value) {
         items[i].value.order = i;
+      } else {
+        items[i].order = i;
       }
     }
   }

@@ -8,8 +8,8 @@
 
 <app-navbar *ngIf="!isOnSharePage"></app-navbar>
 
-<div class="wrapper" [ngClass]="{'logged-in-wrapper': !isOnSharePage}">
+<div class="wrapper" [ngClass]="{'logged-in-wrapper': !isOnSharePage}" #wrapper>
   <div class="container p-1" [ngClass]="{'login-container': isOnLoginPage}">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
   </div>
 </div>

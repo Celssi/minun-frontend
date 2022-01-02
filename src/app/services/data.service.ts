@@ -34,11 +34,11 @@ export class DataService {
     }
   }
 
-  public checkEmailExists(email: string): Observable<boolean> {
-    return this.http.post<boolean>(environment.backendUrl + 'users/check-email', {email});
+  public checkEmailExists(email: string, userId: number): Observable<boolean> {
+    return this.http.post<boolean>(environment.backendUrl + 'users/check-email', {email, userId});
   }
 
-  public checkHandleExists(handle: string, userId: string): Observable<boolean> {
+  public checkHandleExists(handle: string, userId: number): Observable<boolean> {
     return this.http.post<boolean>(environment.backendUrl + 'users/check-handle', {handle, userId});
   }
 

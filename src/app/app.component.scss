@@ -32,10 +32,6 @@
   position: fixed;
 }
 
-app-root:not(.material-icons-loaded) {
-  display: none;
-}
-
 @media (max-width: 1024px) {
   .logged-in-wrapper {
     padding-bottom: 6rem;

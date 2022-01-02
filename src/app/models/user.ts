@@ -1,9 +1,10 @@
 import {SocialMediaLink} from './socialMediaLink';
 import {WorkHistory} from './workHistory';
 import {Education} from './education';
+import {BusinessHour} from './businessHour';
 
 export class User {
-  id: string;
+  id: number;
   accountType: string;
   firstName: string;
   lastName: string;
@@ -25,6 +26,7 @@ export class User {
   socialMediaLinks: SocialMediaLink[];
   workHistories: WorkHistory[];
   educations: Education[];
+  businessHours: BusinessHour[];
 
   constructor() {
     this.active = true;

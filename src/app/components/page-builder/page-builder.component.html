@@ -273,16 +273,15 @@
     </div>
   </mat-card>
 
-  <div *ngIf="isCompanyForm() && authService.isAuthenticated()">
-    <mat-form-field>
-      <input matInput class="timepicker" [ngxTimepicker]="picker1" [format]=24 placeholder="Aukeamisaika">
-    </mat-form-field>
-    <ngx-material-timepicker #picker1></ngx-material-timepicker>
-    <mat-form-field>
-      <input matInput class="timepicker" [ngxTimepicker]="picker2" [format]=24 placeholder="Sulkeutumisaika">
-    </mat-form-field>
-    <ngx-material-timepicker #picker2></ngx-material-timepicker>
-  </div>
+  <mat-card class="my-2" *ngIf="isCompanyForm() && authService.isAuthenticated()">
+    <h2>Aukioloajat</h2>
+    <ng-business-hours
+        [(ngModel)]="businessHours"
+        [ngModelOptions]="{standalone: true}"
+        timeFromLabel="Aukeaa"
+        timeToLabel="Sulkeutuu">
+    </ng-business-hours>
+  </mat-card>
 
   <mat-card *ngIf="authService.isAuthenticated()">
     <div class="theme-selector">

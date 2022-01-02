@@ -13,6 +13,7 @@ import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediar
 })
 export class BusinessCardComponent implements OnInit {
   public user: User;
+  public WEEKDAYS = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'];
 
   isShareMode = false;
   faFacebook = faFacebook;

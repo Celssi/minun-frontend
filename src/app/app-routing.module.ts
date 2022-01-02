@@ -20,7 +20,8 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     useHash: false,
-    relativeLinkResolution: 'legacy'
+    relativeLinkResolution: 'legacy',
+    scrollPositionRestoration: 'top'
   })],
   exports: [RouterModule]
 })
