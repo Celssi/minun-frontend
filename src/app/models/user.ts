@@ -22,6 +22,7 @@ export class User {
   languages: string;
   specialSkills: string;
   handle: string;
+  public: boolean;
 
   socialMediaLinks: SocialMediaLink[];
   workHistories: WorkHistory[];

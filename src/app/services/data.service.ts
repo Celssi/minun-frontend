@@ -4,20 +4,27 @@ import {environment} from '../../environments/environment';
 import {User} from '../models/user';
 import {LoginResult} from '../models/loginResult';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   public logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    this.router.navigate(['etusivu']);
   }
 
   public login(credentials: any): Observable<LoginResult> {
     return this.http.post<LoginResult>(environment.backendUrl + 'users/login', credentials);
+  }
+
+  public refresh(refreshToken: string, token: string): Observable<LoginResult> {
+    return this.http.post<LoginResult>(environment.backendUrl + 'users/refresh', {refreshToken, token});
   }
 
   public register(user): Observable<LoginResult> {
@@ -42,6 +49,12 @@ export class DataService {
     return this.http.post<boolean>(environment.backendUrl + 'users/check-handle', {handle, userId});
   }
 
+  public deleteCurrentProfile(): Observable<any> {
+    return this.http.delete<any>(environment.backendUrl + 'users', {
+      headers: this.getAuthorizationHeader()
+    });
+  }
+
   getCurrentUser(): Observable<User> {
     if (!this.getToken()) {
       return;
@@ -58,6 +71,14 @@ export class DataService {
 
   public getToken(): string {
     return localStorage.getItem('token');
+  }
+
+  public setRefreshToken(refreshToken): void {
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
+  public getRefreshToken(): string {
+    return localStorage.getItem('refreshToken');
   }
 
   public getAuthorizationHeader(): HttpHeaders {

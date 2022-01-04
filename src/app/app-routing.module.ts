@@ -6,6 +6,7 @@ import {LoginComponent} from './components/login/login.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {InfoPageComponent} from './components/info-page/info-page.component';
 import {BusinessCardComponent} from './components/business-card/business-card.component';
+import {CookiesComponent} from './components/cookies/cookies.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/etusivu', pathMatch: 'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'kirjaudu', component: LoginComponent},
   {path: 'tutustu', component: InfoPageComponent},
   {path: 'logout', component: LogoutComponent},
+  {path: 'keksit', component: CookiesComponent},
   {path: ':handle', component: BusinessCardComponent}
 ];
 

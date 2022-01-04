@@ -12,8 +12,9 @@ export class LogoutComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
-    this.dataService.logout();
-    this.router.navigate(['etusivu']);
+    setTimeout(() => {
+      this.dataService.logout();
+    }, 0);
   }
 
 }

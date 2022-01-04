@@ -41,12 +41,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {LoadingInterceptor} from './interceptors/load.interceptor';
 import {LoadingService} from './services/loading.service';
 import {NgBusinessHoursModule} from 'ng-business-hours';
-
 import localeFI from '@angular/common/locales/fi';
 import {registerLocaleData} from '@angular/common';
 import {LocaleService} from './services/locale.service';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import {CookieModule} from 'ngx-cookie';
+import {CookiesComponent} from './components/cookies/cookies.component';
+import {ConfirmModalComponent} from './components/confirm-modal/confirm-modal.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 registerLocaleData(localeFI);
 
@@ -58,7 +60,7 @@ const cookieConfig: NgcCookieConsentConfig = {
   theme: 'edgeless',
   palette: {
     popup: {
-      background: '#23232E',
+      background: '#025174',
       text: '#FFFFFF'
     },
     button: {
@@ -72,7 +74,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     dismiss: 'Selvä juttu!',
     deny: 'Refuse cookies',
     link: 'Lue lisää',
-    href: 'https://cookiesandyou.com',
+    href: '/keksit',
     policy: 'Cookie Policy'
   }
 };
@@ -88,7 +90,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     InfoPageComponent,
     PageBuilderComponent,
     BusinessCardComponent,
-    ImageSelectorComponent
+    ImageSelectorComponent,
+    CookiesComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +122,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     MatToolbarModule,
     NgBusinessHoursModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    MatDialogModule
   ],
   providers: [
     AuthService,

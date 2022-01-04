@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
       this.dataService.login({email: this.loginFormGroup.get('email').value, password: this.loginFormGroup.get('password').value}).subscribe({
         next: (result) => {
           this.dataService.setToken(result.token);
+          this.dataService.setRefreshToken(result.refreshToken);
           this.authService.setUser(result.user);
 
           this.snackBar.open('Tervetuloa takaisin ' + (result.user.firstName ?? result.user.companyName) + '!', 'Sulje');

@@ -15,15 +15,18 @@ import {Router} from '@angular/router';
 import {ImageSelectorComponent} from '../image-selector/image-selector.component';
 import {NgBusinessHoursDaySettings} from 'ng-business-hours';
 import {BusinessHour} from '../../models/businessHour';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 
 // TODO Hakutoiminnot
-// TODO Tilin muuttaminen ei julkiseksi
 // TODO Mainokset
 // TODO Kuukausimaksu
 // TODO Kartta
-// TODO Cookie Concent
 // TODO Käännöskirjasto
 // TODO Ota yhteyttä
+// TODO Google-kirjautuminen
+// TODO Facebook-kirjautuminen
+// TODO Tutustu-sivu
 
 @Component({
   selector: 'app-page-builder',
@@ -73,7 +76,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     private dataService: DataService,
     public authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
   }
 
@@ -105,7 +109,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         twitter: [this.user ? this.getSocialMediaLink(this.user, LinkType.Twitter) : ''],
         github: [this.user ? this.getSocialMediaLink(this.user, LinkType.Github) : ''],
         linkedin: [this.user ? this.getSocialMediaLink(this.user, LinkType.Linkedin) : ''],
-        handle: [this.user ? this.user.handle : '']
+        handle: [this.user ? this.user.handle : ''],
+        public: [this.user ? this.user.public : false]
       });
 
       this.image = this.user?.image;
@@ -197,7 +202,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     const emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegEx.test(this.editForm.email.value)) {
       this.editForm.email.setErrors({emailNotValid: true});
-      this.editFormGroup.updateValueAndValidity();
+      this.editForm.email.updateValueAndValidity();
       return;
     }
 
@@ -207,7 +212,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
           this.editForm.email.setErrors({alreadyExists: true});
         }
 
-        this.editFormGroup.updateValueAndValidity();
+        this.editForm.email.updateValueAndValidity();
       },
       error: (error) => {
         this.handleError(error);
@@ -224,7 +229,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
           this.editForm.handle.setErrors({alreadyExists: true});
         }
 
-        this.editFormGroup.updateValueAndValidity();
+        this.editForm.handle.updateValueAndValidity();
       },
       error: (error) => {
         this.handleError(error);
@@ -362,5 +367,24 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         items[i].order = i;
       }
     }
+  }
+
+  deleteProfile(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {title: 'Oletko varma?', message: 'Olet poistamassa tiliäsi. Haluatko jatkaa?', buttonColor: 'warn'};
+    const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.dataService.deleteCurrentProfile().subscribe({
+          next: () => {
+            this.router.navigate(['logout']);
+          },
+          error: (error) => {
+            this.handleError(error);
+          }
+        });
+      }
+    });
   }
 }

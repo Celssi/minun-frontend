@@ -293,7 +293,19 @@
     </div>
   </mat-card>
 
+  <mat-card class="my-2" *ngIf="authService.isAuthenticated()">
+    <h2>Asetukset</h2>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>Näytä profiilini hakusivulla</mat-label>
+      <mat-select formControlName="public">
+        <mat-option [value]="true">Kyllä</mat-option>
+        <mat-option [value]="false">Ei</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
+
   <div class="button-row mt-2">
+    <button mat-raised-button color="warn" (click)="deleteProfile()" *ngIf="authService.isAuthenticated()" class="me-2">Poista profiilini</button>
     <button mat-raised-button color="primary" (click)="save()">{{authService.isAuthenticated() ? 'Tallenna' : 'Rekisteröidy'}}</button>
   </div>
 </form>

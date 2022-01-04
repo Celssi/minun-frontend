@@ -1,33 +1,50 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor, HttpErrorResponse
-} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError, finalize} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {mergeMap, Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {DataService} from '../services/data.service';
+import {LoginResult} from '../models/loginResult';
 
 @Injectable()
 export class NotLoggedInInterceptor implements HttpInterceptor {
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     return next.handle(request).pipe(
-      catchError(err => {
-        if (err instanceof HttpErrorResponse) {
-
-          if (err.status === 401 || err.status === 403) {
-            this.dataService.logout();
-          }
-
-          return throwError(err);
+      catchError(response => {
+        if (response.status === 401) {
+          return this.handle401Error(request, next);
+        } else {
+          this.dataService.logout();
         }
-      }),
-      finalize(() => {
+        return throwError(response);
+      })
+    );
+  }
+
+  handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    const refreshToken = this.dataService.getRefreshToken();
+    const token = this.dataService.getToken();
+
+    if (!refreshToken || !token) {
+      this.dataService.logout();
+      throwError(() => new Error('Login expired'));
+    }
+
+    return this.dataService.refresh(refreshToken, token).pipe(
+      mergeMap((result: LoginResult) => {
+        this.dataService.setToken(result.token);
+        this.dataService.setRefreshToken(result.refreshToken);
+
+        request = request.clone({
+          setHeaders: {
+            authorization: 'Bearer ' + result.token
+          }
+        });
+
+        return next.handle(request);
       })
     );
   }

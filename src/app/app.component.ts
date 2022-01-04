@@ -73,8 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (environment.useAnalytics) {
       this.router.events.pipe(filter(event => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => {
-          gtag('config', 'G-GEPNC6YNVY',
-            {
+          gtag('config', 'G-GEPNC6YNVY', {
               page_path: event.urlAfterRedirects
             }
           );
