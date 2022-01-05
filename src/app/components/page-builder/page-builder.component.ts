@@ -27,6 +27,7 @@ import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 // TODO Google-kirjautuminen
 // TODO Facebook-kirjautuminen
 // TODO Tutustu-sivu
+// TODO Unohdin salasanani
 
 @Component({
   selector: 'app-page-builder',

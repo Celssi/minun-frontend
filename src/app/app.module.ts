@@ -48,7 +48,8 @@ import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent'
 import {CookieModule} from 'ngx-cookie';
 import {CookiesComponent} from './components/cookies/cookies.component';
 import {ConfirmModalComponent} from './components/confirm-modal/confirm-modal.component';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
+import {BannerComponent} from './components/banner/banner.component';
 
 registerLocaleData(localeFI);
 
@@ -92,7 +93,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     BusinessCardComponent,
     ImageSelectorComponent,
     CookiesComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,

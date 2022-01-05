@@ -11,6 +11,8 @@
   </div>
 </mat-card>
 
+<app-banner [banner]="banner"></app-banner>
+
 <mat-card *ngIf="!authService.isAuthenticated()" class="mt-2">
   <mat-card-header>
     <mat-card-title class="text-white">Aloita palvelun käyttö rekisteröitymällä!</mat-card-title>
