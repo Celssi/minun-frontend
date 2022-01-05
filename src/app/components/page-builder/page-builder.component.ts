@@ -28,6 +28,7 @@ import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 // TODO Facebook-kirjautuminen
 // TODO Tutustu-sivu
 // TODO Unohdin salasanani
+// TODO Tarkista salasana vaatimukset
 
 @Component({
   selector: 'app-page-builder',

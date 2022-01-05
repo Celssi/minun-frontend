@@ -5,6 +5,7 @@ import {User} from '../../models/user';
 import {faFacebook, faGithub, faLinkedin, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {LinkType, SocialMediaLink} from '../../models/socialMediaLink';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
+import {LoadingService} from '../../services/loading.service';
 
 @Component({
   selector: 'app-business-card',
@@ -25,7 +26,11 @@ export class BusinessCardComponent implements OnInit {
   qrCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   qrValue = document.location.href;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) {
+  constructor(
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    public loadingService: LoadingService
+  ) {
   }
 
   ngOnInit(): void {

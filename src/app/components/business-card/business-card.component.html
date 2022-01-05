@@ -133,7 +133,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="!user">
+<div *ngIf="!user && !(loadingService.isLoading$ | async)">
   <mat-card>
     <h2>Pieleen meni!</h2>
     Käyntikorttia ei valitettavasti löytynyt. Ole hyvä ja tarkista linkki.
