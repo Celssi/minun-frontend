@@ -5,6 +5,6 @@ export const environment = {
   useAnalytics: false,
   adsense: {
     adClient: 'ca-pub-YOUR_CLIENT_ID',
-    show: true
+    show: false
   }
 };
