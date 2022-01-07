@@ -50,6 +50,8 @@ import {CookiesComponent} from './components/cookies/cookies.component';
 import {ConfirmModalComponent} from './components/confirm-modal/confirm-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {BannerComponent} from './components/banner/banner.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MaterialElevationDirective} from './helpers/material-elevation.directive';
 
 registerLocaleData(localeFI);
 
@@ -94,7 +96,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     ImageSelectorComponent,
     CookiesComponent,
     ConfirmModalComponent,
-    BannerComponent
+    BannerComponent,
+    MaterialElevationDirective,
+    MaterialElevationDirective
   ],
   imports: [
     BrowserModule,
@@ -125,7 +129,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     NgBusinessHoursModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
     CookieModule.forRoot(),
-    MatDialogModule
+    MatDialogModule,
+    FlexLayoutModule
   ],
   providers: [
     AuthService,

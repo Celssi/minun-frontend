@@ -55,6 +55,18 @@ export class DataService {
     });
   }
 
+  public getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(environment.backendUrl + 'users');
+  }
+
+  public getUser(id: any): Observable<User> {
+    return this.http.get<User>(environment.backendUrl + 'users/' + id);
+  }
+
+  public getUserWithHandle(handle: any): Observable<User> {
+    return this.http.get<User>(environment.backendUrl + 'users/with-handle/' + handle);
+  }
+
   getCurrentUser(): Observable<User> {
     if (!this.getToken()) {
       return;
@@ -85,13 +97,5 @@ export class DataService {
     return new HttpHeaders({
       Authorization: 'Bearer ' + this.getToken()
     });
-  }
-
-  getUser(id: any): Observable<User> {
-    return this.http.get<User>(environment.backendUrl + 'users/' + id);
-  }
-
-  getUserWithHandle(handle: any): Observable<User> {
-    return this.http.get<User>(environment.backendUrl + 'users/with-handle/' + handle);
   }
 }
