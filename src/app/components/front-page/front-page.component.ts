@@ -15,7 +15,7 @@ export class FrontPageComponent implements OnInit {
   constructor(public authService: AuthService) {
     this.banner = new Banner(
       environment.adsense.adClient,
-      1,
+      1465505237,
       'auto',
       true
     );
