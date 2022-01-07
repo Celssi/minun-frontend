@@ -16,6 +16,8 @@ export class NotLoggedInInterceptor implements HttpInterceptor {
       catchError(response => {
         if (response.status === 401) {
           return this.handle401Error(request, next);
+        } else {
+          alert(response.message);
         }
 
         return throwError(response);
