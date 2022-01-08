@@ -3,23 +3,19 @@
     <div class="col-12">
       <div class="search-bar">
         <fa-icon [icon]="faSearch"></fa-icon>
-        <input type="text" class="form-control form-input" placeholder="Kirjoita jotain...">
+        <input type="text" class="form-control form-input" placeholder="Kirjoita jotain..." #search>
       </div>
     </div>
   </div>
 
-  <div fxLayout="row wrap" fxLayoutGap="0.5rem grid">
+  <div fxLayout="row wrap" fxLayoutGap="0.5rem grid" class="results">
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let user of users">
       <mat-card class="my-2" appMaterialElevation [defaultElevation]="0" raisedElevation="12">
         <mat-card-header>
           <mat-card-title>{{ user.companyName ?? (user.firstName + ' ' + user.lastName)}}</mat-card-title>
         </mat-card-header>
         <img mat-card-image [src]="user.image">
-        <mat-card-content>
-          <p>
-            The Himalayas is a mountain range in Asia.
-          </p>
-        </mat-card-content>
+        <mat-card-content></mat-card-content>
         <mat-card-actions>
           <a mat-raised-button color="primary" class="d-block" [routerLink]="['/' + user.handle]">Avaa</a>
         </mat-card-actions>

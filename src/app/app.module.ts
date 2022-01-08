@@ -52,6 +52,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {BannerComponent} from './components/banner/banner.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialElevationDirective} from './helpers/material-elevation.directive';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 registerLocaleData(localeFI);
 
@@ -130,7 +131,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     NgcCookieConsentModule.forRoot(cookieConfig),
     CookieModule.forRoot(),
     MatDialogModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    InfiniteScrollModule
   ],
   providers: [
     AuthService,

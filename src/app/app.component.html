@@ -8,7 +8,14 @@
 
 <app-navbar *ngIf="!isOnSharePage"></app-navbar>
 
-<div class="wrapper" [ngClass]="{'logged-in-wrapper': !isOnSharePage}" #wrapper>
+<div class="wrapper"
+     [ngClass]="{'logged-in-wrapper': !isOnSharePage}"
+     #wrapper
+     infiniteScroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="50"
+     (scrolled)="onScroll()"
+     [scrollWindow]="false">
   <div class="container p-1" [ngClass]="{'login-container': isOnLoginPage}">
     <router-outlet (activate)="onActivate($event)"></router-outlet>
   </div>

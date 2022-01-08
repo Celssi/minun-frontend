@@ -24,3 +24,16 @@
   box-shadow: none;
   border: none;
 }
+
+.user-description {
+  height: 30px;
+  text-overflow: ellipsis;
+}
+
+img {
+  border-radius: 5%;
+  border: 2px solid white;
+  padding: 0;
+  width: calc(100% + 20px);
+  margin: 0 24px 0px -10px;
+}

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {User} from '../models/user';
@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class DataService {
+  @Output() scrollEmitter = new EventEmitter<void>();
+
   constructor(private http: HttpClient, private router: Router) {
   }
 
@@ -65,6 +67,10 @@ export class DataService {
 
   public getUserWithHandle(handle: any): Observable<User> {
     return this.http.get<User>(environment.backendUrl + 'users/with-handle/' + handle);
+  }
+
+  search(searchText: string, offset: number): Observable<User[]> {
+    return this.http.get<User[]>(environment.backendUrl + 'users/search/' + searchText + '/' + offset);
   }
 
   getCurrentUser(): Observable<User> {

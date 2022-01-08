@@ -8,6 +8,7 @@ import {NgcCookieConsentService, NgcStatusChangeEvent} from 'ngx-cookieconsent';
 import {CookieService} from 'ngx-cookie';
 import {environment} from '../environments/environment';
 import {SwUpdate} from '@angular/service-worker';
+import {DataService} from './services/data.service';
 
 // tslint:disable-next-line:ban-types
 declare let gtag: Function;
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private ccService: NgcCookieConsentService,
     private cookieService: CookieService,
     public loadingService: LoadingService,
-    private updates: SwUpdate
+    private updates: SwUpdate,
+    private dataService: DataService
   ) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
@@ -39,11 +41,13 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
 
-    updates.checkForUpdate().then(event => {
-      if (event && prompt('Sovellukseen on päivitys. Haluatko päivittää?')) {
-        updates.activateUpdate().then(() => document.location.reload());
-      }
-    });
+    if (updates.isEnabled) {
+      updates.checkForUpdate().then(event => {
+        if (event && prompt('Sovellukseen on päivitys. Haluatko päivittää?')) {
+          updates.activateUpdate().then(() => document.location.reload());
+        }
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -87,5 +91,9 @@ export class AppComponent implements OnInit, OnDestroy {
           );
         });
     }
+  }
+
+  onScroll(): void {
+    this.dataService.scrollEmitter.emit();
   }
 }
