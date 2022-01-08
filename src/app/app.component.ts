@@ -7,6 +7,7 @@ import {filter, Subscription} from 'rxjs';
 import {NgcCookieConsentService, NgcStatusChangeEvent} from 'ngx-cookieconsent';
 import {CookieService} from 'ngx-cookie';
 import {environment} from '../environments/environment';
+import {SwUpdate} from '@angular/service-worker';
 
 // tslint:disable-next-line:ban-types
 declare let gtag: Function;
@@ -29,11 +30,18 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private ccService: NgcCookieConsentService,
     private cookieService: CookieService,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    private updates: SwUpdate
   ) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.isOnLoginPage = val.url === '/kirjaudu';
+      }
+    });
+
+    updates.checkForUpdate().then(event => {
+      if (event && prompt('Sovellukseen on päivitys. Haluatko päivittää?')) {
+        updates.activateUpdate().then(() => document.location.reload());
       }
     });
   }
