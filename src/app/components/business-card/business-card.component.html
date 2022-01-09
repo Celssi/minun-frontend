@@ -103,7 +103,7 @@
       <div class="detailed-information mb-4" *ngIf="user.languages">
         <h2>Kielet</h2>
         <div class="information-row">
-          <mat-chip-list aria-label="Fish selection">
+          <mat-chip-list>
             <mat-chip *ngFor="let language of getLanguages(user.languages)">{{language}}</mat-chip>
           </mat-chip-list>
         </div>

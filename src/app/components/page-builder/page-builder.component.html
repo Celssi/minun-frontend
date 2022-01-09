@@ -29,13 +29,13 @@
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="isUserForm()">
       <mat-label>Etunimi</mat-label>
-      <input matInput type="text" formControlName="firstName" autocomplete="given-name" maxlength="300">
+      <input matInput type="text" formControlName="firstName" autocomplete="given-name" maxlength="100">
       <mat-error *ngIf="editForm.firstName.errors?.required">Tieto on pakollinen</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="isUserForm()">
       <mat-label>Sukunimi</mat-label>
-      <input matInput type="text" formControlName="lastName" autocomplete="family-name" maxlength="300">
+      <input matInput type="text" formControlName="lastName" autocomplete="family-name" maxlength="100">
       <mat-error *ngIf="editForm.lastName.errors?.required">Tieto on pakollinen</mat-error>
     </mat-form-field>
 
@@ -46,7 +46,7 @@
 
     <mat-form-field appearance="fill" class="width-all-available" *ngIf="isCompanyForm()">
       <mat-label>Yrityksen nimi</mat-label>
-      <input matInput type="text" formControlName="companyName" autocomplete="organization" maxlength="300">
+      <input matInput type="text" formControlName="companyName" autocomplete="organization" maxlength="100">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="user">

@@ -1,5 +1,5 @@
 <mat-card class="search-container">
-  <div class="row height d-flex justify-content-center align-items-center mb-2">
+  <div class="row height d-flex justify-content-center align-items-center" [ngClass]="{'mb-2': users.length > 0}">
     <div class="col-12">
       <div class="search-bar">
         <fa-icon [icon]="faSearch"></fa-icon>
@@ -9,13 +9,66 @@
   </div>
 
   <div fxLayout="row wrap" fxLayoutGap="0.5rem grid" class="results">
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let user of users">
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let user of users">
       <mat-card class="my-2" appMaterialElevation [defaultElevation]="0" raisedElevation="12">
         <mat-card-header>
           <mat-card-title>{{ user.companyName ?? (user.firstName + ' ' + user.lastName)}}</mat-card-title>
         </mat-card-header>
-        <img mat-card-image [src]="user.image">
-        <mat-card-content></mat-card-content>
+        <div class="card-image-container">
+          <img mat-card-image [src]="user.image" *ngIf="user.image">
+          <img mat-card-image src="assets/dummy_finnish.png" *ngIf="!user.image">
+        </div>
+        <mat-card-content>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Kuvaus
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>{{user.description}}</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Osaaminen
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="information-row">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let specialSkill of splitToChipList(user.specialSkills)">{{specialSkill}}</mat-chip>
+                </mat-chip-list>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Yhteystiedot
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div>
+                <div *ngIf="user.email" class="bio-item"><mat-icon>email</mat-icon><span><a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></span></div>
+                <div *ngIf="user.website" class="bio-item"><mat-icon>web</mat-icon><span><a [href]="user.website" target="_blank">{{user.website}}</a></span></div>
+                <div *ngIf="user.phone" class="bio-item"><mat-icon>phone</mat-icon><span><a href="tel:{{user.phone}}">{{user.phone}}</a></span></div>
+                <div *ngIf="user.location" class="bio-item"><mat-icon>location_on</mat-icon><span>{{user.location}}</span></div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <div class="social-buttons mt-2">
+            <a mat-icon-button color="accent" [href]="getFacebookLink(user.socialMediaLinks)" target="_blank" *ngIf="getFacebookLink(user.socialMediaLinks)">
+              <fa-icon [icon]="faFacebook"></fa-icon>
+            </a>
+            <a mat-icon-button color="accent" [href]="getTwitterLink(user.socialMediaLinks)" target="_blank" *ngIf="getTwitterLink(user.socialMediaLinks)">
+              <fa-icon [icon]="faTwitter"></fa-icon>
+            </a>
+            <a mat-icon-button color="accent" [href]="getLinkedinLink(user.socialMediaLinks)" target="_blank" *ngIf="getLinkedinLink(user.socialMediaLinks)">
+              <fa-icon [icon]="faLinkedin"></fa-icon>
+            </a>
+            <a mat-icon-button color="accent" [href]="getGithubLink(user.socialMediaLinks)" target="_blank" *ngIf="getGithubLink(user.socialMediaLinks)">
+              <fa-icon [icon]="faGithub"></fa-icon>
+            </a>
+          </div>
+        </mat-card-content>
         <mat-card-actions>
           <a mat-raised-button color="primary" class="d-block" [routerLink]="['/' + user.handle]">Avaa</a>
         </mat-card-actions>
