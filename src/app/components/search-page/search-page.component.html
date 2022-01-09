@@ -10,9 +10,9 @@
 
   <div fxLayout="row wrap" fxLayoutGap="0.5rem grid" class="results">
     <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let user of users">
-      <mat-card class="my-2" appMaterialElevation [defaultElevation]="0" raisedElevation="12">
+      <mat-card class="my-2 search-card" appMaterialElevation [defaultElevation]="0" raisedElevation="12">
         <mat-card-header>
-          <mat-card-title>{{ user.companyName ?? (user.firstName + ' ' + user.lastName)}}</mat-card-title>
+          <mat-card-title>{{ user.companyName ?? (user.firstName + ' ' + user.lastName)}} <small>(@{{user.handle}})</small></mat-card-title>
         </mat-card-header>
         <div class="card-image-container">
           <img mat-card-image [src]="user.image" *ngIf="user.image">
@@ -20,7 +20,7 @@
         </div>
         <mat-card-content>
           <mat-accordion>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z1">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   Kuvaus
@@ -28,7 +28,7 @@
               </mat-expansion-panel-header>
               <p>{{user.description}}</p>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z1">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   Osaaminen
@@ -40,7 +40,7 @@
                 </mat-chip-list>
               </div>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z1">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   Yhteystiedot
@@ -54,19 +54,8 @@
               </div>
             </mat-expansion-panel>
           </mat-accordion>
-          <div class="social-buttons mt-2">
-            <a mat-icon-button color="accent" [href]="getFacebookLink(user.socialMediaLinks)" target="_blank" *ngIf="getFacebookLink(user.socialMediaLinks)">
-              <fa-icon [icon]="faFacebook"></fa-icon>
-            </a>
-            <a mat-icon-button color="accent" [href]="getTwitterLink(user.socialMediaLinks)" target="_blank" *ngIf="getTwitterLink(user.socialMediaLinks)">
-              <fa-icon [icon]="faTwitter"></fa-icon>
-            </a>
-            <a mat-icon-button color="accent" [href]="getLinkedinLink(user.socialMediaLinks)" target="_blank" *ngIf="getLinkedinLink(user.socialMediaLinks)">
-              <fa-icon [icon]="faLinkedin"></fa-icon>
-            </a>
-            <a mat-icon-button color="accent" [href]="getGithubLink(user.socialMediaLinks)" target="_blank" *ngIf="getGithubLink(user.socialMediaLinks)">
-              <fa-icon [icon]="faGithub"></fa-icon>
-            </a>
+          <div class="mt-2">
+            <app-social-buttons [user]="user" colorClass="dark"></app-social-buttons>
           </div>
         </mat-card-content>
         <mat-card-actions>

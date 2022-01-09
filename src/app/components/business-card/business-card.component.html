@@ -29,19 +29,8 @@
         <div *ngIf="user.location" class="bio-item"><mat-icon>location_on</mat-icon><span>{{user.location}}</span></div>
       </div>
 
-      <div class="social-buttons p-3">
-        <a mat-icon-button color="accent" [href]="getFacebookLink(user.socialMediaLinks)" target="_blank" *ngIf="getFacebookLink(user.socialMediaLinks)">
-          <fa-icon [icon]="faFacebook"></fa-icon>
-        </a>
-        <a mat-icon-button color="accent" [href]="getTwitterLink(user.socialMediaLinks)" target="_blank" *ngIf="getTwitterLink(user.socialMediaLinks)">
-          <fa-icon [icon]="faTwitter"></fa-icon>
-        </a>
-        <a mat-icon-button color="accent" [href]="getLinkedinLink(user.socialMediaLinks)" target="_blank" *ngIf="getLinkedinLink(user.socialMediaLinks)">
-          <fa-icon [icon]="faLinkedin"></fa-icon>
-        </a>
-        <a mat-icon-button color="accent" [href]="getGithubLink(user.socialMediaLinks)" target="_blank" *ngIf="getGithubLink(user.socialMediaLinks)">
-          <fa-icon [icon]="faGithub"></fa-icon>
-        </a>
+      <div class="p-3">
+        <app-social-buttons [user]="user" colorClass="light"></app-social-buttons>
       </div>
     </div>
 
@@ -53,7 +42,7 @@
         <h2>{{user.accountType === 'user' ? 'Erityisosaaminen' : 'Palvelut'}}</h2>
         <div class="information-row">
           <mat-chip-list>
-            <mat-chip *ngFor="let specialSkill of getSpecialSkills(user.specialSkills)">{{specialSkill}}</mat-chip>
+            <mat-chip *ngFor="let specialSkill of splitToChipList(user.specialSkills)">{{specialSkill}}</mat-chip>
           </mat-chip-list>
         </div>
       </div>
@@ -104,7 +93,7 @@
         <h2>Kielet</h2>
         <div class="information-row">
           <mat-chip-list>
-            <mat-chip *ngFor="let language of getLanguages(user.languages)">{{language}}</mat-chip>
+            <mat-chip *ngFor="let language of splitToChipList(user.languages)">{{language}}</mat-chip>
           </mat-chip-list>
         </div>
       </div>

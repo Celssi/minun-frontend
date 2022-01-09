@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {User} from '../../models/user';
-import {faFacebook, faGithub, faLinkedin, faTwitter} from '@fortawesome/free-brands-svg-icons';
-import {LinkType, SocialMediaLink} from '../../models/socialMediaLink';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 import {LoadingService} from '../../services/loading.service';
 
@@ -17,11 +15,6 @@ export class BusinessCardComponent implements OnInit {
   public WEEKDAYS = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'];
 
   isShareMode = false;
-  faFacebook = faFacebook;
-  faTwitter = faTwitter;
-  faGithub = faGithub;
-  faLinkedin = faLinkedin;
-
   qrElementType = NgxQrcodeElementTypes.URL;
   qrCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   qrValue = document.location.href;
@@ -43,28 +36,8 @@ export class BusinessCardComponent implements OnInit {
     });
   }
 
-  getFacebookLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Facebook)?.link ?? undefined;
-  }
-
-  getTwitterLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Twitter)?.link ?? undefined;
-  }
-
-  getLinkedinLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Linkedin)?.link ?? undefined;
-  }
-
-  getGithubLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Github)?.link ?? undefined;
-  }
-
-  getLanguages(languages: string): string[] {
-    return languages?.split(', ') ?? [];
-  }
-
-  getSpecialSkills(specialSkills: string): string[] {
-    return specialSkills?.split(', ') ?? [];
+  splitToChipList(itemString: string): string[] {
+    return itemString?.split(', ').filter(Boolean) ?? [];
   }
 
   toggleShare(): void {

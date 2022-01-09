@@ -2,9 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {DataService} from '../../services/data.service';
 import {User} from '../../models/user';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {debounceTime, distinctUntilChanged, filter, fromEvent, Observable, tap} from 'rxjs';
-import {faFacebook, faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import {LinkType, SocialMediaLink} from '../../models/socialMediaLink';
+import {debounceTime, distinctUntilChanged, filter, fromEvent, tap} from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -16,10 +14,6 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   users: User[] = [];
   searchPhrase: string;
   searchOffset = 0;
-  faFacebook = faFacebook;
-  faTwitter = faTwitter;
-  faGithub = faGithub;
-  faLinkedin = faLinkedin;
 
   @ViewChild('search') searchInput: ElementRef;
 
@@ -62,21 +56,5 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
 
   splitToChipList(itemString: string): string[] {
     return itemString?.split(', ').filter(Boolean) ?? [];
-  }
-
-  getFacebookLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Facebook)?.link ?? undefined;
-  }
-
-  getTwitterLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Twitter)?.link ?? undefined;
-  }
-
-  getLinkedinLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Linkedin)?.link ?? undefined;
-  }
-
-  getGithubLink(socialMediaLinks: SocialMediaLink[]): string {
-    return socialMediaLinks.find(socialMediaLink => socialMediaLink.type === LinkType.Github)?.link ?? undefined;
   }
 }
