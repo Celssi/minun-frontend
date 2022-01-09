@@ -35,11 +35,11 @@
     </div>
 
     <div class="main-content col-md-8 col-sm-12 px-lg-4" *ngIf="hasMainContent()">
-      <h2 class="mt-3" *ngIf="user.description">{{user.accountType === 'user' ? 'Minusta' : 'Yrityksestämme'}} lyhyesti</h2>
+      <h2 class="mt-3" *ngIf="user.description">{{'businessCard.shortDescription' | translate}}</h2>
       <div class="description">{{user.description}}</div>
 
       <div class="detailed-information mb-4" *ngIf="user.specialSkills">
-        <h2>{{user.accountType === 'user' ? 'Erityisosaaminen' : 'Palvelut'}}</h2>
+        <h2>{{'businessCard.specialSkills' | translate}}</h2>
         <div class="information-row">
           <mat-chip-list>
             <mat-chip *ngFor="let specialSkill of splitToChipList(user.specialSkills)">{{specialSkill}}</mat-chip>
@@ -48,7 +48,7 @@
       </div>
 
       <div class="detailed-information" *ngIf="user.workHistories?.length > 0">
-        <h2>Työhistoria</h2>
+        <h2>{{'businessCard.workHistories' | translate}}</h2>
         <div class="information-row" *ngFor="let workHistory of user.workHistories; let i = index">
           <div class="information-icon-container">
             <div class="vertical-line vertical-line-green" [ngClass]="{'vertical-line-half-height': i > 0}"></div>
@@ -69,7 +69,7 @@
       </div>
 
       <div class="detailed-information" *ngIf="user.educations?.length > 0">
-        <h2>Koulutus</h2>
+        <h2>{{'businessCard.education' | translate}}</h2>
         <div class="information-row" *ngFor="let education of user.educations; let i  = index">
           <div class="information-icon-container">
             <div class="vertical-line vertical-line-orange" [ngClass]="{'vertical-line-half-height': i > 0}"></div>
@@ -90,7 +90,7 @@
       </div>
 
       <div class="detailed-information mb-4" *ngIf="user.languages">
-        <h2>Kielet</h2>
+        <h2>{{'businessCard.languages' | translate}}</h2>
         <div class="information-row">
           <mat-chip-list>
             <mat-chip *ngFor="let language of splitToChipList(user.languages)">{{language}}</mat-chip>
@@ -99,21 +99,21 @@
       </div>
 
       <div class="detailed-information mb-4" *ngIf="user.accountType === 'company' && user.businessHours">
-        <h2>Aukioloajat</h2>
+        <h2>{{'businessCard.businessHours' | translate}}</h2>
         <div class="information-row">
           <table class="table table-borderless">
             <thead>
             <tr>
-              <th scope="col">Viikonpäivä</th>
-              <th scope="col">Aukeaa</th>
-              <th scope="col">Sulkeutuu</th>
+              <th scope="col">{{'businessCard.dayOfWeek' | translate}}</th>
+              <th scope="col">{{'businessCard.opens' | translate}}</th>
+              <th scope="col">{{'businessCard.closes' | translate}}</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let businessHour of user.businessHours">
               <td>{{WEEKDAYS[businessHour.order]}}</td>
-              <td>{{businessHour.open ? businessHour.from : 'Suljettu'}}</td>
-              <td>{{businessHour.open ? businessHour.to : 'Suljettu'}}</td>
+              <td>{{businessHour.open ? businessHour.from : ('businessCard.closed' | translate)}}</td>
+              <td>{{businessHour.open ? businessHour.to : ('businessCard.closed' | translate)}}</td>
             </tr>
             </tbody>
           </table>
@@ -124,7 +124,7 @@
 </div>
 <div *ngIf="!user && !(loadingService.isLoading$ | async)">
   <mat-card>
-    <h2>Pieleen meni!</h2>
-    Käyntikorttia ei valitettavasti löytynyt. Ole hyvä ja tarkista linkki.
+    <h2>{{'businessCard.errorHeader' | translate}}</h2>
+    {{'businessCard.errorMessage' | translate}}
   </mat-card>
 </div>

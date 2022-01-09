@@ -1,0 +1,27 @@
+{
+  "miscellaneous": {
+    "updateAvailable": "Sovellukseen on päivitys. Haluatko päivittää?",
+    "monday": "Maanantai",
+    "tuesday": "Tiistai",
+    "wednesday": "Keskiviikko",
+    "thursday": "Torstai",
+    "friday": "Perjantai",
+    "saturday": "Lauantai",
+    "sunday": "Sunnuntai"
+  },
+
+  "businessCard": {
+    "shortDescription": "Lyhyt kuvaus",
+    "specialSkills": "Erityisosaaminen",
+    "languages": "Kielet",
+    "workHistories": "Työhistoria",
+    "education": "Koulutus",
+    "businessHours": "Aukioloajat",
+    "dayOfWeek": "Viikonpäivä",
+    "opens": "Aukeaa",
+    "closes": "Sulkeutuu",
+    "closed": "Suljettu",
+    "errorHeader": "Pieleen meni!",
+    "errorMessage": "Käyntikorttia ei valitettavasti löytynyt. Ole hyvä ja tarkista linkki."
+  }
+}

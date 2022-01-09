@@ -9,6 +9,7 @@ import {CookieService} from 'ngx-cookie';
 import {environment} from '../environments/environment';
 import {SwUpdate} from '@angular/service-worker';
 import {DataService} from './services/data.service';
+import {TranslateService} from '@ngx-translate/core';
 
 // tslint:disable-next-line:ban-types
 declare let gtag: Function;
@@ -33,7 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     public loadingService: LoadingService,
     private updates: SwUpdate,
-    private dataService: DataService
+    private dataService: DataService,
+    private translate: TranslateService
   ) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
@@ -43,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (updates.isEnabled) {
       updates.checkForUpdate().then(event => {
-        if (event && confirm('Sovellukseen on päivitys. Haluatko päivittää?')) {
+        if (event && confirm(this.translate.instant('miscellaneous.updateAvailable'))) {
           updates.activateUpdate().then(() => document.location.reload());
         }
       });

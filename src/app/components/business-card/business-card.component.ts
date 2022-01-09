@@ -4,6 +4,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {User} from '../../models/user';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 import {LoadingService} from '../../services/loading.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-business-card',
@@ -22,8 +23,18 @@ export class BusinessCardComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    private translate: TranslateService
   ) {
+    this.WEEKDAYS = [
+      this.translate.instant('miscellaneous.monday'),
+      this.translate.instant('miscellaneous.tuesday'),
+      this.translate.instant('miscellaneous.wednesday'),
+      this.translate.instant('miscellaneous.thursday'),
+      this.translate.instant('miscellaneous.friday'),
+      this.translate.instant('miscellaneous.saturday'),
+      this.translate.instant('miscellaneous.sunday'),
+    ]
   }
 
   ngOnInit(): void {
