@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (updates.isEnabled) {
       updates.checkForUpdate().then(event => {
-        if (event && prompt('Sovellukseen on päivitys. Haluatko päivittää?')) {
+        if (event && confirm('Sovellukseen on päivitys. Haluatko päivittää?')) {
           updates.activateUpdate().then(() => document.location.reload());
         }
       });

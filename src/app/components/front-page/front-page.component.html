@@ -13,7 +13,7 @@
 
 <app-banner [banner]="banner"></app-banner>
 
-<mat-card *ngIf="!authService.isAuthenticated()" class="mt-2">
+<mat-card *ngIf="!authService.isAuthenticated()" class="mt-2 main-card">
   <mat-card-header>
     <mat-card-title class="text-white">Aloita palvelun käyttö rekisteröitymällä!</mat-card-title>
   </mat-card-header>
@@ -22,10 +22,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="authService.isAuthenticated() && this.authService.user" class="pt-0">
-  <mat-card-header>
-    <mat-card-title></mat-card-title>
-  </mat-card-header>
+<mat-card *ngIf="authService.isAuthenticated() && this.authService.user" class="pt-0 main-card">
   <mat-card-content>
     <app-page-builder [user]="authService.user"></app-page-builder>
   </mat-card-content>

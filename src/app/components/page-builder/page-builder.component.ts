@@ -18,7 +18,6 @@ import {BusinessHour} from '../../models/businessHour';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 
-// TODO Hakutoiminnot
 // TODO Mainokset
 // TODO Kuukausimaksu
 // TODO Kartta
@@ -28,6 +27,7 @@ import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 // TODO Facebook-kirjautuminen
 // TODO Tutustu-sivu
 // TODO Unohdin salasanani
+// TODO Refaktorointi
 
 @Component({
   selector: 'app-page-builder',

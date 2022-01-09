@@ -14,10 +14,8 @@ export class NotLoggedInInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError(response => {
-        if (response.status === 401) {
+        if (response.status === 401 && !request.url.endsWith('/login')) {
           return this.handle401Error(request, next);
-        } else {
-          alert(response.message);
         }
 
         return throwError(response);

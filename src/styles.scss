@@ -89,3 +89,13 @@ material-icons:before {
     padding-left: 70px;
   }
 }
+
+@media (max-height: 768px) {
+  .main-card {
+    padding: 10px !important;
+  }
+
+  mat-toolbar {
+    padding: 4px;
+  }
+}

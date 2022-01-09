@@ -1,4 +1,4 @@
-<form [formGroup]="editFormGroup">
+<form [formGroup]="editFormGroup" [ngClass.md]="{'pt-4': authService.isAuthenticated()}" [ngClass.xs]="{'pt-2': authService.isAuthenticated()}">
   <mat-toolbar *ngIf="authService.isAuthenticated()">
     <h2 class="text-white">Omien tietojen muokkaaminen</h2>
     <div class="action-buttons">
