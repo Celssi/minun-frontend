@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           this.dataService.setRefreshToken(result.refreshToken);
           this.authService.setUser(result.user);
 
-          this.snackBar.open(this.translate.instant('login.welcomeBack', (result.user.firstName ?? result.user.companyName)), this.translate.instant('miscellaneous.close'));
+          this.snackBar.open(this.translate.instant('login.welcomeBack', {user: (result.user.firstName ?? result.user.companyName)}), this.translate.instant('miscellaneous.close'));
           this.router.navigate(['etusivu']);
         },
         error: (error: HttpErrorResponse) => {

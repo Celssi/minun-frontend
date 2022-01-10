@@ -52,7 +52,7 @@
     "password": "Salasana",
     "loginButton": "Kirjaudu",
     "checkUsernameAndEmail": "Tarkista käyttäjätunnus ja salasana!",
-    "welcomeBack": "Tervetuloa takaisin {0}!"
+    "welcomeBack": "Tervetuloa takaisin {{user}}!"
   },
 
   "navbar": {
@@ -71,7 +71,7 @@
     "user": "Yksityishenkilö",
     "company": "Yritys",
     "saved": "Muutokset tallennettu!",
-    "welcomeToUser": "Tervetuloa käyttäjäksi {0}!",
+    "welcomeToUser": "Tervetuloa käyttäjäksi {{user}}!",
     "deleteConfirm": "Olet poistamassa tiliäsi. Haluatko jatkaa?",
     "firstName": "Etunimi",
     "lastName": "Sukunimi",
@@ -97,7 +97,7 @@
     "passwordDescription": "Salasanassa pitää olla vähintään 8 merkkiä, joista vähintään 1 on iso kirjain, 1 pieni kirjain, yksi numero ja yksi erikoismerkki.",
     "describe": "Kuvaile itseäsi/yritystäsi",
     "textTooLong": "Teksti on liian pitkä",
-    "mySkill": "Taitoni",
+    "mySkills": "Taitoni",
     "ourServices": "Palvelumme",
     "languages": "Osaamani kielet",
     "writeAndPressEnter": "Kirjoita ja paina enter...",
@@ -125,7 +125,7 @@
     "register": "Rekisteröidy"
   },
 
-  "searchPage": {
+  "search": {
     "writeSomething": "Kirjoita jotain...",
     "description": "Kuvaus",
     "knowledge": "Osaaminen",

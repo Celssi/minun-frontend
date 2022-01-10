@@ -276,7 +276,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
           this.snackBar.open(this.user ?
             this.translate.instant('pageBuilder.saved') :
-            this.translate.instant('pageBuilder.welcomeToUser', result.user.firstName ?? result.user.companyName), this.translate.instant('miscellaneous.close'));
+            this.translate.instant('pageBuilder.welcomeToUser', {user: result.user.firstName ?? result.user.companyName}), this.translate.instant('miscellaneous.close'));
 
           if (!this.user) {
             this.dataService.setToken(result.token);
