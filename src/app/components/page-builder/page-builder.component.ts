@@ -22,7 +22,6 @@ import {TranslateService} from '@ngx-translate/core';
 // TODO Mainokset
 // TODO Kuukausimaksu
 // TODO Kartta
-// TODO Käännöskirjasto
 // TODO Ota yhteyttä
 // TODO Google-kirjautuminen
 // TODO Facebook-kirjautuminen
