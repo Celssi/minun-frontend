@@ -1,13 +1,13 @@
 <form [formGroup]="editFormGroup" [ngClass.md]="{'pt-4': authService.isAuthenticated()}" [ngClass.xs]="{'pt-2': authService.isAuthenticated()}">
   <mat-toolbar *ngIf="authService.isAuthenticated()">
-    <h2 class="text-white">Omien tietojen muokkaaminen</h2>
+    <h2 class="text-white">{{'pageBuilder.title' | translate}}</h2>
     <div class="action-buttons">
       <button mat-raised-button color="primary" class="me-2" (click)="openBusinessCard()">
-        <span>Avaa käyntikorttisi</span>
+        <span>{{'pageBuilder.openBusinessCard' | translate}}</span>
         <mat-icon>open_in_new</mat-icon>
       </button>
       <button mat-raised-button color="primary" (click)="save()">
-        <span>Tallenna</span>
+        <span>{{'miscellaneous.save' | translate}}</span>
         <mat-icon>save</mat-icon>
       </button>
     </div>
@@ -18,99 +18,99 @@
   </div>
 
   <mat-card class="my-2">
-    <h2>Perustiedot</h2>
+    <h2>{{'pageBuilder.basicInfo' | translate}}</h2>
     <mat-form-field appearance="fill" class="width-all-available">
-      <mat-label>Tilin tyyppi</mat-label>
+      <mat-label>{{'pageBuilder.accountType' | translate}}</mat-label>
       <mat-select formControlName="accountType" (selectionChange)="accountTypeChanged()" autofocus>
-        <mat-option value="user">Yksityishenkilö</mat-option>
-        <mat-option value="company">Yritys</mat-option>
+        <mat-option value="user">{{'pageBuilder.user' | translate}}</mat-option>
+        <mat-option value="company">{{'pageBuilder.company' | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="isUserForm()">
-      <mat-label>Etunimi</mat-label>
+      <mat-label>{{'pageBuilder.firstName' | translate}}</mat-label>
       <input matInput type="text" formControlName="firstName" autocomplete="given-name" maxlength="100">
       <mat-error *ngIf="editForm.firstName.errors?.required">Tieto on pakollinen</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="isUserForm()">
-      <mat-label>Sukunimi</mat-label>
+      <mat-label>{{'pageBuilder.lastName' | translate}}</mat-label>
       <input matInput type="text" formControlName="lastName" autocomplete="family-name" maxlength="100">
       <mat-error *ngIf="editForm.lastName.errors?.required">Tieto on pakollinen</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="isUserForm() && user">
-      <mat-label>Tittelini</mat-label>
+      <mat-label>{{'pageBuilder.workTitle' | translate}}</mat-label>
       <input matInput type="text" formControlName="title" autocomplete="off" maxlength="300">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-all-available" *ngIf="isCompanyForm()">
-      <mat-label>Yrityksen nimi</mat-label>
+      <mat-label>{{'pageBuilder.companyName' | translate}}</mat-label>
       <input matInput type="text" formControlName="companyName" autocomplete="organization" maxlength="100">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="user">
-      <mat-label>Puhelinnumero</mat-label>
+      <mat-label>{{'pageBuilder.phone' | translate}}</mat-label>
       <input matInput type="text" formControlName="phone" autocomplete="tel" maxlength="300">
-      <mat-error *ngIf="editForm.phone.errors?.wrongNumber">Puhelinnumero on väärän muotoinen</mat-error>
+      <mat-error *ngIf="editForm.phone.errors?.wrongNumber">{{'pageBuilder.phoneWrongFormat' | translate}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" [ngClass]="{'width-half-available': user, 'width-all-available': !user}">
-      <mat-label>Sähköposti</mat-label>
+      <mat-label>{{'pageBuilder.email' | translate}}</mat-label>
       <input matInput type="text" formControlName="email" autocomplete="email" (focusout)="validateEmail()" email maxlength="300">
       <mat-icon matSuffix matTooltip="Sähköpostia käytetään kirjautumiseen.">info</mat-icon>
-      <mat-error *ngIf="editForm.email.errors?.emailNotValid">Sähköposti on väärän muotoinen</mat-error>
-      <mat-error *ngIf="editForm.email.errors?.alreadyExists">Sähköposti on jo käytössä</mat-error>
-      <mat-error *ngIf="editForm.email.errors?.required">Tieto on pakollinen</mat-error>
+      <mat-error *ngIf="editForm.email.errors?.emailNotValid">{{'pageBuilder.emailWrongFormat' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.email.errors?.alreadyExists">{{'pageBuilder.emailAlreadyUsed' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.email.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="user">
-      <mat-label>Nettisivuni</mat-label>
+      <mat-label>{{'pageBuilder.webpage' | translate}}</mat-label>
       <input matInput type="text" formControlName="website" autocomplete="url" maxlength="300">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="user">
-      <mat-label>Sijaintini</mat-label>
+      <mat-label>{{'pageBuilder.location' | translate}}</mat-label>
       <input matInput type="text" formControlName="location" autocomplete="address-level2" maxlength="300">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="user">
-      <mat-label>Kahvani</mat-label>
+      <mat-label>{{'pageBuilder.handle' | translate}}</mat-label>
       <input matInput type="text" formControlName="handle" autocomplete="off" maxlength="300" (focusout)="validateHandle()">
       <mat-icon matSuffix matTooltip="Kahvasi näkyy käyntikorttisi jakolinkissä.">info</mat-icon>
-      <mat-error *ngIf="editForm.handle.errors?.required">Tieto on pakollinen</mat-error>
-      <mat-error *ngIf="editForm.handle.errors?.alreadyExists">Kahva on jo käytössä</mat-error>
+      <mat-error *ngIf="editForm.handle.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.handle.errors?.alreadyExists">{{'pageBuilder.handleAlreadyUsed' | translate}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="!user">
-      <mat-label>Salasana</mat-label>
+      <mat-label>{{'pageBuilder.password' | translate}}</mat-label>
       <input matInput type="password" formControlName="password" autocomplete="new-password" maxlength="300">
-      <mat-icon matSuffix matTooltip="Salasanassa pitää olla vähintään 8 merkkiä, joista vähintään 1 on iso kirjain, 1 pieni kirjain, yksi numero ja yksi erikoismerkki.">info</mat-icon>
-      <mat-error *ngIf="editForm.password.errors?.pattern">Salasana on väärän muotoinen</mat-error>
-      <mat-error *ngIf="editForm.password.errors?.required">Tieto on pakollinen</mat-error>
+      <mat-icon matSuffix [matTooltip]="'pageBuilder.passwordDescription' | translate">info</mat-icon>
+      <mat-error *ngIf="editForm.password.errors?.pattern">{{'pageBuilder.passwordWrongFormat' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.password.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="width-half-available" *ngIf="!user">
-      <mat-label>Salasana uudelleen</mat-label>
+      <mat-label>{{'pageBuilder.passwordAgain' | translate}}</mat-label>
       <input matInput type="password" formControlName="passwordAgain" autocomplete="new-password" maxlength="300">
-      <mat-error *ngIf="editForm.passwordAgain.errors?.noMatch">Salasanat eivät ole samat</mat-error>
-      <mat-error *ngIf="editForm.passwordAgain.errors?.required">Tieto on pakollinen</mat-error>
+      <mat-error *ngIf="editForm.passwordAgain.errors?.noMatch">{{'pageBuilder.passwordNoMatch' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.passwordAgain.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
     </mat-form-field>
   </mat-card>
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated()">
-    <h2>Kuvaus</h2>
+    <h2>{{'pageBuilder.description' | translate}}</h2>
     <mat-form-field appearance="fill" class="width-all-available">
-      <mat-label>Kuvaile itseäsi/yritystäsi</mat-label>
+      <mat-label>{{'pageBuilder.describe' | translate}}</mat-label>
       <textarea matInput formControlName="description" #description rows="10" (keyup)="limitDescriptionSize()"></textarea>
       <mat-hint align="end">{{description.value?.length || 0}}/1000</mat-hint>
-      <mat-error *ngIf="editForm.description.errors?.max">Teksti on liian pitkä</mat-error>
+      <mat-error *ngIf="editForm.description.errors?.max">{{'pageBuilder.textTooLong' | translate}}</mat-error>
     </mat-form-field>
   </mat-card>
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated()">
     <div class="social-media-links">
-      <h2>Sosiaalisen median linkit</h2>
+      <h2>{{'pageBuilder.socialMediaLinks' | translate}}</h2>
       <mat-form-field appearance="fill" class="width-all-available">
         <mat-label>Facebook</mat-label>
         <span matPrefix class="me-2"><fa-icon [icon]="faFacebook"></fa-icon></span>
@@ -136,15 +136,15 @@
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated()">
     <div class="skills">
-      <h2>{{isUserForm() ? 'Taitoni' : 'Palvelumme'}}</h2>
+      <h2>{{isUserForm() ? ('pageBuilder.mySkills' | translate) : ('pageBuilder.ourServices' | translate)}}</h2>
       <mat-form-field appearance="fill" class="width-all-available" *ngIf="isUserForm()">
-        <mat-label>Osaamani kielet</mat-label>
+        <mat-label>{{'pageBuilder.languages' | translate}}</mat-label>
         <mat-chip-list #languagesChipList>
           <mat-chip *ngFor="let language of languages; let i = index" [selectable]="true" [removable]="true" (removed)="removeFromList(languages, i)">
             {{language}}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Kirjoita uusi kieli ja paina enter..."
+          <input [placeholder]="'pageBuilder.writeAndPressEnter' | translate"
                  autocomplete="off"
                  [matChipInputFor]="languagesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -154,13 +154,13 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="width-all-available">
-        <mat-label>{{isUserForm() ? 'Erityisosaamiseni' : 'Yrityksemme erityisosaaminen'}}</mat-label>
+        <mat-label>{{isUserForm() ? ('pageBuilder.specialSkills' | translate) : ('pageBuilder.companySpecialSkills' | translate)}}</mat-label>
         <mat-chip-list #specialSkillsChipList>
           <mat-chip *ngFor="let specialSkill of specialSkills; let i = index" [selectable]="true" [removable]="true" (removed)="removeFromList(specialSkills, i)">
             {{specialSkill}}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Kirjoita uusi erityisosaaminen ja paina enter..."
+          <input [placeholder]="'pageBuilder.writeAndPressEnter' | translate"
                  autocomplete="off"
                  [matChipInputFor]="specialSkillsChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -173,43 +173,43 @@
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated() && isUserForm()">
     <div class="work-histories">
-      <h2>Työhistoria</h2>
+      <h2>{{'pageBuilder.workHistory' | translate}}</h2>
 
       <div class="work-history" formArrayName="workHistories" *ngFor="let workHistory of workHistories.controls; let i = index" [ngClass]="{'mb-4': i < workHistories.controls.length - 1}">
         <mat-card class="mat-elevation-z0">
           <mat-card-actions>
-            <button (click)="moveUp(workHistories, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä ylemmäksi" *ngIf="i - 1 >= 0">
+            <button (click)="moveUp(workHistories, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab [matTooltip]="'pageBuilder.moveUp' | translate" *ngIf="i - 1 >= 0">
               <mat-icon>arrow_upward</mat-icon>
             </button>
-            <button (click)="moveDown(workHistories, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä alemmaksi" *ngIf="i + 1 < educations.controls.length">
+            <button (click)="moveDown(workHistories, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab [matTooltip]="'pageBuilder.moveUp' | translate" *ngIf="i + 1 < educations.controls.length">
               <mat-icon>arrow_downward</mat-icon>
             </button>
-            <button (click)="removeFromList(workHistories, i)" class="mat-elevation-z2" color="warn" mat-mini-fab matTooltip="Poista työhistoria">
+            <button (click)="removeFromList(workHistories, i)" class="mat-elevation-z2" color="warn" mat-mini-fab [matTooltip]="'miscellaneous.delete' | translate">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
           <div [formGroupName]="i">
             <div class="group-row">
               <mat-form-field appearance="fill" class="width-all-available">
-                <mat-label>Työpaikka</mat-label>
+                <mat-label>{{'pageBuilder.workPlace' | translate}}</mat-label>
                 <input matInput type="text" autocomplete="organization" formControlName="workplace">
-                <mat-error *ngIf="workHistory.get('workplace').errors?.required">Tieto on pakollinen</mat-error>
+                <mat-error *ngIf="workHistory.get('workplace').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
               </mat-form-field>
             </div>
             <mat-form-field appearance="fill" class="width-all-available">
-              <mat-label>Titteli</mat-label>
+              <mat-label>{{'pageBuilder.workTitle' | translate}}</mat-label>
               <input matInput type="text" autocomplete="organization-title" formControlName="title" maxlength="300">
-              <mat-error *ngIf="workHistory.get('title').errors?.required">Tieto on pakollinen</mat-error>
+              <mat-error *ngIf="workHistory.get('title').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="width-all-available">
-              <mat-label>Ajankohta</mat-label>
+              <mat-label>{{'pageBuilder.period' | translate}}</mat-label>
               <input matInput type="text" autocomplete="off" formControlName="period" maxlength="300">
-              <mat-error *ngIf="workHistory.get('period').errors?.required">Tieto on pakollinen</mat-error>
+              <mat-error *ngIf="workHistory.get('period').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="width-all-available">
-              <mat-label>Kuvaus</mat-label>
+              <mat-label>{{'pageBuilder.description' | translate}}</mat-label>
               <textarea matInput rows="5" formControlName="description" maxlength="1000"></textarea>
-              <mat-error *ngIf="workHistory.get('description').errors?.required">Tieto on pakollinen</mat-error>
+              <mat-error *ngIf="workHistory.get('description').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
             </mat-form-field>
           </div>
         </mat-card>
@@ -217,50 +217,50 @@
     </div>
     <div class="button-row my-3">
       <button mat-raised-button color="primary" class="add-button" (click)="addWorkHistoryFormGroup()">
-        Lisää työhistoria
+        {{'pageBuilder.addWorkHistory' | translate}}
       </button>
     </div>
   </mat-card>
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated() && isUserForm()">
     <div class="educations">
-      <h2>Koulutus</h2>
+      <h2>{{'pageBuilder.education' | translate}}</h2>
 
       <div class="education" formArrayName="educations" *ngFor="let education of educations.controls; let i = index" [ngClass]="{'mb-4': i < educations.controls.length - 1}">
         <mat-card class="mat-elevation-z0">
           <mat-card-actions>
-            <button (click)="moveUp(educations, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä ylemmäksi" *ngIf="i - 1 >= 0">
+            <button (click)="moveUp(educations, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab [matTooltip]="'pageBuilder.moveUp' | translate" *ngIf="i - 1 >= 0">
               <mat-icon>arrow_upward</mat-icon>
             </button>
-            <button (click)="moveDown(educations, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab matTooltip="Siirrä alemmaksi" *ngIf="i + 1 < educations.controls.length">
+            <button (click)="moveDown(educations, i)" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab [matTooltip]="'pageBuilder.moveDown' | translate" *ngIf="i + 1 < educations.controls.length">
               <mat-icon>arrow_downward</mat-icon>
             </button>
-            <button (click)="removeFromList(educations, i)" class="mat-elevation-z2 mx-1" color="warn" mat-mini-fab matTooltip="Poista koulutus">
+            <button (click)="removeFromList(educations, i)" class="mat-elevation-z2 mx-1" color="warn" mat-mini-fab [matTooltip]="'miscellaneous.delete' | translate">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
           <div [formGroupName]="i">
             <div class="group-row">
               <mat-form-field appearance="fill" class="width-all-available">
-                <mat-label>Koulutuspaikka</mat-label>
+                <mat-label>{{'pageBuilder.educationPlace' | translate}}</mat-label>
                 <input matInput type="text" autocomplete="off" formControlName="educationPlace">
-                <mat-error *ngIf="education.get('educationPlace').errors?.required">Tieto on pakollinen</mat-error>
+                <mat-error *ngIf="education.get('educationPlace').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
               </mat-form-field>
             </div>
             <mat-form-field appearance="fill" class="width-all-available">
-              <mat-label>Tutkinto</mat-label>
+              <mat-label>{{'pageBuilder.degree' | translate}}</mat-label>
               <input matInput type="text" autocomplete="off" formControlName="title" maxlength="300">
-              <mat-error *ngIf="education.get('title').errors?.required">Tieto on pakollinen</mat-error>
+              <mat-error *ngIf="education.get('title').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="width-all-available">
-              <mat-label>Ajankohta</mat-label>
+              <mat-label>{{'pageBuilder.period' | translate}}</mat-label>
               <input matInput type="text" autocomplete="off" formControlName="period" maxlength="300">
-              <mat-error *ngIf="education.get('period').errors?.required">Tieto on pakollinen</mat-error>
+              <mat-error *ngIf="education.get('period').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="width-all-available">
-              <mat-label>Kuvaus</mat-label>
+              <mat-label>{{'pageBuilder.description' | translate}}</mat-label>
               <textarea matInput rows="5" formControlName="description" maxlength="1000"></textarea>
-              <mat-error *ngIf="education.get('description').errors?.required">Tieto on pakollinen</mat-error>
+              <mat-error *ngIf="education.get('description').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
             </mat-form-field>
           </div>
         </mat-card>
@@ -268,44 +268,44 @@
     </div>
     <div class="button-row my-3">
       <button mat-raised-button color="primary" class="add-button" (click)="addEducationFormGroup()">
-        Lisää koulutus
+        {{'pageBuilder.addEducation' | translate}}
       </button>
     </div>
   </mat-card>
 
   <mat-card class="my-2" *ngIf="isCompanyForm() && authService.isAuthenticated()">
-    <h2>Aukioloajat</h2>
+    <h2>{{'pageBuilder.businessHours' | translate}}</h2>
     <ng-business-hours
         [(ngModel)]="businessHours"
         [ngModelOptions]="{standalone: true}"
-        timeFromLabel="Aukeaa"
-        timeToLabel="Sulkeutuu">
+        [timeFromLabel]="'pageBuilder.opens' | translate"
+        [timeToLabel]="'pageBuilder.closes' | translate">
     </ng-business-hours>
   </mat-card>
 
   <mat-card *ngIf="authService.isAuthenticated()">
     <div class="theme-selector">
-      <h2>Valitse teema</h2>
+      <h2>{{'pageBuilder.pickTheme' | translate}}</h2>
       <input checked="checked" id="light" type="radio" name="theme" value="light" formControlName="theme"/>
-      <label class="theme light" for="light">Vaalea teema</label>
+      <label class="theme light" for="light">{{'pageBuilder.lightTheme' | translate}}</label>
       <input id="dark" type="radio" name="theme" value="dark" formControlName="theme"/>
-      <label class="theme dark" for="dark">Tumma teema</label>
+      <label class="theme dark" for="dark">{{'pageBuilder.darkTheme' | translate}}</label>
     </div>
   </mat-card>
 
   <mat-card class="my-2" *ngIf="authService.isAuthenticated()">
-    <h2>Asetukset</h2>
+    <h2>{{'pageBuilder.settings' | translate}}</h2>
     <mat-form-field appearance="fill" class="width-all-available">
-      <mat-label>Näytä profiilini hakusivulla</mat-label>
+      <mat-label>{{'pageBuilder.showMyProfileOnSearchPage' | translate}}</mat-label>
       <mat-select formControlName="public">
-        <mat-option [value]="true">Kyllä</mat-option>
-        <mat-option [value]="false">Ei</mat-option>
+        <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
+        <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card>
 
   <div class="button-row mt-2">
-    <button mat-raised-button color="warn" (click)="deleteProfile()" *ngIf="authService.isAuthenticated()" class="me-2">Poista profiilini</button>
-    <button mat-raised-button color="primary" (click)="save()">{{authService.isAuthenticated() ? 'Tallenna' : 'Rekisteröidy'}}</button>
+    <button mat-raised-button color="warn" (click)="deleteProfile()" *ngIf="authService.isAuthenticated()" class="me-2">{{'pageBuilder.showMyProfileOnSearchPage' | translate}}</button>
+    <button mat-raised-button color="primary" (click)="save()">{{authService.isAuthenticated() ? ('pageBuilder.save' | translate) : ('pageBuilder.register' | translate)}}</button>
   </div>
 </form>

@@ -3,6 +3,6 @@
   {{message}}
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button (click)="close()">Sulje</button>
-  <button mat-raised-button [color]="buttonColor" (click)="confirm()">Kyllä</button>
+  <button mat-raised-button (click)="close()">{{'miscellaneous.close' | translate}}</button>
+  <button mat-raised-button [color]="buttonColor" (click)="confirm()">{{'miscellaneous.yes' | translate}}</button>
 </mat-dialog-actions>

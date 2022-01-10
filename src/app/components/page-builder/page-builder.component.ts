@@ -17,6 +17,7 @@ import {NgBusinessHoursDaySettings} from 'ng-business-hours';
 import {BusinessHour} from '../../models/businessHour';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
+import {TranslateService} from '@ngx-translate/core';
 
 // TODO Mainokset
 // TODO Kuukausimaksu
@@ -77,7 +78,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     public authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private translate: TranslateService
   ) {
   }
 
@@ -273,8 +275,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
           this.sendDisabled = false;
 
           this.snackBar.open(this.user ?
-            'Muutokset tallennettu!' :
-            'Tervetuloa käyttäjäksi ' + (result.user.firstName ?? result.user.companyName) + '!', 'Sulje');
+            this.translate.instant('pageBuilder.saved') :
+            this.translate.instant('pageBuilder.welcomeToUser', result.user.firstName ?? result.user.companyName), this.translate.instant('miscellaneous.close'));
 
           if (!this.user) {
             this.dataService.setToken(result.token);
@@ -330,7 +332,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   private handleError(error?: any): void {
     console.error(error);
     this.sendDisabled = false;
-    this.snackBar.open('Tapahtui virhe!', 'Sulje');
+    this.snackBar.open(this.translate.instant('miscellaneous.errorHappened'), this.translate.instant('miscellaneous.close'));
   }
 
   openBusinessCard(): void {
@@ -371,7 +373,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   deleteProfile(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {title: 'Oletko varma?', message: 'Olet poistamassa tiliäsi. Haluatko jatkaa?', buttonColor: 'warn'};
+    dialogConfig.data = {title: this.translate.instant('miscellaneous.areYouSure'), message: this.translate.instant('pageBuilder.deleteConfirm'), buttonColor: 'warn'};
     const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {

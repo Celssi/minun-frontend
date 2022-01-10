@@ -2,10 +2,10 @@
   <div class="overlay">
     <div class="text-white text-center py-5 px-4">
       <div class="py-5">
-        <h1>Minun Infoni</h1>
-        <h2 class="card-title h2 my-4 py-2">Uusi tapa jakaa käyntikortteja</h2>
-        <p class="mb-4 pb-2 px-md-5 mx-md-5">Tämän erittäin upean palvelun avulla pystyt esittelemään itsesi nopeasti ja tyylikkäästi. Täytät vain tietoja ja homma on sillä selvä!</p>
-        <a mat-raised-button color="primary" [routerLink]="['/tutustu']">Lue Lisää!</a>
+        <h1>{{'frontPage.title' | translate}}</h1>
+        <h2 class="card-title h2 my-4 py-2">{{'frontPage.subtitle' | translate}}</h2>
+        <p class="mb-4 pb-2 px-md-5 mx-md-5">{{'frontPage.description' | translate}}</p>
+        <a mat-raised-button color="primary" [routerLink]="['/tutustu']">{{'frontPage.readMore' | translate}}</a>
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@
 
 <mat-card *ngIf="!authService.isAuthenticated()" class="mt-2 main-card">
   <mat-card-header>
-    <mat-card-title class="text-white">Aloita palvelun käyttö rekisteröitymällä!</mat-card-title>
+    <mat-card-title class="text-white">{{'frontPage.notLoggedInWelcome' | translate}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <app-page-builder></app-page-builder>

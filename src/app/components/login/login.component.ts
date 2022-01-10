@@ -5,6 +5,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,13 @@ export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private dataService: DataService, private snackBar: MatSnackBar, private authService: AuthService, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataService: DataService,
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    private router: Router,
+    private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -37,11 +44,11 @@ export class LoginComponent implements OnInit {
           this.dataService.setRefreshToken(result.refreshToken);
           this.authService.setUser(result.user);
 
-          this.snackBar.open('Tervetuloa takaisin ' + (result.user.firstName ?? result.user.companyName) + '!', 'Sulje');
+          this.snackBar.open(this.translate.instant('login.welcomeBack', (result.user.firstName ?? result.user.companyName)), this.translate.instant('miscellaneous.close'));
           this.router.navigate(['etusivu']);
         },
         error: (error: HttpErrorResponse) => {
-          this.snackBar.open('Tarkista käyttäjätunnus ja salasana!', 'Sulje');
+          this.snackBar.open(this.translate.instant('login.checkUsernameAndEmail'), this.translate.instant('miscellaneous.close'));
         }
       });
     }

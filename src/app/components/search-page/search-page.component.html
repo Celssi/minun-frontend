@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="search-bar">
         <fa-icon [icon]="faSearch"></fa-icon>
-        <input type="text" class="form-control form-input" placeholder="Kirjoita jotain..." #search>
+        <input type="text" class="form-control form-input" [placeholder]="'search.writeSomething' | translate" #search>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
             <mat-expansion-panel class="mat-elevation-z1">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Kuvaus
+                  {{'search.description' | translate}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <p>{{user.description}}</p>
@@ -31,7 +31,7 @@
             <mat-expansion-panel class="mat-elevation-z1">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Osaaminen
+                  {{'search.knowledge' | translate}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div class="information-row">
@@ -43,7 +43,7 @@
             <mat-expansion-panel class="mat-elevation-z1">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Yhteystiedot
+                  {{'search.contactInfo' | translate}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div>
@@ -59,7 +59,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <a mat-raised-button color="primary" class="d-block" [routerLink]="['/' + user.handle]">Avaa</a>
+          <a mat-raised-button color="primary" class="d-block" [routerLink]="['/' + user.handle]">{{'search.open' | translate}}</a>
         </mat-card-actions>
       </mat-card>
     </div>

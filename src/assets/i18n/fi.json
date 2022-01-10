@@ -7,7 +7,14 @@
     "thursday": "Torstai",
     "friday": "Perjantai",
     "saturday": "Lauantai",
-    "sunday": "Sunnuntai"
+    "sunday": "Sunnuntai",
+    "close": "Sulje",
+    "yes": "Kyllä",
+    "no": "Ei",
+    "save": "Tallenna",
+    "errorHappened": "Tapahtui virhe!",
+    "areYouSure": "Oletko varma?",
+    "delete": "Poista"
   },
 
   "businessCard": {
@@ -23,5 +30,106 @@
     "closed": "Suljettu",
     "errorHeader": "Pieleen meni!",
     "errorMessage": "Käyntikorttia ei valitettavasti löytynyt. Ole hyvä ja tarkista linkki."
+  },
+
+  "frontPage": {
+    "title": "Minun Infoni",
+    "subtitle": "Uusi tapa jakaa käyntikortteja",
+    "description": "Tämän erittäin upean palvelun avulla pystyt esittelemään itsesi nopeasti ja tyylikkäästi. Täytät vain tietoja ja homma on sillä selvä!",
+    "readMore": "Lue lisää!",
+    "notLoggedInWelcome": "Aloita palvelun käyttö rekisteröitymällä!"
+  },
+
+  "imageSelector": {
+    "newRandom": "Uusi satunnainen kuva",
+    "fromComputer": "Valitse kuva koneeltasi",
+    "delete": "Poista kuva"
+  },
+
+  "login": {
+    "title": "Kirjautuminen",
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "loginButton": "Kirjaudu",
+    "checkUsernameAndEmail": "Tarkista käyttäjätunnus ja salasana!",
+    "welcomeBack": "Tervetuloa takaisin {0}!"
+  },
+
+  "navbar": {
+    "frontPage": "Etusivu",
+    "search": "Etsi käyntikorttia",
+    "getToKnow": "Tutustu",
+    "logout": "Kirjaudu ulos",
+    "login": "Kirjaudu sisään"
+  },
+
+  "pageBuilder": {
+    "title": "Omien tietojen muokkaaminen",
+    "openBusinessCard": "Avaa käyntikorttisi",
+    "basicInfo": "Perustiedot",
+    "accountType": "Tilin tyyppi",
+    "user": "Yksityishenkilö",
+    "company": "Yritys",
+    "saved": "Muutokset tallennettu!",
+    "welcomeToUser": "Tervetuloa käyttäjäksi {0}!",
+    "deleteConfirm": "Olet poistamassa tiliäsi. Haluatko jatkaa?",
+    "firstName": "Etunimi",
+    "lastName": "Sukunimi",
+    "workTitle": "Titteli",
+    "companyName": "Yrityksen nimi",
+    "phone": "Puhelinnumero",
+    "email": "Sähköposti",
+    "webpage": "Nettisivu",
+    "location": "Sijainti",
+    "handle": "Kahva",
+    "password": "Salasana",
+    "passwordAgain": "Salasana uudelleen",
+    "description": "Kuvaus",
+    "socialMediaLinks": "Sosiaalisen median linkit",
+    "workHistory": "Työhistoria",
+    "phoneWrongFormat": "Puhelinnumero on väärän muotoinen",
+    "emailWrongFormat": "Sähköposti on väärän muotoinen",
+    "emailAlreadyUsed": "Sähköposti on jo käytössä",
+    "requiredField": "Tieto on pakollinen",
+    "handleAlreadyUsed": "Kahva on jo käytössä",
+    "passwordWrongFormat": "Salasana on väärän muotoinen",
+    "passwordNoMatch": "Salasanat eivät ole samat",
+    "passwordDescription": "Salasanassa pitää olla vähintään 8 merkkiä, joista vähintään 1 on iso kirjain, 1 pieni kirjain, yksi numero ja yksi erikoismerkki.",
+    "describe": "Kuvaile itseäsi/yritystäsi",
+    "textTooLong": "Teksti on liian pitkä",
+    "mySkill": "Taitoni",
+    "ourServices": "Palvelumme",
+    "languages": "Osaamani kielet",
+    "writeAndPressEnter": "Kirjoita ja paina enter...",
+    "specialSkills": "Erityisosaamiseni",
+    "companySpecialSkill": "Yrityksemme palvelut",
+    "moveUp": "Siirrä ylemmäksi",
+    "moveDown": "Siirrä alemmaksi",
+    "workPlace": "Työpaikka",
+    "period": "Ajankohta",
+    "addWorkHistory": "Lisää työhistoria",
+    "education": "Koulutus",
+    "educationPlace": "Koulutuspaikka",
+    "degree": "Tutkinto",
+    "addEducation": "Lisää tutkinto",
+    "businessHours": "Aukioloajat",
+    "opens": "Aukeaa",
+    "closes": "Sulkeutuu",
+    "pickTheme": "Valitse teema",
+    "lightTheme": "Vaalea teema",
+    "darkTheme": "Tumma teema",
+    "settings": "Asetukset",
+    "showMyProfileOnSearchPage": "Näytä profiilini hakusivulla",
+    "deleteMyProfile": "Poista profiilini",
+    "save": "Tallenna",
+    "register": "Rekisteröidy"
+  },
+
+  "searchPage": {
+    "writeSomething": "Kirjoita jotain...",
+    "description": "Kuvaus",
+    "knowledge": "Osaaminen",
+    "contactInfo": "Yhteystiedot",
+    "open": "Avaa"
   }
 }

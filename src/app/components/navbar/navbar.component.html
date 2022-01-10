@@ -16,32 +16,32 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/etusivu" [routerLinkActive]="['active-link']">
         <mat-icon>dashboard</mat-icon>
-        <span class="link-text">Etusivu</span>
+        <span class="link-text">{{'navbar.frontPage' | translate}}</span>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" routerLink="/etsi" [routerLinkActive]="['active-link']">
         <mat-icon>search</mat-icon>
-        <span class="link-text">Etsi käyntikorttia</span>
+        <span class="link-text">{{'navbar.search' | translate}}</span>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" routerLink="/tutustu" [routerLinkActive]="['active-link']">
         <mat-icon>menu_book</mat-icon>
-        <span class="link-text">Tutustu</span>
+        <span class="link-text">{{'navbar.getToKnow' | translate}}</span>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" (click)="logout()" *ngIf="authService.isAuthenticated()">
         <mat-icon>logout</mat-icon>
-        <span class="link-text">Kirjaudu ulos</span>
+        <span class="link-text">{{'navbar.logout' | translate}}</span>
       </a>
       <a class="nav-link" routerLink="/kirjaudu" *ngIf="!authService.isAuthenticated()">
         <mat-icon>login</mat-icon>
-        <span class="link-text">Kirjaudu sisään</span>
+        <span class="link-text">{{'navbar.login' | translate}}</span>
       </a>
     </li>
     <li class="nav-item version-info">

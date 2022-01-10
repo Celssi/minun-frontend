@@ -3,15 +3,15 @@
   <input #hiddenFileInput (change)="imageChanged($event)" accept="image/*" style="display: none" type="file"/>
 
   <div class="mt-2">
-    <button (click)="fetchRandomImage()" class="me-2 mat-elevation-z2" color="primary" mat-mini-fab matTooltip="Uusi satunnainen kuva">
+    <button (click)="fetchRandomImage()" class="me-2 mat-elevation-z2" color="primary" mat-mini-fab [matTooltip]="'imageSelector.newRandom' | translate">
       <mat-icon>refresh</mat-icon>
     </button>
 
-    <button (click)="hiddenFileInput.click()" class="me-2 mat-elevation-z2" color="primary" mat-mini-fab matTooltip="Valitse kuva koneeltasi">
+    <button (click)="hiddenFileInput.click()" class="me-2 mat-elevation-z2" color="primary" mat-mini-fab [matTooltip]="'imageSelector.fromComputer' | translate">
       <mat-icon>camera_alt</mat-icon>
     </button>
 
-    <button (click)="deleteImage()" class="mat-elevation-z2" color="warn" mat-mini-fab *ngIf="croppedImage" matTooltip="Poista kuva">
+    <button (click)="deleteImage()" class="mat-elevation-z2" color="warn" mat-mini-fab *ngIf="croppedImage" [matTooltip]="'imageSelector.delete' | translate">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
@@ -29,7 +29,7 @@
       ></image-cropper>
     </div>
     <div class="mt-2 centered">
-      <button (click)="applyCrop()" mat-raised-button color="primary">Tallenna</button>
+      <button (click)="applyCrop()" mat-raised-button color="primary">{{'miscellaneous.save' | translate}}</button>
     </div>
   </div>
 </ng-template>
