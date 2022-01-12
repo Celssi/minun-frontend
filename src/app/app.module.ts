@@ -49,7 +49,6 @@ import {CookieModule} from 'ngx-cookie';
 import {CookiesComponent} from './components/cookies/cookies.component';
 import {ConfirmModalComponent} from './components/confirm-modal/confirm-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import {BannerComponent} from './components/banner/banner.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialElevationDirective} from './helpers/material-elevation.directive';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -57,6 +56,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { SocialButtonsComponent } from './components/social-buttons/social-buttons.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {DynamicScriptLoaderService} from './services/dynamic-script-loader.service';
 
 registerLocaleData(localeFI);
 
@@ -79,7 +79,7 @@ const cookieConfig: NgcCookieConsentConfig = {
   type: 'info',
   content: {
     message: 'Sivusto käyttää evästeitä parhaan käyttökokemuksen saavuttamiseksi.',
-    dismiss: 'Selvä juttu!',
+    dismiss: 'Hyväksyn!',
     deny: 'Refuse cookies',
     link: 'Lue lisää',
     href: '/keksit',
@@ -105,7 +105,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ImageSelectorComponent,
     CookiesComponent,
     ConfirmModalComponent,
-    BannerComponent,
     MaterialElevationDirective,
     MaterialElevationDirective,
     SocialButtonsComponent
@@ -156,6 +155,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AuthService,
     MatSnackBar,
     LoadingService,
+    DynamicScriptLoaderService,
     {provide: HTTP_INTERCEPTORS, useClass: NotLoggedInInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {

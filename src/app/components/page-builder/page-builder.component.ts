@@ -19,7 +19,6 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
 import {TranslateService} from '@ngx-translate/core';
 
-// TODO Mainokset
 // TODO Kuukausimaksu
 // TODO Kartta
 // TODO Ota yhteyttä

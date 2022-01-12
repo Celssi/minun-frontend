@@ -1,6 +1,6 @@
-<ng-container *ngIf="loadingService.isLoading$ | async">
+<ng-container *ngIf="(loadingService.isLoading$ | async) || ccService.isOpen()">
   <div class="spinner-overlay">
-    <div class="spinner">
+    <div class="spinner" *ngIf="(loadingService.isLoading$ | async)">
       <mat-progress-spinner diameter=200 mode="indeterminate"></mat-progress-spinner>
     </div>
   </div>
