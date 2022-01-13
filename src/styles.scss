@@ -84,6 +84,12 @@ material-icons:before {
   }
 }
 
+.mat-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (min-width: 1024px) {
   .wrapper {
     padding-left: 70px;

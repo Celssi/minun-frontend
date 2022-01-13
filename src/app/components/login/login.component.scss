@@ -3,6 +3,6 @@ mat-form-field {
 }
 
 .login-button-container {
-  text-align: right;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 }

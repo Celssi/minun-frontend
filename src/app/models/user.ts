@@ -23,6 +23,8 @@ export class User {
   specialSkills: string;
   handle: string;
   public: boolean;
+  allowFacebookLogin: boolean;
+  allowGoogleLogin: boolean;
 
   socialMediaLinks: SocialMediaLink[];
   workHistories: WorkHistory[];

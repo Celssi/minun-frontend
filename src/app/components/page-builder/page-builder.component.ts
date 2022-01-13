@@ -110,7 +110,9 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         github: [this.user ? this.getSocialMediaLink(this.user, LinkType.Github) : ''],
         linkedin: [this.user ? this.getSocialMediaLink(this.user, LinkType.Linkedin) : ''],
         handle: [this.user ? this.user.handle : ''],
-        public: [this.user ? this.user.public : false]
+        public: [this.user ? this.user.public : false],
+        allowFacebookLogin: [this.user ? this.user.allowFacebookLogin : false],
+        allowGoogleLogin: [this.user ? this.user.allowGoogleLogin : false]
       });
 
       this.image = this.user?.image;
@@ -271,10 +273,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       this.dataService.save(values).subscribe({
         next: (result) => {
           this.sendDisabled = false;
-
-          this.snackBar.open(this.user ?
-            this.translate.instant('pageBuilder.saved') :
-            this.translate.instant('pageBuilder.welcomeToUser', {user: result.user.firstName ?? result.user.companyName}), this.translate.instant('miscellaneous.close'));
+          this.translate.instant('pageBuilder.saved');
 
           if (!this.user) {
             this.dataService.setToken(result.token);

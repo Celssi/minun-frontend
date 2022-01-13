@@ -302,10 +302,24 @@
         <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.allowFacebookLogin' | translate}}</mat-label>
+      <mat-select formControlName="allowFacebookLogin">
+        <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
+        <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.allowGoogleLogin' | translate}}</mat-label>
+      <mat-select formControlName="allowGoogleLogin">
+        <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
+        <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-card>
 
   <div class="button-row mt-2">
-    <button mat-raised-button color="warn" (click)="deleteProfile()" *ngIf="authService.isAuthenticated()" class="me-2">{{'pageBuilder.showMyProfileOnSearchPage' | translate}}</button>
+    <button mat-raised-button color="warn" (click)="deleteProfile()" *ngIf="authService.isAuthenticated()" class="me-2">{{'pageBuilder.deleteMyProfile' | translate}}</button>
     <button mat-raised-button color="primary" (click)="save()">{{authService.isAuthenticated() ? ('pageBuilder.save' | translate) : ('pageBuilder.register' | translate)}}</button>
   </div>
 </form>

@@ -7,12 +7,14 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {InfoPageComponent} from './components/info-page/info-page.component';
 import {BusinessCardComponent} from './components/business-card/business-card.component';
 import {CookiesComponent} from './components/cookies/cookies.component';
+import {FacebookComponent} from './components/facebook/facebook.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/etusivu', pathMatch: 'full'},
   {path: 'etusivu', component: FrontPageComponent},
   {path: 'etsi', component: SearchPageComponent},
   {path: 'kirjaudu', component: LoginComponent},
+  {path: 'kirjaudu/facebook/:token', component: FacebookComponent},
   {path: 'tutustu', component: InfoPageComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'keksit', component: CookiesComponent},

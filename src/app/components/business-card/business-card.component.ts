@@ -34,7 +34,7 @@ export class BusinessCardComponent implements OnInit {
       this.translate.instant('miscellaneous.friday'),
       this.translate.instant('miscellaneous.saturday'),
       this.translate.instant('miscellaneous.sunday'),
-    ]
+    ];
   }
 
   ngOnInit(): void {

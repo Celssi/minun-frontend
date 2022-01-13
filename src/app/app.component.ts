@@ -110,11 +110,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   async loadGoogleAnalytics(): Promise<any> {
     const data = await this.dynamicScriptLoader.load('gtag', 'datalayer');
-    console.log(data);
   }
 
   sendUrlToGoogleAnalytics(url: string): void {
-    console.log(url);
     gtag('config', 'G-GEPNC6YNVY', {
         page_path: url
       }

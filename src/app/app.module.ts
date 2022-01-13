@@ -51,12 +51,13 @@ import {ConfirmModalComponent} from './components/confirm-modal/confirm-modal.co
 import {MatDialogModule} from '@angular/material/dialog';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialElevationDirective} from './helpers/material-elevation.directive';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { SocialButtonsComponent } from './components/social-buttons/social-buttons.component';
+import {SocialButtonsComponent} from './components/social-buttons/social-buttons.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {DynamicScriptLoaderService} from './services/dynamic-script-loader.service';
+import {FacebookComponent} from './components/facebook/facebook.component';
 
 registerLocaleData(localeFI);
 
@@ -107,7 +108,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ConfirmModalComponent,
     MaterialElevationDirective,
     MaterialElevationDirective,
-    SocialButtonsComponent
+    SocialButtonsComponent,
+    FacebookComponent
   ],
   imports: [
     BrowserModule,

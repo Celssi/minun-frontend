@@ -6,6 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
+import {environment} from '../../../environments/environment';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup;
+  faFacebook = faFacebook;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,8 +46,6 @@ export class LoginComponent implements OnInit {
           this.dataService.setToken(result.token);
           this.dataService.setRefreshToken(result.refreshToken);
           this.authService.setUser(result.user);
-
-          this.snackBar.open(this.translate.instant('login.welcomeBack', {user: (result.user.firstName ?? result.user.companyName)}), this.translate.instant('miscellaneous.close'));
           this.router.navigate(['etusivu']);
         },
         error: (error: HttpErrorResponse) => {
@@ -52,5 +53,9 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  loginWithFacebook(): void {
+    window.location.href = environment.facebookLoginUrl;
   }
 }

@@ -15,7 +15,8 @@
       </mat-form-field>
 
       <div class="login-button-container">
-        <button mat-raised-button color="primary" (click)="login()">{{'login.loginButton' | translate}}</button>
+        <button mat-raised-button color="primary" (click)="login()" class="mb-2">{{'login.loginButton' | translate}}</button>
+        <button mat-raised-button color="primary" (click)="loginWithFacebook()">{{'login.loginWithFacebookButton' | translate}} <fa-icon class="ms-1" [icon]="faFacebook"></fa-icon></button>
       </div>
     </form>
   </mat-card-content>
