@@ -12,23 +12,15 @@
 </mat-card>
 
 <mat-card *ngIf="!authService.isAuthenticated()" class="mt-2 main-card">
-  <mat-card-header>
+  <mat-card-header class="border-bottom p-2">
     <mat-card-title class="text-white">{{'frontPage.notLoggedInWelcome' | translate}}</mat-card-title>
   </mat-card-header>
 
-  <hr/>
-
-  <h2 class="text-white my-4 text-center">Voit rekisteröityä joko sosiaalisen median avulla...</h2>
-
   <mat-card-content>
-    <mat-card class="social-media-card">
-      <button mat-raised-button color="primary" (click)="registerWithFacebook()">{{'login.registerWithFacebookButton' | translate}} <fa-icon class="ms-1" [icon]="faFacebook"></fa-icon></button>
-    </mat-card>
+    <h2 class="text-white my-4 text-center">{{'frontPage.registerSocialMediaHeader' | translate}}</h2>
+    <app-social-register></app-social-register>
 
-    <hr/>
-
-    <h2 class="text-white my-4 text-center">...tai täyttämällä lomakkeen</h2>
-
+    <h2 class="text-white my-4 text-center">{{'frontPage.registerFormHeader' | translate}}</h2>
     <app-page-builder></app-page-builder>
   </mat-card-content>
 </mat-card>

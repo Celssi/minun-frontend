@@ -23,7 +23,6 @@ import {TranslateService} from '@ngx-translate/core';
 // TODO Kartta
 // TODO Ota yhteyttä
 // TODO Google-kirjautuminen
-// TODO Facebook-kirjautuminen
 // TODO Tutustu-sivu
 // TODO Unohdin salasanani
 

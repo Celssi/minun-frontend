@@ -37,7 +37,9 @@
     "subtitle": "Uusi tapa jakaa käyntikortteja",
     "description": "Tämän erittäin upean palvelun avulla pystyt esittelemään itsesi nopeasti ja tyylikkäästi. Täytät vain tietoja ja homma on sillä selvä!",
     "readMore": "Lue lisää!",
-    "notLoggedInWelcome": "Aloita palvelun käyttö rekisteröitymällä!"
+    "notLoggedInWelcome": "Aloita palvelun käyttö rekisteröitymällä!",
+    "registerSocialMediaHeader": "Voit rekisteröityä joko sosiaalisen median avulla...",
+    "registerFormHeader": "...tai täyttämällä lomakkeen"
   },
 
   "imageSelector": {
