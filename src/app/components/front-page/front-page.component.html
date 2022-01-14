@@ -1,11 +1,11 @@
-<mat-card class="jumbotron" *ngIf="!authService.isAuthenticated()">
+<mat-card *ngIf="!authService.isAuthenticated()" class="jumbotron">
   <div class="overlay">
     <div class="text-white text-center py-5 px-4">
       <div class="py-5">
         <h1>{{'frontPage.title' | translate}}</h1>
         <h2 class="card-title h2 my-4 py-2">{{'frontPage.subtitle' | translate}}</h2>
         <p class="mb-4 pb-2 px-md-5 mx-md-5">{{'frontPage.description' | translate}}</p>
-        <a mat-raised-button color="primary" [routerLink]="['/tutustu']">{{'frontPage.readMore' | translate}}</a>
+        <a [routerLink]="['/tutustu']" color="primary" mat-raised-button>{{'frontPage.readMore' | translate}}</a>
       </div>
     </div>
   </div>

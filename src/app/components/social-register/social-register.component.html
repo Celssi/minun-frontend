@@ -1,3 +1,8 @@
 <mat-card class="social-media-card">
-  <button mat-raised-button color="primary" (click)="registerWithFacebook()">{{'login.registerWithFacebookButton' | translate}} <fa-icon class="ms-1" [icon]="faFacebook"></fa-icon></button>
+  <button (click)="registerWithFacebook()" color="primary" mat-raised-button>{{'login.registerWithFacebookButton' | translate}}
+    <fa-icon [icon]="faFacebook" class="ms-1"></fa-icon>
+  </button>
+  <button (click)="registerWithGoogle()" class="mt-2" color="primary" mat-raised-button>{{'login.registerWithGoogleButton' | translate}}
+    <fa-icon [icon]="faGoogle" class="ms-1"></fa-icon>
+  </button>
 </mat-card>

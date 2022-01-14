@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faFacebook} from '@fortawesome/free-brands-svg-icons';
+import {faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
 import {environment} from '../../../environments/environment';
 
 @Component({
@@ -9,6 +9,7 @@ import {environment} from '../../../environments/environment';
 })
 export class SocialRegisterComponent implements OnInit {
   faFacebook = faFacebook;
+  faGoogle = faGoogle;
 
   constructor() {
   }
@@ -18,6 +19,10 @@ export class SocialRegisterComponent implements OnInit {
 
   registerWithFacebook(): void {
     window.location.href = environment.facebookLoginUrl;
+  }
+
+  registerWithGoogle(): void {
+    window.location.href = environment.googleLoginUrl;
   }
 
 }

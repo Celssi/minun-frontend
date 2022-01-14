@@ -22,6 +22,12 @@ declare let gtag: Function;
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  isOnLoginPage = false;
+  isOnSharePage = false;
+  private statusChangeSubscription: Subscription;
+  @ViewChild('wrapper')
+  private wrapperDiv!: ElementRef<HTMLElement>;
+
   constructor(
     private router: Router,
     public ccService: NgcCookieConsentService,
@@ -46,13 +52,6 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     }
   }
-  isOnLoginPage = false;
-  isOnSharePage = false;
-
-  private statusChangeSubscription: Subscription;
-
-  @ViewChild('wrapper')
-  private wrapperDiv!: ElementRef<HTMLElement>;
 
   private static loadFonts(): void {
     WebFont.load({

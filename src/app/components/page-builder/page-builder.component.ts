@@ -57,6 +57,17 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     {open: false, from: '08:00', to: '16:00'}
   ];
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataService: DataService,
+    public authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private translate: TranslateService
+  ) {
+  }
+
   get editForm(): any {
     return this.editFormGroup ? this.editFormGroup.controls : undefined;
   }
@@ -69,17 +80,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     return this.editFormGroup.get('educations') as FormArray;
   }
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private dataService: DataService,
-    public authService: AuthService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    public dialog: MatDialog,
-    private translate: TranslateService
-  ) {
-  }
-
   ngOnInit(): void {
     this.initForm();
   }
@@ -88,79 +88,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     if (!this.authService.isAuthenticated() && !this.image) {
       this.fetchRandomImage();
     }
-  }
-
-  private initForm(): void {
-    if (!this.authService.isAuthenticated()) {
-      this.editFormGroup = this.formBuilder.group({...this.getRegisterForm()});
-    } else {
-      this.editFormGroup = this.formBuilder.group({
-        ...this.getSuitableFields(this.user ? this.user.accountType : 'user'),
-        accountType: [this.user ? this.user.accountType : 'user', Validators.required],
-        email: [this.user ? this.user.email : '', [Validators.required, Validators.email]],
-        phone: [this.user ? this.user.phone : '', PhoneNumberValidator('FI')],
-        website: [this.user ? this.user.website : ''],
-        location: [this.user ? this.user.location : ''],
-        description: [this.user ? this.user.description : '', [Validators.max(1000)]],
-        image: [this.user ? this.user.image : ''],
-        theme: [this.user ? this.user.theme : ''],
-        facebook: [this.user ? this.getSocialMediaLink(this.user, LinkType.Facebook) : ''],
-        twitter: [this.user ? this.getSocialMediaLink(this.user, LinkType.Twitter) : ''],
-        github: [this.user ? this.getSocialMediaLink(this.user, LinkType.Github) : ''],
-        linkedin: [this.user ? this.getSocialMediaLink(this.user, LinkType.Linkedin) : ''],
-        handle: [this.user ? this.user.handle : ''],
-        public: [this.user ? this.user.public : false],
-        allowFacebookLogin: [this.user ? this.user.allowFacebookLogin : false],
-        allowGoogleLogin: [this.user ? this.user.allowGoogleLogin : false]
-      });
-
-      this.image = this.user?.image;
-      this.languages = this.user?.languages?.split(', ').filter(Boolean) ?? [];
-      this.specialSkills = this.user?.specialSkills?.split(', ').filter(Boolean) ?? [];
-
-      this.user?.workHistories?.forEach((workHistory: WorkHistory) => {
-        this.addWorkHistoryFormGroup(workHistory);
-      });
-
-      this.user?.educations?.forEach((education: Education) => {
-        this.addEducationFormGroup(education);
-      });
-
-      this.sortByOrder(this.workHistories?.controls);
-      this.sortByOrder(this.educations?.controls);
-
-      this.editFormGroup.get('accountType').disable();
-    }
-  }
-
-  private getSuitableFields(accountType: string): any {
-    if (accountType === 'user') {
-      return {
-        firstName: [this.user ? this.user.firstName : '', Validators.required],
-        lastName: [this.user ? this.user.lastName : '', Validators.required],
-        title: [this.user ? this.user.title : ''],
-        workHistories: this.formBuilder.array([]),
-        educations: this.formBuilder.array([]),
-      };
-    } else if (accountType === 'company') {
-      return {
-        companyName: [this.user ? this.user.companyName : '', Validators.required]
-      };
-    }
-  }
-
-  private getRegisterForm(accountType?: string): any {
-    return {
-      accountType: [accountType ?? 'user', Validators.required],
-      ...this.getSuitableFields(accountType ?? 'user'),
-      email: [this.user ? this.user.email : '', [Validators.required, Validators.email]],
-      phone: [this.user ? this.user.phone : '', PhoneNumberValidator('FI')],
-      website: [this.user ? this.user.website : ''],
-      location: [this.user ? this.user.location : ''],
-      password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$')]],
-      passwordAgain: ['', Validators.required],
-      image: []
-    };
   }
 
   addWorkHistoryFormGroup(workHistory?: WorkHistory): void {
@@ -291,10 +218,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private getSocialMediaLink(user: User, type: LinkType): string {
-    return user.socialMediaLinks?.find(socialMediaLink => socialMediaLink.type === type)?.link;
-  }
-
   addChipToList(list: any, event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -323,12 +246,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   updateImage($event: string): void {
     this.editForm.image.setValue($event);
-  }
-
-  private handleError(error?: any): void {
-    console.error(error);
-    this.sendDisabled = false;
-    this.snackBar.open(this.translate.instant('miscellaneous.errorHappened'), this.translate.instant('miscellaneous.close'));
   }
 
   openBusinessCard(): void {
@@ -384,5 +301,88 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  private initForm(): void {
+    if (!this.authService.isAuthenticated()) {
+      this.editFormGroup = this.formBuilder.group({...this.getRegisterForm()});
+    } else {
+      this.editFormGroup = this.formBuilder.group({
+        ...this.getSuitableFields(this.user ? this.user.accountType : 'user'),
+        accountType: [this.user ? this.user.accountType : 'user', Validators.required],
+        email: [this.user ? this.user.email : '', [Validators.required, Validators.email]],
+        phone: [this.user ? this.user.phone : '', PhoneNumberValidator('FI')],
+        website: [this.user ? this.user.website : ''],
+        location: [this.user ? this.user.location : ''],
+        description: [this.user ? this.user.description : '', [Validators.max(1000)]],
+        image: [this.user ? this.user.image : ''],
+        theme: [this.user ? this.user.theme : ''],
+        facebook: [this.user ? this.getSocialMediaLink(this.user, LinkType.Facebook) : ''],
+        twitter: [this.user ? this.getSocialMediaLink(this.user, LinkType.Twitter) : ''],
+        github: [this.user ? this.getSocialMediaLink(this.user, LinkType.Github) : ''],
+        linkedin: [this.user ? this.getSocialMediaLink(this.user, LinkType.Linkedin) : ''],
+        handle: [this.user ? this.user.handle : ''],
+        public: [this.user ? this.user.public : false],
+        allowFacebookLogin: [this.user ? this.user.allowFacebookLogin : false],
+        allowGoogleLogin: [this.user ? this.user.allowGoogleLogin : false]
+      });
+
+      this.image = this.user?.image;
+      this.languages = this.user?.languages?.split(', ').filter(Boolean) ?? [];
+      this.specialSkills = this.user?.specialSkills?.split(', ').filter(Boolean) ?? [];
+
+      this.user?.workHistories?.forEach((workHistory: WorkHistory) => {
+        this.addWorkHistoryFormGroup(workHistory);
+      });
+
+      this.user?.educations?.forEach((education: Education) => {
+        this.addEducationFormGroup(education);
+      });
+
+      this.sortByOrder(this.workHistories?.controls);
+      this.sortByOrder(this.educations?.controls);
+
+      this.editFormGroup.get('accountType').disable();
+    }
+  }
+
+  private getSuitableFields(accountType: string): any {
+    if (accountType === 'user') {
+      return {
+        firstName: [this.user ? this.user.firstName : '', Validators.required],
+        lastName: [this.user ? this.user.lastName : '', Validators.required],
+        title: [this.user ? this.user.title : ''],
+        workHistories: this.formBuilder.array([]),
+        educations: this.formBuilder.array([]),
+      };
+    } else if (accountType === 'company') {
+      return {
+        companyName: [this.user ? this.user.companyName : '', Validators.required]
+      };
+    }
+  }
+
+  private getRegisterForm(accountType?: string): any {
+    return {
+      accountType: [accountType ?? 'user', Validators.required],
+      ...this.getSuitableFields(accountType ?? 'user'),
+      email: [this.user ? this.user.email : '', [Validators.required, Validators.email]],
+      phone: [this.user ? this.user.phone : '', PhoneNumberValidator('FI')],
+      website: [this.user ? this.user.website : ''],
+      location: [this.user ? this.user.location : ''],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$')]],
+      passwordAgain: ['', Validators.required],
+      image: []
+    };
+  }
+
+  private getSocialMediaLink(user: User, type: LinkType): string {
+    return user.socialMediaLinks?.find(socialMediaLink => socialMediaLink.type === type)?.link;
+  }
+
+  private handleError(error?: any): void {
+    console.error(error);
+    this.sendDisabled = false;
+    this.snackBar.open(this.translate.instant('miscellaneous.errorHappened'), this.translate.instant('miscellaneous.close'));
   }
 }

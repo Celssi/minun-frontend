@@ -11,12 +11,11 @@ import packageInfo from '../../../../package.json';
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('navcontainer') private navContainer: ElementRef<HTMLElement>;
-
   backendVersion: string;
   appVersion: string;
   showArrowLeft = false;
   showArrowRight = false;
+  @ViewChild('navcontainer') private navContainer: ElementRef<HTMLElement>;
 
   constructor(
     private versionService: VersionService,

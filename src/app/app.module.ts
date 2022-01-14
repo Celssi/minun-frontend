@@ -59,6 +59,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {DynamicScriptLoaderService} from './services/dynamic-script-loader.service';
 import {FacebookComponent} from './components/facebook/facebook.component';
 import {SocialRegisterComponent} from './components/social-register/social-register.component';
+import {GoogleComponent} from './components/google/google.component';
 
 registerLocaleData(localeFI);
 
@@ -112,7 +113,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SocialButtonsComponent,
     FacebookComponent,
     SocialRegisterComponent,
-    SocialRegisterComponent
+    SocialRegisterComponent,
+    GoogleComponent
   ],
   imports: [
     BrowserModule,

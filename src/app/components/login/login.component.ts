@@ -7,7 +7,7 @@ import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../../../environments/environment';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import {faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup;
   faFacebook = faFacebook;
+  faGoogle = faGoogle;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,5 +58,9 @@ export class LoginComponent implements OnInit {
 
   loginWithFacebook(): void {
     window.location.href = environment.facebookLoginUrl;
+  }
+
+  loginWithGoogle(): void {
+    window.location.href = environment.googleLoginUrl;
   }
 }

@@ -1,14 +1,14 @@
-<div class="share-overlay" *ngIf="isShareMode" (click)="toggleShare()">
+<div (click)="toggleShare()" *ngIf="isShareMode" class="share-overlay">
   <ngx-qrcode
-    [elementType]="qrElementType"
-    [errorCorrectionLevel]="qrCorrectionLevel"
-    [value]="qrValue"></ngx-qrcode>
+      [elementType]="qrElementType"
+      [errorCorrectionLevel]="qrCorrectionLevel"
+      [value]="qrValue"></ngx-qrcode>
 </div>
-<div class="container" *ngIf="user" [ngClass]="getContainerClasses()">
+<div *ngIf="user" [ngClass]="getContainerClasses()" class="container">
   <div class="row">
-    <div class="col-md-4 bg-info col-sm-12 pt-3" [ngClass]="{'col-12 max-width-400': !hasMainContent(), 'col-md-4': hasMainContent()}">
+    <div [ngClass]="{'col-12 max-width-400': !hasMainContent(), 'col-md-4': hasMainContent()}" class="col-md-4 bg-info col-sm-12 pt-3">
       <div class="business-card-header">
-        <button mat-icon-button class="share-button" (click)="toggleShare()">
+        <button (click)="toggleShare()" class="share-button" mat-icon-button>
           <mat-icon>share</mat-icon>
         </button>
 
@@ -16,17 +16,25 @@
       </div>
 
       <div class="image-container mb-4">
-        <img [src]="user.image" alt="" />
+        <img [src]="user.image" alt=""/>
       </div>
 
       <h1 class="text-center text-white">{{getUserName()}}</h1>
       <h5 class="text-center text-white">{{user.title}}</h5>
 
       <div class="bio text-white p-3">
-        <div *ngIf="user.email" class="bio-item"><mat-icon>email</mat-icon><span><a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></span></div>
-        <div *ngIf="user.website" class="bio-item"><mat-icon>web</mat-icon><span><a [href]="user.website" target="_blank">{{user.website}}</a></span></div>
-        <div *ngIf="user.phone" class="bio-item"><mat-icon>phone</mat-icon><span><a href="tel:{{user.phone}}">{{user.phone}}</a></span></div>
-        <div *ngIf="user.location" class="bio-item"><mat-icon>location_on</mat-icon><span>{{user.location}}</span></div>
+        <div *ngIf="user.email" class="bio-item">
+          <mat-icon>email</mat-icon>
+          <span><a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></span></div>
+        <div *ngIf="user.website" class="bio-item">
+          <mat-icon>web</mat-icon>
+          <span><a [href]="user.website" target="_blank">{{user.website}}</a></span></div>
+        <div *ngIf="user.phone" class="bio-item">
+          <mat-icon>phone</mat-icon>
+          <span><a href="tel:{{user.phone}}">{{user.phone}}</a></span></div>
+        <div *ngIf="user.location" class="bio-item">
+          <mat-icon>location_on</mat-icon>
+          <span>{{user.location}}</span></div>
       </div>
 
       <div class="p-3">
@@ -34,11 +42,11 @@
       </div>
     </div>
 
-    <div class="main-content col-md-8 col-sm-12 px-lg-4" *ngIf="hasMainContent()">
-      <h2 class="mt-3" *ngIf="user.description">{{'businessCard.shortDescription' | translate}}</h2>
+    <div *ngIf="hasMainContent()" class="main-content col-md-8 col-sm-12 px-lg-4">
+      <h2 *ngIf="user.description" class="mt-3">{{'businessCard.shortDescription' | translate}}</h2>
       <div class="description">{{user.description}}</div>
 
-      <div class="detailed-information mb-4" *ngIf="user.specialSkills">
+      <div *ngIf="user.specialSkills" class="detailed-information mb-4">
         <h2>{{'businessCard.specialSkills' | translate}}</h2>
         <div class="information-row">
           <mat-chip-list>
@@ -47,17 +55,17 @@
         </div>
       </div>
 
-      <div class="detailed-information" *ngIf="user.workHistories?.length > 0">
+      <div *ngIf="user.workHistories?.length > 0" class="detailed-information">
         <h2>{{'businessCard.workHistories' | translate}}</h2>
-        <div class="information-row" *ngFor="let workHistory of user.workHistories; let i = index">
+        <div *ngFor="let workHistory of user.workHistories; let i = index" class="information-row">
           <div class="information-icon-container">
-            <div class="vertical-line vertical-line-green" [ngClass]="{'vertical-line-half-height': i > 0}"></div>
+            <div [ngClass]="{'vertical-line-half-height': i > 0}" class="vertical-line vertical-line-green"></div>
             <div class="horizontal-line horizontal-line-green"></div>
             <div class="information-icon information-icon-green">
               <mat-icon>business_center</mat-icon>
             </div>
             <div class="horizontal-line horizontal-line-green"></div>
-            <div class="vertical-line vertical-line-green" [ngClass]="{'vertical-line-half-height': i < (user.workHistories.length - 1)}"></div>
+            <div [ngClass]="{'vertical-line-half-height': i < (user.workHistories.length - 1)}" class="vertical-line vertical-line-green"></div>
           </div>
           <div class="information-content">
             <small>{{workHistory.period}}</small>
@@ -68,17 +76,17 @@
         </div>
       </div>
 
-      <div class="detailed-information" *ngIf="user.educations?.length > 0">
+      <div *ngIf="user.educations?.length > 0" class="detailed-information">
         <h2>{{'businessCard.education' | translate}}</h2>
-        <div class="information-row" *ngFor="let education of user.educations; let i  = index">
+        <div *ngFor="let education of user.educations; let i  = index" class="information-row">
           <div class="information-icon-container">
-            <div class="vertical-line vertical-line-orange" [ngClass]="{'vertical-line-half-height': i > 0}"></div>
+            <div [ngClass]="{'vertical-line-half-height': i > 0}" class="vertical-line vertical-line-orange"></div>
             <div class="horizontal-line horizontal-line-orange"></div>
             <div class="information-icon information-icon-orange">
               <mat-icon>history_edu</mat-icon>
             </div>
             <div class="horizontal-line horizontal-line-orange"></div>
-            <div class="vertical-line vertical-line-orange" [ngClass]="{'vertical-line-half-height': i < (user.educations.length - 1)}"></div>
+            <div [ngClass]="{'vertical-line-half-height': i < (user.educations.length - 1)}" class="vertical-line vertical-line-orange"></div>
           </div>
           <div class="information-content">
             <small>{{education.period}}</small>
@@ -89,7 +97,7 @@
         </div>
       </div>
 
-      <div class="detailed-information mb-4" *ngIf="user.languages">
+      <div *ngIf="user.languages" class="detailed-information mb-4">
         <h2>{{'businessCard.languages' | translate}}</h2>
         <div class="information-row">
           <mat-chip-list>
@@ -98,7 +106,7 @@
         </div>
       </div>
 
-      <div class="detailed-information mb-4" *ngIf="user.accountType === 'company' && user.businessHours">
+      <div *ngIf="user.accountType === 'company' && user.businessHours" class="detailed-information mb-4">
         <h2>{{'businessCard.businessHours' | translate}}</h2>
         <div class="information-row">
           <table class="table table-borderless">

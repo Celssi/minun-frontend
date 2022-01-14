@@ -20,7 +20,8 @@ export class ImageSelectorComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.image = this.defaultImage;
@@ -54,10 +55,6 @@ export class ImageSelectorComponent implements OnInit {
     }
   }
 
-  private openImagePicker(): void {
-    this.modalRef = this.modalService.show(this.imageModalRef, {class: 'modal-lg'});
-  }
-
   deleteImage(): void {
     this.image = undefined;
     this.croppedImage = undefined;
@@ -88,5 +85,9 @@ export class ImageSelectorComponent implements OnInit {
       };
       reader.readAsDataURL(blob);
     });
+  }
+
+  private openImagePicker(): void {
+    this.modalRef = this.modalService.show(this.imageModalRef, {class: 'modal-lg'});
   }
 }

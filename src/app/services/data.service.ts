@@ -29,6 +29,10 @@ export class DataService {
     return this.http.post<LoginResult>(environment.backendUrl + 'users/login/facebook', {facebookToken});
   }
 
+  public loginWithGoogleToken(googleToken: string): Observable<LoginResult> {
+    return this.http.post<LoginResult>(environment.backendUrl + 'users/login/google', {googleToken});
+  }
+
   public refresh(refreshToken: string, token: string): Observable<LoginResult> {
     return this.http.post<LoginResult>(environment.backendUrl + 'users/refresh', {refreshToken, token});
   }

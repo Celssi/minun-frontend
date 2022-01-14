@@ -16,7 +16,6 @@
     "areYouSure": "Oletko varma?",
     "delete": "Poista"
   },
-
   "businessCard": {
     "shortDescription": "Lyhyt kuvaus",
     "specialSkills": "Erityisosaaminen",
@@ -31,7 +30,6 @@
     "errorHeader": "Pieleen meni!",
     "errorMessage": "Käyntikorttia ei valitettavasti löytynyt. Ole hyvä ja tarkista linkki."
   },
-
   "frontPage": {
     "title": "Minun Infoni",
     "subtitle": "Uusi tapa jakaa käyntikortteja",
@@ -41,13 +39,11 @@
     "registerSocialMediaHeader": "Voit rekisteröityä joko sosiaalisen median avulla...",
     "registerFormHeader": "...tai täyttämällä lomakkeen"
   },
-
   "imageSelector": {
     "newRandom": "Uusi satunnainen kuva",
     "fromComputer": "Valitse kuva koneeltasi",
     "delete": "Poista kuva"
   },
-
   "login": {
     "title": "Kirjautuminen",
     "email": "Sähköposti",
@@ -56,9 +52,10 @@
     "checkUsernameAndEmail": "Tarkista käyttäjätunnus ja salasana!",
     "welcomeBack": "Tervetuloa takaisin!",
     "loginWithFacebookButton": "Kirjaudu Facebookilla",
-    "registerWithFacebookButton": "Rekisteröidy Facebookin avulla"
+    "registerWithFacebookButton": "Rekisteröidy Facebookin avulla",
+    "loginWithGoogleButton": "Kirjaudu Googlella",
+    "registerWithGoogleButton": "Rekisteröidy Googlen avulla"
   },
-
   "navbar": {
     "frontPage": "Etusivu",
     "search": "Etsi käyntikorttia",
@@ -66,7 +63,6 @@
     "logout": "Kirjaudu ulos",
     "login": "Kirjaudu sisään"
   },
-
   "pageBuilder": {
     "title": "Omien tietojen muokkaaminen",
     "openBusinessCard": "Avaa käyntikorttisi",
@@ -130,7 +126,6 @@
     "allowFacebookLogin": "Salli kirjautuminen Facebookilla",
     "allowGoogleLogin": "Salli kirjautuminen Googlella"
   },
-
   "search": {
     "writeSomething": "Kirjoita jotain...",
     "description": "Kuvaus",

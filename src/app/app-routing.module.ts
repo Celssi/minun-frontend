@@ -8,6 +8,7 @@ import {InfoPageComponent} from './components/info-page/info-page.component';
 import {BusinessCardComponent} from './components/business-card/business-card.component';
 import {CookiesComponent} from './components/cookies/cookies.component';
 import {FacebookComponent} from './components/facebook/facebook.component';
+import {GoogleComponent} from './components/google/google.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/etusivu', pathMatch: 'full'},
@@ -15,6 +16,9 @@ const routes: Routes = [
   {path: 'etsi', component: SearchPageComponent},
   {path: 'kirjaudu', component: LoginComponent},
   {path: 'kirjaudu/facebook/:token', component: FacebookComponent},
+  {path: 'kirjaudu/google/:token', component: GoogleComponent},
+  {path: 'kirjaudu/facebook', component: FacebookComponent},
+  {path: 'kirjaudu/google', component: GoogleComponent},
   {path: 'tutustu', component: InfoPageComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'keksit', component: CookiesComponent},
