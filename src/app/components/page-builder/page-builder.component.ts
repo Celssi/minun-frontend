@@ -24,6 +24,7 @@ import {TranslateService} from '@ngx-translate/core';
 // TODO Ota yhteyttä
 // TODO Tutustu-sivu
 // TODO Unohdin salasanani
+// TODO Facebook ja Google sähköposti tooltip
 
 @Component({
   selector: 'app-page-builder',

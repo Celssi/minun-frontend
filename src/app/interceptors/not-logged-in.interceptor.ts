@@ -17,7 +17,7 @@ export class NotLoggedInInterceptor implements HttpInterceptor {
         if (response.status === 401 && !request.url.endsWith('/login')) {
           return this.handle401Error(request, next);
         } else if (response.status === 403 && request.url.endsWith('/refresh')) {
-          this.dataService.logout();
+          this.dataService.logout().subscribe();
         }
 
         return throwError(response);
@@ -30,7 +30,7 @@ export class NotLoggedInInterceptor implements HttpInterceptor {
     const token = this.dataService.getToken();
 
     if (!refreshToken || !token) {
-      this.dataService.logout();
+      this.dataService.logout().subscribe();
       throwError(() => new Error('Login expired'));
     }
 

@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {User} from '../models/user';
 import {LoginResult} from '../models/loginResult';
-import {Observable} from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -15,30 +15,39 @@ export class DataService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  public logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    this.router.navigate(['etusivu']);
+  public login(credentials: any): Observable<LoginResult> {
+    return this.http.post<LoginResult>(environment.backendUrl + 'login', credentials);
   }
 
-  public login(credentials: any): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'users/login', credentials);
+  public logout(): Observable<void> {
+    if (!this.getToken()) {
+      return;
+    }
+
+    return this.http.get<void>(environment.backendUrl + 'login/logout', {
+      headers: this.getAuthorizationHeader()
+    }).pipe(
+      tap(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        this.router.navigate(['etusivu']);
+      }));
   }
 
   public loginWithFacebookToken(facebookToken: string): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'users/login/facebook', {facebookToken});
+    return this.http.post<LoginResult>(environment.backendUrl + 'login/facebook', {facebookToken});
   }
 
   public loginWithGoogleToken(googleToken: string): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'users/login/google', {googleToken});
+    return this.http.post<LoginResult>(environment.backendUrl + 'login/google', {googleToken});
   }
 
   public refresh(refreshToken: string, token: string): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'users/refresh', {refreshToken, token});
+    return this.http.post<LoginResult>(environment.backendUrl + 'login/refresh', {refreshToken, token});
   }
 
   public register(user): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'users/register', user);
+    return this.http.post<LoginResult>(environment.backendUrl + 'login/register', user);
   }
 
   public save(user): Observable<any> {

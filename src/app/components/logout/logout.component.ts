@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-logout',
@@ -9,12 +8,12 @@ import {Router} from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private dataService: DataService, private router: Router) {
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.dataService.logout();
+      this.dataService.logout().subscribe();
     }, 0);
   }
 
