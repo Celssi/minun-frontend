@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../../../environments/environment';
 import {faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
+import {LoadingService} from '../../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     private snackBar: MatSnackBar,
     private authService: AuthService,
     private router: Router,
+    private loadingService: LoadingService,
     private translate: TranslateService) {
   }
 
@@ -57,10 +59,12 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithFacebook(): void {
+    this.loadingService.setLoading(true);
     window.location.href = environment.facebookLoginUrl;
   }
 
   loginWithGoogle(): void {
+    this.loadingService.setLoading(true);
     window.location.href = environment.googleLoginUrl;
   }
 }

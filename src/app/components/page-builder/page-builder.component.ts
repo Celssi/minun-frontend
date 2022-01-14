@@ -22,7 +22,6 @@ import {TranslateService} from '@ngx-translate/core';
 // TODO Kuukausimaksu
 // TODO Kartta
 // TODO Ota yhteyttä
-// TODO Google-kirjautuminen
 // TODO Tutustu-sivu
 // TODO Unohdin salasanani
 
@@ -130,7 +129,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     const emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegEx.test(this.editForm.email.value)) {
       this.editForm.email.setErrors({emailNotValid: true});
-      this.editForm.email.updateValueAndValidity();
       return;
     }
 
@@ -139,8 +137,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         if (emailExists) {
           this.editForm.email.setErrors({alreadyExists: true});
         }
-
-        this.editForm.email.updateValueAndValidity();
       },
       error: (error) => {
         this.handleError(error);
@@ -156,8 +152,6 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         if (handleExists) {
           this.editForm.handle.setErrors({alreadyExists: true});
         }
-
-        this.editForm.handle.updateValueAndValidity();
       },
       error: (error) => {
         this.handleError(error);
@@ -172,7 +166,9 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   limitDescriptionSize(): void {
-    this.editForm.description?.setValue(this.editForm.description?.value.substring(0, 1000));
+    if (this.editForm.description?.value) {
+      this.editForm.description.setValue(this.editForm.description.value.substring(0, 1000));
+    }
   }
 
   save(): void {
@@ -199,7 +195,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       this.dataService.save(values).subscribe({
         next: (result) => {
           this.sendDisabled = false;
-          this.translate.instant('pageBuilder.saved');
+          this.snackBar.open(this.translate.instant('pageBuilder.saved'), this.translate.instant('miscellaneous.close'));
 
           if (!this.user) {
             this.dataService.setToken(result.token);
