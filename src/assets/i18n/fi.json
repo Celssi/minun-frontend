@@ -124,7 +124,11 @@
     "save": "Tallenna",
     "register": "Rekisteröidy",
     "allowFacebookLogin": "Salli kirjautuminen Facebookilla",
-    "allowGoogleLogin": "Salli kirjautuminen Googlella"
+    "allowGoogleLogin": "Salli kirjautuminen Googlella",
+    "emailMustMatchFacebook": "Käyttäjätunnuksen sähköpostin on oltava sama kuin Facebookissa oleva",
+    "emailMustMatchGoogle": "Käyttäjätunnuksen sähköpostin on oltava sama kuin Googlessa oleva",
+    "usedForLogin": "Sähköpostia käytetään kirjautumiseen.",
+    "handleUsedForSharing": "Kahvasi näkyy käyntikorttisi jakolinkissä."
   },
   "search": {
     "writeSomething": "Kirjoita jotain...",

@@ -58,7 +58,7 @@
     <mat-form-field [ngClass]="{'width-half-available': user, 'width-all-available': !user}" appearance="fill">
       <mat-label>{{'pageBuilder.email' | translate}}</mat-label>
       <input (focusout)="validateEmail()" autocomplete="email" email formControlName="email" matInput maxlength="300" type="text">
-      <mat-icon matSuffix matTooltip="Sähköpostia käytetään kirjautumiseen.">info</mat-icon>
+      <mat-icon matSuffix [matTooltip]="'pageBuilder.usedForLogin' | translate">info</mat-icon>
       <mat-error *ngIf="editForm.email.errors?.emailNotValid">{{'pageBuilder.emailWrongFormat' | translate}}</mat-error>
       <mat-error *ngIf="editForm.email.errors?.alreadyExists">{{'pageBuilder.emailAlreadyUsed' | translate}}</mat-error>
       <mat-error *ngIf="editForm.email.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
@@ -77,7 +77,7 @@
     <mat-form-field *ngIf="user" appearance="fill" class="width-half-available">
       <mat-label>{{'pageBuilder.handle' | translate}}</mat-label>
       <input (focusout)="validateHandle()" autocomplete="off" formControlName="handle" matInput maxlength="300" type="text">
-      <mat-icon matSuffix matTooltip="Kahvasi näkyy käyntikorttisi jakolinkissä.">info</mat-icon>
+      <mat-icon matSuffix [matTooltip]="'pageBuilder.handleUsedForSharing' | translate">info</mat-icon>
       <mat-error *ngIf="editForm.handle.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
       <mat-error *ngIf="editForm.handle.errors?.alreadyExists">{{'pageBuilder.handleAlreadyUsed' | translate}}</mat-error>
     </mat-form-field>
@@ -308,6 +308,7 @@
         <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
         <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix [matTooltip]="'pageBuilder.emailMustMatchFacebook' | translate">info</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="fill" class="width-all-available">
       <mat-label>{{'pageBuilder.allowGoogleLogin' | translate}}</mat-label>
@@ -315,6 +316,7 @@
         <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
         <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix [matTooltip]="'pageBuilder.emailMustMatchGoogle' | translate">info</mat-icon>
     </mat-form-field>
   </mat-card>
 
