@@ -52,7 +52,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['etusivu']);
         },
         error: (error: HttpErrorResponse) => {
-          this.snackBar.open(this.translate.instant('login.checkUsernameAndEmail'), this.translate.instant('miscellaneous.close'));
+          if (error.status === 401) {
+            this.snackBar.open(this.translate.instant('login.checkUsernameAndEmail'), this.translate.instant('miscellaneous.close'));
+          } else if (error.status === 412) {
+            this.snackBar.open(this.translate.instant('login.confirmEmail'), this.translate.instant('miscellaneous.close'));
+          }
         }
       });
     }

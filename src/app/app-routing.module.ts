@@ -9,6 +9,7 @@ import {BusinessCardComponent} from './components/business-card/business-card.co
 import {CookiesComponent} from './components/cookies/cookies.component';
 import {FacebookComponent} from './components/facebook/facebook.component';
 import {GoogleComponent} from './components/google/google.component';
+import {ConfirmEmailComponent} from './components/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/etusivu', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'tutustu', component: InfoPageComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'keksit', component: CookiesComponent},
+  {path: 'vahvista/:code/:email', component: ConfirmEmailComponent},
   {path: ':handle', component: BusinessCardComponent}
 ];
 

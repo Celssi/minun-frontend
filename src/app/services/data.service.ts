@@ -19,19 +19,24 @@ export class DataService {
     return this.http.post<LoginResult>(environment.backendUrl + 'login', credentials);
   }
 
-  public logout(): Observable<void> {
-    if (!this.getToken()) {
-      return;
-    }
+  public async logout(): Promise<void> {
+    if (!this.getToken()) { return; }
 
-    return this.http.get<void>(environment.backendUrl + 'login/logout', {
-      headers: this.getAuthorizationHeader()
-    }).pipe(
-      tap(() => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
-        this.router.navigate(['etusivu']);
-      }));
+    try {
+      await this.http.get<void>(environment.backendUrl + 'login/logout/' + this.getRefreshToken(), {
+        headers: this.getAuthorizationHeader()
+      });
+    } catch (err) {
+      await this.finalizeLogout();
+    } finally {
+      await this.finalizeLogout();
+    }
+  }
+
+  private async finalizeLogout(): Promise<void> {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    await this.router.navigate(['etusivu']);
   }
 
   public loginWithFacebookToken(facebookToken: string): Observable<LoginResult> {
@@ -48,6 +53,10 @@ export class DataService {
 
   public register(user): Observable<LoginResult> {
     return this.http.post<LoginResult>(environment.backendUrl + 'login/register', user);
+  }
+
+  public confirmCode(email: string, confirmCode: string): Observable<void> {
+    return this.http.post<void>(environment.backendUrl + 'login/confirm', {email, confirmCode});
   }
 
   public save(user): Observable<any> {

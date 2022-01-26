@@ -13,7 +13,7 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.dataService.logout().subscribe();
+      this.dataService.logout();
     }, 0);
   }
 

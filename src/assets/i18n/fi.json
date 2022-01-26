@@ -54,7 +54,12 @@
     "loginWithFacebookButton": "Kirjaudu Facebookilla",
     "registerWithFacebookButton": "Rekisteröidy Facebookin avulla",
     "loginWithGoogleButton": "Kirjaudu Googlella",
-    "registerWithGoogleButton": "Rekisteröidy Googlen avulla"
+    "registerWithGoogleButton": "Rekisteröidy Googlen avulla",
+    "confirmEmail": "Sähköpostiosoitetta ei ole vahvistettu",
+    "confirmingEmail": "Odota hetki, sähköpostiosoitettasi vahvistetaan...",
+    "confirmEmailTitle": "Sähköpostiosoitteen vahvistaminen",
+    "emailConfirmed": "Sähköpostiosoite on nyt vahvistettu ja voit kirjautua palveluun!",
+    "emailCouldNotBeConfirmed": "Sähköposti osoitetta ei voitu vahvistaa!"
   },
   "navbar": {
     "frontPage": "Etusivu",
