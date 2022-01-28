@@ -1,16 +1,16 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {LoadingService} from './services/loading.service';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { LoadingService } from './services/loading.service';
 
 import WebFont from 'webfontloader';
-import {filter, Subscription} from 'rxjs';
-import {NgcCookieConsentService, NgcStatusChangeEvent} from 'ngx-cookieconsent';
-import {CookieService} from 'ngx-cookie';
-import {environment} from '../environments/environment';
-import {SwUpdate} from '@angular/service-worker';
-import {DataService} from './services/data.service';
-import {TranslateService} from '@ngx-translate/core';
-import {DynamicScriptLoaderService} from './services/dynamic-script-loader.service';
+import { filter, Subscription } from 'rxjs';
+import { NgcCookieConsentService, NgcStatusChangeEvent } from 'ngx-cookieconsent';
+import { CookieService } from 'ngx-cookie';
+import { environment } from '../environments/environment';
+import { SwUpdate } from '@angular/service-worker';
+import { DataService } from './services/data.service';
+import { TranslateService } from '@ngx-translate/core';
+import { DynamicScriptLoaderService } from './services/dynamic-script-loader.service';
 
 // tslint:disable-next-line:ban-types
 declare let gtag: Function;

@@ -1,23 +1,23 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DataService} from '../../services/data.service';
-import {AuthService} from '../../services/auth.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {PhoneNumberValidator} from '../../helpers/PhoneNumberValidator';
-import {User} from '../../models/user';
-import {LinkType} from '../../models/socialMediaLink';
-import {faFacebook, faGithub, faLinkedin, faTwitter} from '@fortawesome/free-brands-svg-icons';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Education} from '../../models/education';
-import {WorkHistory} from '../../models/workHistory';
-import {Router} from '@angular/router';
-import {ImageSelectorComponent} from '../image-selector/image-selector.component';
-import {NgBusinessHoursDaySettings} from 'ng-business-hours';
-import {BusinessHour} from '../../models/businessHour';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
-import {TranslateService} from '@ngx-translate/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PhoneNumberValidator } from '../../helpers/PhoneNumberValidator';
+import { User } from '../../models/user';
+import { LinkType } from '../../models/socialMediaLink';
+import { faFacebook, faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Education } from '../../models/education';
+import { WorkHistory } from '../../models/workHistory';
+import { Router } from '@angular/router';
+import { ImageSelectorComponent } from '../image-selector/image-selector.component';
+import { NgBusinessHoursDaySettings } from 'ng-business-hours';
+import { BusinessHour } from '../../models/businessHour';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 // TODO Kuukausimaksu
 // TODO Kartta
