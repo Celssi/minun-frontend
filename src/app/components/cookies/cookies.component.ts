@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cookies',
@@ -6,12 +6,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./cookies.component.scss']
 })
 export class CookiesComponent implements OnInit {
-
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     console.log('asd');
   }
-
 }

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {HttpErrorResponse} from '@angular/common/http';
-import {DataService} from '../../services/data.service';
-import {AuthService} from '../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-google',
@@ -10,12 +10,7 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./google.component.scss']
 })
 export class GoogleComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute,
-              private dataService: DataService,
-              private authService: AuthService,
-              private router: Router) {
-  }
+  constructor(private route: ActivatedRoute, private dataService: DataService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {

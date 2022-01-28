@@ -1,10 +1,10 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {User} from '../models/user';
-import {LoginResult} from '../models/loginResult';
-import {Observable, tap} from 'rxjs';
-import {Router} from '@angular/router';
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { User } from '../models/user';
+import { LoginResult } from '../models/loginResult';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,16 @@ import {Router} from '@angular/router';
 export class DataService {
   @Output() scrollEmitter = new EventEmitter<void>();
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   public login(credentials: any): Observable<LoginResult> {
     return this.http.post<LoginResult>(environment.backendUrl + 'login', credentials);
   }
 
   public async logout(): Promise<void> {
-    if (!this.getToken()) { return; }
+    if (!this.getToken()) {
+      return;
+    }
 
     try {
       await this.http.get<void>(environment.backendUrl + 'login/logout/' + this.getRefreshToken(), {
@@ -33,22 +34,16 @@ export class DataService {
     }
   }
 
-  private async finalizeLogout(): Promise<void> {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    await this.router.navigate(['etusivu']);
-  }
-
   public loginWithFacebookToken(facebookToken: string): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'login/facebook', {facebookToken});
+    return this.http.post<LoginResult>(environment.backendUrl + 'login/facebook', { facebookToken });
   }
 
   public loginWithGoogleToken(googleToken: string): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'login/google', {googleToken});
+    return this.http.post<LoginResult>(environment.backendUrl + 'login/google', { googleToken });
   }
 
   public refresh(refreshToken: string, token: string): Observable<LoginResult> {
-    return this.http.post<LoginResult>(environment.backendUrl + 'login/refresh', {refreshToken, token});
+    return this.http.post<LoginResult>(environment.backendUrl + 'login/refresh', { refreshToken, token });
   }
 
   public register(user): Observable<LoginResult> {
@@ -56,7 +51,7 @@ export class DataService {
   }
 
   public confirmCode(email: string, confirmCode: string): Observable<void> {
-    return this.http.post<void>(environment.backendUrl + 'login/confirm', {email, confirmCode});
+    return this.http.post<void>(environment.backendUrl + 'login/confirm', { email, confirmCode });
   }
 
   public save(user): Observable<any> {
@@ -70,11 +65,11 @@ export class DataService {
   }
 
   public checkEmailExists(email: string, userId: number): Observable<boolean> {
-    return this.http.post<boolean>(environment.backendUrl + 'users/check-email', {email, userId});
+    return this.http.post<boolean>(environment.backendUrl + 'users/check-email', { email, userId });
   }
 
   public checkHandleExists(handle: string, userId: number): Observable<boolean> {
-    return this.http.post<boolean>(environment.backendUrl + 'users/check-handle', {handle, userId});
+    return this.http.post<boolean>(environment.backendUrl + 'users/check-handle', { handle, userId });
   }
 
   public deleteCurrentProfile(): Observable<any> {
@@ -129,5 +124,11 @@ export class DataService {
     return new HttpHeaders({
       Authorization: 'Bearer ' + this.getToken()
     });
+  }
+
+  private async finalizeLogout(): Promise<void> {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    await this.router.navigate(['etusivu']);
   }
 }

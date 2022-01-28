@@ -1,19 +1,17 @@
-import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {mergeMap, Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {DataService} from '../services/data.service';
-import {LoginResult} from '../models/loginResult';
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { mergeMap, Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from '../services/data.service';
+import { LoginResult } from '../models/loginResult';
 
 @Injectable()
 export class NotLoggedInInterceptor implements HttpInterceptor {
-
-  constructor(private dataService: DataService) {
-  }
+  constructor(private dataService: DataService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError(response => {
+      catchError((response) => {
         if (response.status === 401 && !request.url.endsWith('/login')) {
           return this.handle401Error(request, next);
         } else if (response.status === 403 && request.url.endsWith('/refresh')) {

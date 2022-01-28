@@ -21,7 +21,6 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   isOnLoginPage = false;
   isOnSharePage = false;
   private statusChangeSubscription: Subscription;
@@ -45,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     if (updates.isEnabled) {
-      updates.checkForUpdate().then(event => {
+      updates.checkForUpdate().then((event) => {
         if (event && confirm(this.translate.instant('miscellaneous.updateAvailable'))) {
           updates.activateUpdate().then(() => document.location.reload());
         }
@@ -60,21 +59,17 @@ export class AppComponent implements OnInit, OnDestroy {
   private static loadFonts(): void {
     WebFont.load({
       google: {
-        families: [
-          'Material Icons',
-        ],
-      },
+        families: ['Material Icons']
+      }
     });
   }
 
   ngOnInit(): void {
     AppComponent.loadFonts();
 
-    this.statusChangeSubscription = this.ccService.statusChange$.subscribe(
-      (event: NgcStatusChangeEvent) => {
-        this.setUpAnalytics(window.location.pathname);
-      }
-    );
+    this.statusChangeSubscription = this.ccService.statusChange$.subscribe((event: NgcStatusChangeEvent) => {
+      this.setUpAnalytics(window.location.pathname);
+    });
 
     const consent = this.cookieService.get('cookieconsent_status');
     if (consent) {
@@ -95,10 +90,9 @@ export class AppComponent implements OnInit, OnDestroy {
   setUpAnalytics(initialUrl?: string): void {
     if (environment.useAnalytics) {
       this.loadGoogleAnalytics().then(() => {
-        this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-          .subscribe((event: NavigationEnd) => {
-            this.sendUrlToGoogleAnalytics(event.urlAfterRedirects);
-          });
+        this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+          this.sendUrlToGoogleAnalytics(event.urlAfterRedirects);
+        });
 
         if (initialUrl) {
           this.sendUrlToGoogleAnalytics(initialUrl);
@@ -117,8 +111,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   sendUrlToGoogleAnalytics(url: string): void {
     gtag('config', 'G-GEPNC6YNVY', {
-        page_path: url
-      }
-    );
+      page_path: url
+    });
   }
 }

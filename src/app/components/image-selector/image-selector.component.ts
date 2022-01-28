@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {ImageCroppedEvent} from 'ngx-image-cropper';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-image-selector',
@@ -8,7 +8,6 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
   styleUrls: ['./image-selector.component.scss']
 })
 export class ImageSelectorComponent implements OnInit {
-
   @ViewChild('imagePickerModal') public imageModalRef: TemplateRef<any>;
 
   image: string;
@@ -18,10 +17,7 @@ export class ImageSelectorComponent implements OnInit {
   @Input() defaultImage: string;
   @Output() imageChangedEmitter = new EventEmitter<string>();
 
-  constructor(
-    private modalService: BsModalService,
-  ) {
-  }
+  constructor(private modalService: BsModalService) {}
 
   ngOnInit(): void {
     this.image = this.defaultImage;
@@ -76,9 +72,13 @@ export class ImageSelectorComponent implements OnInit {
 
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        resolve(reader.result);
-      }, false);
+      reader.addEventListener(
+        'load',
+        () => {
+          resolve(reader.result);
+        },
+        false
+      );
 
       reader.onerror = () => {
         return reject(this);
@@ -88,6 +88,6 @@ export class ImageSelectorComponent implements OnInit {
   }
 
   private openImagePicker(): void {
-    this.modalRef = this.modalService.show(this.imageModalRef, {class: 'modal-lg'});
+    this.modalRef = this.modalService.show(this.imageModalRef, { class: 'modal-lg' });
   }
 }

@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {DataService} from '../../services/data.service';
-import {User} from '../../models/user';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {debounceTime, distinctUntilChanged, filter, fromEvent, tap} from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import { User } from '../../models/user';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -17,8 +17,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
 
   @ViewChild('search') searchInput: ElementRef;
 
-  constructor(private dataService: DataService) {
-  }
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.dataService.scrollEmitter.subscribe(() => {

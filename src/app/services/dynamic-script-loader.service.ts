@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 interface Scripts {
   name: string;
@@ -6,15 +6,14 @@ interface Scripts {
 }
 
 export const ScriptStore: Scripts[] = [
-  {name: 'gtag', src: 'https://www.googletagmanager.com/gtag/js?id=G-GEPNC6YNVY'},
-  {name: 'datalayer', src: '../../assets/datalayer.js'}
+  { name: 'gtag', src: 'https://www.googletagmanager.com/gtag/js?id=G-GEPNC6YNVY' },
+  { name: 'datalayer', src: '../../assets/datalayer.js' }
 ];
 
 declare var document: any;
 
 @Injectable()
 export class DynamicScriptLoaderService {
-
   private scripts: any = {};
 
   constructor() {
@@ -41,15 +40,14 @@ export class DynamicScriptLoaderService {
 
         script.onload = () => {
           this.scripts[name].loaded = true;
-          resolve({script: name, loaded: true, status: 'Loaded'});
+          resolve({ script: name, loaded: true, status: 'Loaded' });
         };
 
-        script.onerror = (error: any) => resolve({script: name, loaded: false, status: 'Loaded'});
+        script.onerror = (error: any) => resolve({ script: name, loaded: false, status: 'Loaded' });
         document.getElementsByTagName('head')[0].appendChild(script);
       } else {
-        resolve({script: name, loaded: true, status: 'Already Loaded'});
+        resolve({ script: name, loaded: true, status: 'Already Loaded' });
       }
     });
   }
-
 }

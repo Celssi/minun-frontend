@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {DataService} from '../../services/data.service';
-import {ActivatedRoute, Params} from '@angular/router';
-import {User} from '../../models/user';
-import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
-import {LoadingService} from '../../services/loading.service';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { User } from '../../models/user';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+import { LoadingService } from '../../services/loading.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-business-card',
@@ -20,12 +20,7 @@ export class BusinessCardComponent implements OnInit {
   qrCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   qrValue = document.location.href;
 
-  constructor(
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    public loadingService: LoadingService,
-    private translate: TranslateService
-  ) {
+  constructor(private dataService: DataService, private route: ActivatedRoute, public loadingService: LoadingService, private translate: TranslateService) {
     this.WEEKDAYS = [
       this.translate.instant('miscellaneous.monday'),
       this.translate.instant('miscellaneous.tuesday'),
@@ -33,7 +28,7 @@ export class BusinessCardComponent implements OnInit {
       this.translate.instant('miscellaneous.thursday'),
       this.translate.instant('miscellaneous.friday'),
       this.translate.instant('miscellaneous.saturday'),
-      this.translate.instant('miscellaneous.sunday'),
+      this.translate.instant('miscellaneous.sunday')
     ];
   }
 
@@ -56,15 +51,17 @@ export class BusinessCardComponent implements OnInit {
   }
 
   getUserName(): string {
-    return this.user.accountType === 'user' ? (this.user.firstName + ' ' + this.user.lastName) : this.user.companyName;
+    return this.user.accountType === 'user' ? this.user.firstName + ' ' + this.user.lastName : this.user.companyName;
   }
 
   hasMainContent(): boolean {
-    return !!this.user.description ||
+    return (
+      !!this.user.description ||
       this.user.specialSkills?.length > 0 ||
       this.user.workHistories?.length > 0 ||
       this.user.educations?.length > 0 ||
-      this.user.languages?.length > 0;
+      this.user.languages?.length > 0
+    );
   }
 
   getContainerClasses(): string {

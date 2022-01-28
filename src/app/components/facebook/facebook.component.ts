@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DataService} from '../../services/data.service';
-import {HttpErrorResponse} from '@angular/common/http';
-import {AuthService} from '../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataService } from '../../services/data.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-facebook',
@@ -10,14 +10,7 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./facebook.component.scss']
 })
 export class FacebookComponent implements OnInit {
-
-  constructor(
-    private route: ActivatedRoute,
-    private dataService: DataService,
-    private authService: AuthService,
-    private router: Router
-  ) {
-  }
+  constructor(private route: ActivatedRoute, private dataService: DataService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -39,5 +32,4 @@ export class FacebookComponent implements OnInit {
       }
     });
   }
-
 }

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {DataService} from '../../services/data.service';
-import {ActivatedRoute, Params} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-email',
@@ -11,11 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class ConfirmEmailComponent implements OnInit {
   public status = '';
 
-  constructor(private route: ActivatedRoute,
-              private dataService: DataService,
-              private translate: TranslateService,
-  ) {
-  }
+  constructor(private route: ActivatedRoute, private dataService: DataService, private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.translate.get('login.confirmingEmail').subscribe((translated) => {
@@ -33,5 +29,4 @@ export class ConfirmEmailComponent implements OnInit {
       });
     });
   }
-
 }

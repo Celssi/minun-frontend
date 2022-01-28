@@ -31,7 +31,6 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./page-builder.component.scss']
 })
 export class PageBuilderComponent implements OnInit, AfterViewInit {
-
   @Input() user: User;
   @ViewChild('imageSelector') imageSelector: ImageSelectorComponent;
 
@@ -47,13 +46,13 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   languages = [];
   specialSkills = [];
   businessHours: NgBusinessHoursDaySettings[] = [
-    {open: true, from: '08:00', to: '16:00'},
-    {open: true, from: '08:00', to: '16:00'},
-    {open: true, from: '08:00', to: '16:00'},
-    {open: true, from: '08:00', to: '16:00'},
-    {open: true, from: '08:00', to: '16:00'},
-    {open: false, from: '08:00', to: '16:00'},
-    {open: false, from: '08:00', to: '16:00'}
+    { open: true, from: '08:00', to: '16:00' },
+    { open: true, from: '08:00', to: '16:00' },
+    { open: true, from: '08:00', to: '16:00' },
+    { open: true, from: '08:00', to: '16:00' },
+    { open: true, from: '08:00', to: '16:00' },
+    { open: false, from: '08:00', to: '16:00' },
+    { open: false, from: '08:00', to: '16:00' }
   ];
 
   constructor(
@@ -64,8 +63,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private translate: TranslateService
-  ) {
-  }
+  ) {}
 
   get editForm(): any {
     return this.editFormGroup ? this.editFormGroup.controls : undefined;
@@ -119,23 +117,24 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   validatePasswords(): void {
     if (this.editForm.password.value !== this.editForm.passwordAgain.value) {
-      this.editForm.passwordAgain.setErrors({noMatch: true});
+      this.editForm.passwordAgain.setErrors({ noMatch: true });
     }
   }
 
   validateEmail(): void {
     this.editForm.email.setErrors(undefined);
 
-    const emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegEx =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegEx.test(this.editForm.email.value)) {
-      this.editForm.email.setErrors({emailNotValid: true});
+      this.editForm.email.setErrors({ emailNotValid: true });
       return;
     }
 
     this.dataService.checkEmailExists(this.editForm.email.value, this.user?.id).subscribe({
       next: (emailExists) => {
         if (emailExists) {
-          this.editForm.email.setErrors({alreadyExists: true});
+          this.editForm.email.setErrors({ alreadyExists: true });
         }
       },
       error: (error) => {
@@ -150,7 +149,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     this.dataService.checkHandleExists(this.editForm.handle.value, this.user.id).subscribe({
       next: (handleExists) => {
         if (handleExists) {
-          this.editForm.handle.setErrors({alreadyExists: true});
+          this.editForm.handle.setErrors({ alreadyExists: true });
         }
       },
       error: (error) => {
@@ -180,7 +179,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     }
 
     if (this.editFormGroup.valid) {
-      const values = {...this.editFormGroup.value};
+      const values = { ...this.editFormGroup.value };
       values.languages = this.languages.join(', ');
       values.specialSkills = this.specialSkills.join(', ');
       values.id = this.user?.id;
@@ -188,7 +187,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       this.setOrderNumbers(this.workHistories?.controls);
       this.setOrderNumbers(this.educations?.controls);
 
-      const modifiedBusinessHours = this.businessHours.map(businessHour => new BusinessHour(businessHour));
+      const modifiedBusinessHours = this.businessHours.map((businessHour) => new BusinessHour(businessHour));
       this.setOrderNumbers(modifiedBusinessHours);
       values.businessHours = modifiedBusinessHours;
 
@@ -262,7 +261,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   sortByOrder(items: Array<any>): void {
     if (items) {
-      items.sort((a, b) => (a.value.order > b.value.order) ? 1 : ((b.value.order > a.value.order) ? -1 : 0));
+      items.sort((a, b) => (a.value.order > b.value.order ? 1 : b.value.order > a.value.order ? -1 : 0));
     }
   }
 
@@ -282,10 +281,14 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   deleteProfile(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {title: this.translate.instant('miscellaneous.areYouSure'), message: this.translate.instant('pageBuilder.deleteConfirm'), buttonColor: 'warn'};
+    dialogConfig.data = {
+      title: this.translate.instant('miscellaneous.areYouSure'),
+      message: this.translate.instant('pageBuilder.deleteConfirm'),
+      buttonColor: 'warn'
+    };
     const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.dataService.deleteCurrentProfile().subscribe({
           next: () => {
@@ -301,7 +304,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   private initForm(): void {
     if (!this.authService.isAuthenticated()) {
-      this.editFormGroup = this.formBuilder.group({...this.getRegisterForm()});
+      this.editFormGroup = this.formBuilder.group({ ...this.getRegisterForm() });
     } else {
       this.editFormGroup = this.formBuilder.group({
         ...this.getSuitableFields(this.user ? this.user.accountType : 'user'),
@@ -349,7 +352,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         lastName: [this.user ? this.user.lastName : '', Validators.required],
         title: [this.user ? this.user.title : ''],
         workHistories: this.formBuilder.array([]),
-        educations: this.formBuilder.array([]),
+        educations: this.formBuilder.array([])
       };
     } else if (accountType === 'company') {
       return {
@@ -373,7 +376,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   private getSocialMediaLink(user: User, type: LinkType): string {
-    return user.socialMediaLinks?.find(socialMediaLink => socialMediaLink.type === type)?.link;
+    return user.socialMediaLinks?.find((socialMediaLink) => socialMediaLink.type === type)?.link;
   }
 
   private handleError(error?: any): void {

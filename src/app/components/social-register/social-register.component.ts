@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
-import {environment} from '../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-social-register',
@@ -11,11 +11,9 @@ export class SocialRegisterComponent implements OnInit {
   faFacebook = faFacebook;
   faGoogle = faGoogle;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   registerWithFacebook(): void {
     window.location.href = environment.facebookLoginUrl;
@@ -24,5 +22,4 @@ export class SocialRegisterComponent implements OnInit {
   registerWithGoogle(): void {
     window.location.href = environment.googleLoginUrl;
   }
-
 }

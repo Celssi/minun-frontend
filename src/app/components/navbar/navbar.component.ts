@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import {VersionService} from '../../services/version.service';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { VersionService } from '../../services/version.service';
 import packageInfo from '../../../../package.json';
 
 @Component({
@@ -10,19 +10,13 @@ import packageInfo from '../../../../package.json';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
-
   backendVersion: string;
   appVersion: string;
   showArrowLeft = false;
   showArrowRight = false;
   @ViewChild('navcontainer') private navContainer: ElementRef<HTMLElement>;
 
-  constructor(
-    private versionService: VersionService,
-    private router: Router,
-    public authService: AuthService
-  ) {
-  }
+  constructor(private versionService: VersionService, private router: Router, public authService: AuthService) {}
 
   ngOnInit(): void {
     this.appVersion = packageInfo.version;
@@ -34,7 +28,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.showArrowRight = (this.navContainer.nativeElement.scrollWidth - window.innerWidth) > 30;
+      this.showArrowRight = this.navContainer.nativeElement.scrollWidth - window.innerWidth > 30;
 
       const selectedLink = document.getElementsByClassName('active-link')[0] || undefined;
       if (selectedLink) {

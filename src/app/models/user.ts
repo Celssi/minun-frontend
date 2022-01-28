@@ -1,7 +1,7 @@
-import {SocialMediaLink} from './socialMediaLink';
-import {WorkHistory} from './workHistory';
-import {Education} from './education';
-import {BusinessHour} from './businessHour';
+import { SocialMediaLink } from './socialMediaLink';
+import { WorkHistory } from './workHistory';
+import { Education } from './education';
+import { BusinessHour } from './businessHour';
 
 export class User {
   id: number;
