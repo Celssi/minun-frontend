@@ -14,18 +14,16 @@ export class ConfirmEmailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private dataService: DataService, private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.translate.get('login.confirmingEmail').subscribe((translated) => {
-      this.status = translated;
+    this.status = this.translate.instant('login.confirmingEmail');
 
-      this.route.params.subscribe((params: Params) => {
-        this.dataService.confirmCode(params.email, params.code).subscribe({
-          next: () => {
-            this.status = this.translate.instant('login.emailConfirmed');
-          },
-          error: () => {
-            this.status = this.translate.instant('login.emailCouldNotBeConfirmed');
-          }
-        });
+    this.route.params.subscribe((params: Params) => {
+      this.dataService.confirmCode(params.email, params.code).subscribe({
+        next: () => {
+          this.status = this.translate.instant('login.emailConfirmed');
+        },
+        error: () => {
+          this.status = this.translate.instant('login.emailCouldNotBeConfirmed');
+        }
       });
     });
   }

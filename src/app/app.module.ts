@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,13 +54,14 @@ import { MaterialElevationDirective } from './helpers/material-elevation.directi
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SocialButtonsComponent } from './components/social-buttons/social-buttons.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DynamicScriptLoaderService } from './services/dynamic-script-loader.service';
 import { FacebookComponent } from './components/facebook/facebook.component';
 import { SocialRegisterComponent } from './components/social-register/social-register.component';
 import { GoogleComponent } from './components/google/google.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
+import { Observable } from 'rxjs';
 
 registerLocaleData(localeFI);
 
@@ -93,6 +94,13 @@ const cookieConfig: NgcCookieConsentConfig = {
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
+}
+
+export function appInitializerFactory(translate: TranslateService): () => Observable<any> {
+  return () => {
+    translate.setDefaultLang('fi');
+    return translate.use('fi');
+  };
 }
 
 @NgModule({
@@ -179,6 +187,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       provide: LOCALE_ID,
       deps: [LocaleService],
       useFactory: (localeService: LocaleService) => localeService.locale
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true
     }
   ],
   exports: [ImageSelectorComponent],
