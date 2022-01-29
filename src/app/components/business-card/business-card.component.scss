@@ -223,8 +223,8 @@
 }
 
 .dark {
-  .share-button {
-    color: #FFFFFF;
+  .share-button, td, th {
+    color: #FFFFFF !important;
   }
 
   .bio {
