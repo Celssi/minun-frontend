@@ -133,7 +133,7 @@
     "emailMustMatchFacebook": "Käyttäjätunnuksen sähköpostin on oltava sama kuin Facebookissa oleva",
     "emailMustMatchGoogle": "Käyttäjätunnuksen sähköpostin on oltava sama kuin Googlessa oleva",
     "usedForLogin": "Sähköpostia käytetään kirjautumiseen.",
-    "handleUsedForSharing": "Kahvasi näkyy käyntikorttisi jakolinkissä.",
+    "handleUsedForSharing": "Kahvasi näkyy käyntikorttisi jakolinkissä."
   },
   "search": {
     "writeSomething": "Kirjoita jotain...",
