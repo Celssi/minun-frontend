@@ -22,7 +22,6 @@ import { TranslateService } from '@ngx-translate/core';
 // TODO Kuukausimaksu
 // TODO Kartta
 // TODO Ota yhteyttä
-// TODO Tutustu-sivu
 // TODO Unohdin salasanani
 
 @Component({
@@ -125,7 +124,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     this.editForm.email.setErrors(undefined);
 
     const emailRegEx =
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegEx.test(this.editForm.email.value)) {
       this.editForm.email.setErrors({ emailNotValid: true });
       return;

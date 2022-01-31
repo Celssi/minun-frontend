@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -16,6 +16,14 @@ export class ImageSelectorComponent implements OnInit {
 
   @Input() defaultImage: string;
   @Output() imageChangedEmitter = new EventEmitter<string>();
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }
 
   constructor(private modalService: BsModalService) {}
 
