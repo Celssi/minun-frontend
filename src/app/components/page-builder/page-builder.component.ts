@@ -248,7 +248,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   openBusinessCard(): void {
-    window.open('/' + this.user.handle, '_blank');
+    this.router.navigate([this.user.handle]);
   }
 
   moveUp(list: FormArray, index: number): void {
