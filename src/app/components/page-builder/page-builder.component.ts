@@ -24,7 +24,6 @@ import { TranslateService } from '@ngx-translate/core';
 // TODO Ota yhteyttä
 // TODO Tutustu-sivu
 // TODO Unohdin salasanani
-// TODO Rekisteröitymisen ensimmäinen kuva ei tallennu
 
 @Component({
   selector: 'app-page-builder',
@@ -160,9 +159,13 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   accountTypeChanged(): void {
+    const image = this.editForm.image.value;
+
     this.editFormGroup = this.formBuilder.group({
       ...this.getRegisterForm(this.editForm.accountType.value ?? 'user')
     });
+
+    this.editForm.image.value = image;
   }
 
   limitDescriptionSize(): void {

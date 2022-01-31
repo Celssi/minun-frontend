@@ -50,10 +50,6 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       });
     }
-
-    this.translate.use('fi').subscribe(() => {
-      this.loadingService.setLoading(true);
-    });
   }
 
   private static loadFonts(): void {

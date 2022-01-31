@@ -11,6 +11,10 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    if (request.url.endsWith('fi.json')) {
+      return next.handle(request);
+    }
+
     this.totalRequests++;
     this.loadingService.setLoading(true);
 

@@ -8,7 +8,5 @@ import { Component, OnInit } from '@angular/core';
 export class CookiesComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('asd');
-  }
+  ngOnInit(): void {}
 }
