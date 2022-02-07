@@ -22,7 +22,6 @@ import { TranslateService } from '@ngx-translate/core';
 // TODO Kuukausimaksu
 // TODO Kartta
 // TODO Ota yhteyttä
-// TODO Unohdin salasanani
 
 @Component({
   selector: 'app-page-builder',
