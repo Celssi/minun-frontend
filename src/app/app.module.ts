@@ -62,6 +62,7 @@ import { SocialRegisterComponent } from './components/social-register/social-reg
 import { GoogleComponent } from './components/google/google.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 import { Observable } from 'rxjs';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 registerLocaleData(localeFI);
 
@@ -115,6 +116,7 @@ export function appInitializerFactory(translate: TranslateService): () => Observ
     PageBuilderComponent,
     BusinessCardComponent,
     ImageSelectorComponent,
+    ForgotPasswordComponent,
     CookiesComponent,
     ConfirmModalComponent,
     MaterialElevationDirective,

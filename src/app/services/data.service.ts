@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { LoginResult } from '../models/loginResult';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ResetRequest } from '../models/resetRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +103,14 @@ export class DataService {
     return this.http.get<User>(environment.backendUrl + 'users/current', {
       headers: this.getAuthorizationHeader()
     });
+  }
+
+  getResetPassword(code: string): Observable<ResetRequest> {
+    return this.http.get<ResetRequest>(environment.backendUrl + 'users/reset-password/' + code);
+  }
+
+  resetPassword(values: any): Observable<ResetRequest> {
+    return this.http.post<ResetRequest>(environment.backendUrl + 'users/reset-password', values);
   }
 
   public setToken(token): void {

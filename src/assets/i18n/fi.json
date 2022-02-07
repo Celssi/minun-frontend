@@ -59,7 +59,8 @@
     "confirmingEmail": "Odota hetki, sähköpostiosoitettasi vahvistetaan...",
     "confirmEmailTitle": "Sähköpostiosoitteen vahvistaminen",
     "emailConfirmed": "Sähköpostiosoite on nyt vahvistettu ja voit kirjautua palveluun!",
-    "emailCouldNotBeConfirmed": "Sähköposti osoitetta ei voitu vahvistaa!"
+    "emailCouldNotBeConfirmed": "Sähköposti osoitetta ei voitu vahvistaa!",
+    "forgotPasswordButton": "Unohdin salasanani"
   },
   "navbar": {
     "frontPage": "Etusivu",
@@ -141,5 +142,17 @@
     "knowledge": "Osaaminen",
     "contactInfo": "Yhteystiedot",
     "open": "Avaa"
+  },
+  "forgot": {
+    "header": "Unohdin salasanani",
+    "email": "Sähköpostini",
+    "tooOld": "Salasanan nollaus -linkki on vanhentunut tai virheellinen!",
+    "forgot": "Lähetä nollauslinkki sähköpostiin",
+    "backToLogin": "Takaisin kirjautumissivulle",
+    "passwordResetted": "Salasana on nollattu!",
+    "emailSent": "Sähköposti on lähetetty!",
+    "password": "Salasana",
+    "passwordAgain": "Salasana uudelleen",
+    "reset": "Nollaa salasana"
   }
 }

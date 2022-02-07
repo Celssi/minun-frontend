@@ -30,10 +30,9 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
     fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         filter(Boolean),
-        debounceTime(500),
+        debounceTime(1000),
         distinctUntilChanged(),
         tap((event: any) => {
-          this.users = [];
           this.searchPhrase = event.target.value;
           this.search(this.searchPhrase, this.searchOffset);
         })
@@ -48,7 +47,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
 
     this.dataService.search(searchPhrase, offset).subscribe({
       next: (users: User[]) => {
-        this.users.push(...users);
+        this.users = users;
       }
     });
   }

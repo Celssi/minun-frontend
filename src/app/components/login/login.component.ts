@@ -61,6 +61,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  forgotPassword(): void {
+    this.router.navigate(['unohdin-salasanani']);
+  }
+
   loginWithFacebook(): void {
     this.loadingService.setLoading(true);
     window.location.href = environment.facebookLoginUrl;

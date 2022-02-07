@@ -10,6 +10,7 @@ import { CookiesComponent } from './components/cookies/cookies.component';
 import { FacebookComponent } from './components/facebook/facebook.component';
 import { GoogleComponent } from './components/google/google.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/etusivu', pathMatch: 'full' },
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'keksit', component: CookiesComponent },
   { path: 'vahvista/:code/:email', component: ConfirmEmailComponent },
+  { path: 'unohdin-salasanani', component: ForgotPasswordComponent },
+  { path: 'unohdin-salasanani/:code', component: ForgotPasswordComponent },
   { path: ':handle', component: BusinessCardComponent }
 ];
 
