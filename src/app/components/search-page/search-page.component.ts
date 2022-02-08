@@ -12,6 +12,7 @@ import { debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs
 export class SearchPageComponent implements OnInit, AfterViewInit {
   faSearch = faSearch;
   users: User[] = [];
+  previousSearchPhrase: string;
   searchPhrase: string;
   searchOffset = 0;
 
@@ -45,9 +46,15 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
+    if (searchPhrase !== this.previousSearchPhrase) {
+      this.searchOffset = 0;
+      this.users = [];
+      this.previousSearchPhrase = searchPhrase;
+    }
+
     this.dataService.search(searchPhrase, offset).subscribe({
       next: (users: User[]) => {
-        this.users = users;
+        this.users.push(...users);
       }
     });
   }
