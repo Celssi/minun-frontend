@@ -1,65 +1,64 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { User } from '../../models/user';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs';
+import { debounceTime, filter, Observable, Subject, switchMap } from 'rxjs';
+
+interface SearchRequest {
+  searchPhrase: string;
+  offset: number;
+}
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit, AfterViewInit {
+export class SearchPageComponent implements OnInit {
+  @ViewChild('search') searchInput: ElementRef;
+
+  searchTerm$ = new Subject<string>();
   faSearch = faSearch;
   users: User[] = [];
-  previousSearchPhrase: string;
   searchPhrase: string;
   searchOffset = 0;
 
-  @ViewChild('search') searchInput: ElementRef;
-
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) {
+    this.search(this.searchTerm$).subscribe((results: User[]) => {
+      this.users = results;
+    });
+  }
 
   ngOnInit(): void {
     this.dataService.scrollEmitter.subscribe(() => {
       this.searchOffset += 1;
-      this.search(this.searchPhrase, this.searchOffset);
+      this.searchEntries(this.searchPhrase, this.searchOffset).subscribe((values: User[]) => {
+        this.users.push(...values);
+      });
     });
   }
 
-  ngAfterViewInit(): void {
-    fromEvent(this.searchInput.nativeElement, 'keyup')
-      .pipe(
-        filter(Boolean),
-        debounceTime(1000),
-        distinctUntilChanged(),
-        tap((event: any) => {
-          this.searchPhrase = event.target.value;
-          this.search(this.searchPhrase, this.searchOffset);
-        })
-      )
-      .subscribe();
+  search(terms: Observable<string>): Observable<User[]> {
+    return terms.pipe(
+      filter(Boolean),
+      debounceTime(500),
+      switchMap((term: string) => {
+        return this.searchEntries(term, 0);
+      })
+    );
   }
 
-  search(searchPhrase: string, offset: number): void {
-    if (!searchPhrase) {
-      return;
-    }
-
-    if (searchPhrase !== this.previousSearchPhrase) {
-      this.searchOffset = 0;
-      this.users = [];
-      this.previousSearchPhrase = searchPhrase;
-    }
-
-    this.dataService.search(searchPhrase, offset).subscribe({
-      next: (users: User[]) => {
-        this.users.push(...users);
-      }
-    });
+  searchEntries(searchPhrase: string, offset: number): Observable<User[]> {
+    this.searchOffset = offset;
+    this.users = offset !== 0 ? this.users : [];
+    return this.dataService.search(searchPhrase, offset);
   }
 
   splitToChipList(itemString: string): string[] {
     return itemString?.split(', ').filter(Boolean) ?? [];
+  }
+
+  getSearchRequest(value: string): SearchRequest {
+    return { searchPhrase: value, offset: this.searchOffset };
   }
 }

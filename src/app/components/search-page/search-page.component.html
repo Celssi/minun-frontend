@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="search-bar">
         <fa-icon [icon]="faSearch"></fa-icon>
-        <input #search [placeholder]="'search.writeSomething' | translate" class="form-control form-input" type="text">
+        <input #search [placeholder]="'search.writeSomething' | translate" class="form-control form-input" type="text" [(ngModel)]="searchPhrase" (keyup)="searchTerm$.next($event.target.value)">
       </div>
     </div>
   </div>
