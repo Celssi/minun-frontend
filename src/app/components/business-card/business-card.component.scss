@@ -281,7 +281,7 @@
     }
   }
 
-  .bg-info {
+  .bg-info, .dark .main-content, .dark .bg-info {
     background-image: none !important;
     background-color: #FFFFFF !important;
   }
@@ -292,5 +292,11 @@
 
   * {
     color: #000000 !important;
+  }
+
+  .dark {
+    .share-button, td, th {
+      color: #000000 !important;
+    }
   }
 }
