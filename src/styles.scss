@@ -109,3 +109,23 @@ material-icons:before {
     padding: 4px;
   }
 }
+
+@media print {
+  .wrapper {
+    max-height: unset;
+  }
+
+  body {
+    background-image: none !important;
+    background-color: #FFFFFF !important;
+  }
+
+  nav {
+    display: none !important;
+  }
+
+  .print-full-width {
+    width: 100% !important;
+    max-width: fit-content !important;
+  }
+}

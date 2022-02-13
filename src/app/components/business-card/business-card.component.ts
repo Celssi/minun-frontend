@@ -61,7 +61,7 @@ export class BusinessCardComponent implements OnInit {
       this.user.workHistories?.length > 0 ||
       this.user.educations?.length > 0 ||
       this.user.languages?.length > 0 ||
-      this.user.businessHours?.length > 0
+      (this.user.accountType === 'company' && this.user.businessHours?.length > 0)
     );
   }
 

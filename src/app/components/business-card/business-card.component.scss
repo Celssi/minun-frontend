@@ -271,3 +271,26 @@
   flex-direction: column;
   align-items: center;
 }
+
+
+@media print {
+  .image-container {
+    img {
+      width: 50%;
+      border: 1px solid black !important;
+    }
+  }
+
+  .bg-info {
+    background-image: none !important;
+    background-color: #FFFFFF !important;
+  }
+
+  .share-button {
+    visibility: hidden !important;
+  }
+
+  * {
+    color: #000000 !important;
+  }
+}

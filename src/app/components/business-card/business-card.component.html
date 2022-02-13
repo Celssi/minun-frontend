@@ -4,7 +4,7 @@
       [errorCorrectionLevel]="qrCorrectionLevel"
       [value]="qrValue"></ngx-qrcode>
 </div>
-<div *ngIf="user" [ngClass]="getContainerClasses()" class="container">
+<div *ngIf="user" [ngClass]="getContainerClasses()" class="container print-full-width">
   <div class="row">
     <div [ngClass]="{'col-12 max-width-400': !hasMainContent(), 'col-md-4': hasMainContent()}" class="col-md-4 bg-info col-sm-12 pt-3">
       <div class="business-card-header">
