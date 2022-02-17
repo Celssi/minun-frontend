@@ -82,6 +82,25 @@ material-icons:before {
   display: none;
 }
 
+.mat-raised-button {
+  mat-icon, fa-icon {
+    margin-left: 5px;
+  }
+
+  fa-icon {
+    display: flex;
+  }
+
+  fa-icon svg {
+    height: 24px;
+    width: 24px !important;
+  }
+
+  .mat-button-wrapper {
+    justify-content: space-between;
+  }
+}
+
 ::ng-deep .wf-loading, .wf-materialicons-n4-inactive {
   .material-icons {
     display: none
@@ -94,7 +113,7 @@ material-icons:before {
   justify-content: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   .wrapper {
     padding-left: 70px;
   }
