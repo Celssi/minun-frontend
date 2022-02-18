@@ -1,4 +1,4 @@
-<form [formGroup]="editFormGroup" [ngClass.md]="{'pt-4': authService.isAuthenticated()}" [ngClass.xs]="{'pt-2': authService.isAuthenticated()}" (keyup.enter)="save()">
+<form [formGroup]="editFormGroup" [ngClass.md]="{'pt-4': authService.isAuthenticated()}" [ngClass.xs]="{'pt-2': authService.isAuthenticated()}">
   <mat-toolbar *ngIf="authService.isAuthenticated()">
     <h2 class="text-white">{{'pageBuilder.title' | translate}}</h2>
     <div class="action-buttons">
@@ -137,6 +137,7 @@
   <mat-card *ngIf="authService.isAuthenticated()" class="my-2">
     <div class="skills">
       <h2>{{isUserForm() ? ('pageBuilder.mySkills' | translate) : ('pageBuilder.ourServices' | translate)}}</h2>
+      <small>{{'pageBuilder.pleaseSeparateWithComma' | translate}}</small>
       <mat-form-field *ngIf="isUserForm()" appearance="fill" class="width-all-available">
         <mat-label>{{'pageBuilder.languages' | translate}}</mat-label>
         <mat-chip-list #languagesChipList>
@@ -148,7 +149,7 @@
                  [matChipInputAddOnBlur]="true"
                  [matChipInputFor]="languagesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [placeholder]="'pageBuilder.writeAndPressEnter' | translate"
+                 [placeholder]="'pageBuilder.writeAndPressComma' | translate"
                  autocomplete="off">
         </mat-chip-list>
       </mat-form-field>
@@ -164,7 +165,7 @@
                  [matChipInputAddOnBlur]="true"
                  [matChipInputFor]="specialSkillsChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [placeholder]="'pageBuilder.writeAndPressEnter' | translate"
+                 [placeholder]="'pageBuilder.writeAndPressComma' | translate"
                  autocomplete="off">
         </mat-chip-list>
       </mat-form-field>

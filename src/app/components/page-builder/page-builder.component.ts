@@ -32,7 +32,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   @Input() user: User;
   @ViewChild('imageSelector') imageSelector: ImageSelectorComponent;
 
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  readonly separatorKeysCodes = [COMMA] as const;
 
   editFormGroup: FormGroup;
   image: string;
