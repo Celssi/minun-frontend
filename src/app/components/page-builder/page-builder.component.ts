@@ -90,7 +90,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       workplace: [workHistory?.workplace ?? '', Validators.required],
       title: [workHistory?.title ?? '', Validators.required],
       period: [workHistory?.period ?? '', Validators.required],
-      description: [workHistory?.description ?? '', Validators.required],
+      description: [workHistory?.description ?? ''],
       order: [workHistory?.order ?? 0]
     });
 
@@ -102,7 +102,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       educationPlace: [education?.educationPlace ?? '', Validators.required],
       title: [education?.title ?? '', Validators.required],
       period: [education?.period ?? '', Validators.required],
-      description: [education?.description ?? '', Validators.required],
+      description: [education?.description ?? ''],
       order: [education?.order ?? 0]
     });
 

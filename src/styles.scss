@@ -11,6 +11,9 @@ $minun-frontend-theme: mat.define-light-theme((
                 primary: $minun-frontend-primary,
                 accent: $minun-frontend-accent,
                 warn: $minun-frontend-warn,
+        ),
+        typography: mat.define-typography-config(
+                $font-family: 'Rubik',
         )
 ));
 
@@ -22,8 +25,6 @@ html, body {
 }
 
 body {
-  font-family: 'Oxygen', 'Helvetica Neue', sans-serif !important;
-
   margin: 0;
   padding-bottom: 20px;
 
@@ -113,6 +114,15 @@ material-icons:before {
   justify-content: center;
 }
 
+.mat-form-field-underline {
+  display: none;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  border: 2px solid #0C8E96;
+  border-radius: 4px !important;
+}
+
 @media (min-width: 1025px) {
   .wrapper {
     padding-left: 70px;
@@ -136,7 +146,7 @@ material-icons:before {
 
   body {
     background-image: none !important;
-    background-color: #FFFFFF !important;
+    background-color: #FAF8F6 !important;
   }
 
   nav {

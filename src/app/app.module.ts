@@ -75,11 +75,11 @@ const cookieConfig: NgcCookieConsentConfig = {
   palette: {
     popup: {
       background: '#025174',
-      text: '#FFFFFF'
+      text: '#FAF8F6'
     },
     button: {
       background: '#607D8B',
-      text: '#FFFFFF'
+      text: '#FAF8F6'
     }
   },
   type: 'info',

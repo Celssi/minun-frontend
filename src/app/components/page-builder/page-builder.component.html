@@ -287,9 +287,9 @@
     <div class="theme-selector">
       <h2>{{'pageBuilder.pickTheme' | translate}}</h2>
       <input checked="checked" formControlName="theme" id="light" name="theme" type="radio" value="light"/>
-      <label class="theme light" for="light">{{'pageBuilder.lightTheme' | translate}}</label>
+      <label class="theme light" for="light" [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'light'}">{{'pageBuilder.lightTheme' | translate}}</label>
       <input formControlName="theme" id="dark" name="theme" type="radio" value="dark"/>
-      <label class="theme dark" for="dark">{{'pageBuilder.darkTheme' | translate}}</label>
+      <label class="theme dark" for="dark" [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'dark'}">{{'pageBuilder.darkTheme' | translate}}</label>
     </div>
   </mat-card>
 

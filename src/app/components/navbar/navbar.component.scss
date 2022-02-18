@@ -25,7 +25,7 @@
 .version-info {
   display: none;
   text-align: center;
-  color: #FFFFFF;
+  color: #FAF8F6;
   margin-top: auto;
 }
 
@@ -47,7 +47,7 @@
 .nav-link:hover {
   filter: grayscale(0%) opacity(1);
   background: $bg-secondary;
-  color: #FFFFFF;
+  color: #FAF8F6;
 }
 
 .link-text {
@@ -66,7 +66,7 @@
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  color: #FFFFFF;
+  color: #FAF8F6;
   //background: $bg-secondary;
   font-size: 1.3rem;
   letter-spacing: 0.3ch;
@@ -167,7 +167,7 @@ li > a.active-link, li > a.active-link:hover {
 }
 
 li > a[class*='active'] {
-  color: #FFFFFF !important;
+  color: #FAF8F6 !important;
   filter: grayscale(0%) opacity(1);
 }
 

@@ -22,6 +22,16 @@
   background-image: linear-gradient(-225deg, #025174 0%, #3584A7 51%, #30D2BE 100%);
 }
 
+.description {
+  max-width: 600px;;
+}
+
+.ad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (max-width: 800px) {
   h2 {
     text-align: left !important;

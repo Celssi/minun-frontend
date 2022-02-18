@@ -188,7 +188,7 @@
 
 .light {
   .share-button {
-    color: #FFFFFF;
+    color: #FAF8F6;
   }
 
   .bio {
@@ -198,7 +198,7 @@
 
   .image-container {
     img {
-      border: 3px solid #FFFFFF;
+      border: 3px solid #FAF8F6;
       border-radius: 5%;
     }
   }
@@ -209,12 +209,12 @@
                     -225deg, #025174 0%, #3584A7 51%, #30D2BE 100%);
 
     a {
-      color: #FFFFFF;
+      color: #FAF8F6;
     }
   }
 
   .main-content {
-    background-color: #FFFFFF;
+    background-color: #FAF8F6;
 
     .detailed-information {
       border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -224,7 +224,7 @@
 
 .dark {
   .share-button, td, th {
-    color: #FFFFFF !important;
+    color: #FAF8F6 !important;
   }
 
   .bio {
@@ -234,7 +234,7 @@
 
   .image-container {
     .rounded-circle {
-      border: 3px solid #FFFFFF;
+      border: 3px solid #FAF8F6;
     }
   }
 
@@ -264,7 +264,7 @@
   background-color: rgba(0, 0, 0, 0.8);
   right: 0;
   left: 0;
-  color: #FFFFFF;
+  color: #FAF8F6;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -283,7 +283,7 @@
 
   .bg-info, .dark .main-content, .dark .bg-info {
     background-image: none !important;
-    background-color: #FFFFFF !important;
+    background-color: #FAF8F6 !important;
   }
 
   .share-button {
