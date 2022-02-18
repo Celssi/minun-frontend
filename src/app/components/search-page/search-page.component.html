@@ -9,7 +9,8 @@
   </div>
 
   <div class="results" fxLayout="row wrap" fxLayoutGap="0.5rem grid">
-    <div *ngFor="let user of users" fxFlex="33%" fxFlex.sm="50%" fxFlex.xs="100%">
+    <ng-container *ngFor="let i of [1, 2, 3,4,5,6,7,8,9,10,11,12,12,2,2,2,2,22,2,2,2]">
+    <div *ngFor="let user of users" fxFlex="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlexAlign="center">
       <mat-card [defaultElevation]="0" appMaterialElevation class="my-2 search-card" raisedElevation="12">
         <mat-card-header>
           <mat-card-title>{{ user.companyName ?? (user.firstName + ' ' + user.lastName)}} <small>(@{{user.handle}})</small></mat-card-title>
@@ -71,5 +72,6 @@
         </mat-card-actions>
       </mat-card>
     </div>
+    </ng-container>
   </div>
 </mat-card>
