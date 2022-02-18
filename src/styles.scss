@@ -96,10 +96,6 @@ material-icons:before {
     height: 24px;
     width: 24px !important;
   }
-
-  .mat-button-wrapper {
-    justify-content: space-between;
-  }
 }
 
 ::ng-deep .wf-loading, .wf-materialicons-n4-inactive {
@@ -109,6 +105,7 @@ material-icons:before {
 }
 
 .mat-button-wrapper {
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;

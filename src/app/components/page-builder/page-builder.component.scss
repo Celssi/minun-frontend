@@ -14,23 +14,6 @@
   width: calc(100% - 10px);
 }
 
-.action-buttons {
-  .mat-button-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  mat-icon {
-    font-size: 18px;
-    height: 20px;
-    width: 20px;
-  }
-
-  button {
-    height: 35px;
-  }
-}
-
 mat-toolbar {
   border-radius: 4px;
   position: sticky;
