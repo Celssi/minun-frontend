@@ -150,6 +150,7 @@
                  [matChipInputFor]="languagesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [placeholder]="'pageBuilder.writeAndPressComma' | translate"
+                 (keyup.,)="processChipList($event)"
                  autocomplete="off">
         </mat-chip-list>
       </mat-form-field>

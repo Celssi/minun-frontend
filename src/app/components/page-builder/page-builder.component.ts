@@ -8,7 +8,7 @@ import { User } from '../../models/user';
 import { LinkType } from '../../models/socialMediaLink';
 import { faFacebook, faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA } from '@angular/cdk/keycodes';
 import { Education } from '../../models/education';
 import { WorkHistory } from '../../models/workHistory';
 import { Router } from '@angular/router';
@@ -246,7 +246,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   openBusinessCard(): void {
-    this.router.navigate([this.user.handle]);
+    this.router.navigate([this.user.handle]).then();
   }
 
   moveUp(list: FormArray, index: number): void {
@@ -294,7 +294,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       if (result) {
         this.dataService.deleteCurrentProfile().subscribe({
           next: () => {
-            this.router.navigate(['logout']);
+            this.router.navigate(['logout']).then();
           },
           error: (error) => {
             this.handleError(error);
@@ -385,5 +385,11 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     console.error(error);
     this.sendDisabled = false;
     this.snackBar.open(this.translate.instant('miscellaneous.errorHappened'), this.translate.instant('miscellaneous.close'));
+  }
+
+  processChipList(event: KeyboardEvent): void {
+    const target = event.currentTarget as HTMLElement;
+    target.blur();
+    target.focus();
   }
 }
