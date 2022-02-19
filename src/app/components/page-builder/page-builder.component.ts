@@ -388,8 +388,9 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   processChipList(event: KeyboardEvent): void {
-    const target = event.currentTarget as HTMLElement;
+    /*const target = event.currentTarget as HTMLElement;
     target.blur();
-    target.focus();
+    target.focus();*/
+    alert(event.code + ' ' + event.key);
   }
 }
