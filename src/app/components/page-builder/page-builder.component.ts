@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
@@ -216,10 +216,13 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   addChipToList(list: any, event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+    const values = (event.value || '')
+      .split(',')
+      .map((v) => v.trim())
+      .filter(Boolean);
 
-    if (value) {
-      list.push(value);
+    if (values.length > 0) {
+      list.push(values);
     }
 
     event.chipInput.clear();
@@ -385,12 +388,5 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     console.error(error);
     this.sendDisabled = false;
     this.snackBar.open(this.translate.instant('miscellaneous.errorHappened'), this.translate.instant('miscellaneous.close'));
-  }
-
-  processChipList(event: KeyboardEvent): void {
-    /*const target = event.currentTarget as HTMLElement;
-    target.blur();
-    target.focus();*/
-    alert(event.code + ' ' + event.key);
   }
 }
