@@ -53,6 +53,32 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     { open: false, from: '08:00', to: '16:00' }
   ];
 
+  private _skillToAdd = '';
+  get skillToAdd(): string {
+    return this._skillToAdd;
+  }
+  set skillToAdd(value: string) {
+    this._skillToAdd = value;
+
+    if (this._skillToAdd.endsWith(',')) {
+      this.specialSkills.push(this._skillToAdd.split(',')[0]);
+      this._skillToAdd = '';
+    }
+  }
+
+  private _languageToAdd = '';
+  get languageToAdd(): string {
+    return this._languageToAdd;
+  }
+  set languageToAdd(value: string) {
+    this._languageToAdd = value;
+
+    if (this._languageToAdd.endsWith(',')) {
+      this.languages.push(this._languageToAdd.split(',')[0]);
+      this._languageToAdd = '';
+    }
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
@@ -216,13 +242,10 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   addChipToList(list: any, event: MatChipInputEvent): void {
-    const values = (event.value || '')
-      .split(',')
-      .map((v) => v.trim())
-      .filter(Boolean);
+    const value = (event.value || '').trim();
 
-    if (values.length > 0) {
-      list.push(values);
+    if (value) {
+      list.push(value);
     }
 
     event.chipInput.clear();
@@ -388,5 +411,12 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     console.error(error);
     this.sendDisabled = false;
     this.snackBar.open(this.translate.instant('miscellaneous.errorHappened'), this.translate.instant('miscellaneous.close'));
+  }
+
+  public processChiplist(event: Event): void {
+    console.log(event);
+    const target = event.currentTarget as HTMLElement;
+    target.blur();
+    target.focus();
   }
 }

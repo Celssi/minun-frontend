@@ -150,6 +150,7 @@
                  [matChipInputFor]="languagesChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [placeholder]="'pageBuilder.writeAndPressComma' | translate"
+                 [(ngModel)]="languageToAdd" [ngModelOptions]="{standalone: true}"
                  autocomplete="off">
         </mat-chip-list>
       </mat-form-field>
@@ -166,6 +167,7 @@
                  [matChipInputFor]="specialSkillsChipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [placeholder]="'pageBuilder.writeAndPressComma' | translate"
+                 [(ngModel)]="skillToAdd" [ngModelOptions]="{standalone: true}"
                  autocomplete="off">
         </mat-chip-list>
       </mat-form-field>
