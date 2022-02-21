@@ -136,6 +136,11 @@ mat-form-field {
   height: 400px;
 }
 
+.form-text-block {
+  text-align: right;
+  margin: 0 5px;
+}
+
 @media (max-device-width: 800px) {
   h2 {
     margin-left: 10px;

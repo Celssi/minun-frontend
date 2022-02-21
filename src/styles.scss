@@ -115,6 +115,10 @@ material-icons:before {
   display: none;
 }
 
+.mat-simple-snackbar-action .mat-button-wrapper {
+  display: unset;
+}
+
 .mat-form-field-appearance-fill .mat-form-field-flex {
   border: 2px solid #0C8E96;
   border-radius: 4px !important;

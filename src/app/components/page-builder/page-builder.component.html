@@ -96,6 +96,14 @@
       <mat-error *ngIf="editForm.passwordAgain.errors?.noMatch">{{'pageBuilder.passwordNoMatch' | translate}}</mat-error>
       <mat-error *ngIf="editForm.passwordAgain.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
     </mat-form-field>
+
+    <div class="mt-2 form-text-block" *ngIf="!authService.isAuthenticated()">
+      {{'pageBuilder.privacyPolicy' | translate}} <a routerLink="/tutustu">{{'pageBuilder.here' | translate}}</a>
+    </div>
+
+    <div class="mt-2 form-text-block" *ngIf="!authService.isAuthenticated()">
+      {{'pageBuilder.confirmationReminder' | translate}}
+    </div>
   </mat-card>
 
   <mat-card *ngIf="authService.isAuthenticated()" class="my-2">
