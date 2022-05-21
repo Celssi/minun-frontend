@@ -1,4 +1,4 @@
-import { NgBusinessHoursDaySettings } from 'ng-business-hours';
+import { NgBusinessHoursDaySettings } from 'ng-business-hours-lm';
 
 export class BusinessHour {
   id?: number;

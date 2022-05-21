@@ -13,7 +13,7 @@ import { Education } from '../../models/education';
 import { WorkHistory } from '../../models/workHistory';
 import { Router } from '@angular/router';
 import { ImageSelectorComponent } from '../image-selector/image-selector.component';
-import { NgBusinessHoursDaySettings } from 'ng-business-hours';
+import { NgBusinessHoursDaySettings } from 'ng-business-hours-lm';
 import { BusinessHour } from '../../models/businessHour';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';

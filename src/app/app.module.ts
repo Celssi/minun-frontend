@@ -40,7 +40,7 @@ import { ImageSelectorComponent } from './components/image-selector/image-select
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoadingInterceptor } from './interceptors/load.interceptor';
 import { LoadingService } from './services/loading.service';
-import { NgBusinessHoursModule } from 'ng-business-hours';
+import { NgBusinessHoursLmModule } from 'ng-business-hours-lm';
 import localeFI from '@angular/common/locales/fi';
 import { registerLocaleData } from '@angular/common';
 import { LocaleService } from './services/locale.service';
@@ -153,9 +153,9 @@ export function appInitializerFactory(translate: TranslateService): () => Observ
     NgxQRCodeModule,
     NgxMaterialTimepickerModule.setLocale('fi-FI'),
     MatToolbarModule,
-    NgBusinessHoursModule,
+    NgBusinessHoursLmModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
-    CookieModule.forRoot(),
+    CookieModule,
     MatDialogModule,
     FlexLayoutModule,
     InfiniteScrollModule,
