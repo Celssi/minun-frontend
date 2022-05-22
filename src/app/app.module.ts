@@ -155,7 +155,7 @@ export function appInitializerFactory(translate: TranslateService): () => Observ
     MatToolbarModule,
     NgBusinessHoursLmModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
-    CookieModule,
+    CookieModule.withOptions(),
     MatDialogModule,
     FlexLayoutModule,
     InfiniteScrollModule,
