@@ -286,12 +286,12 @@
 
   <mat-card *ngIf="isCompanyForm() && authService.isAuthenticated()" class="my-2">
     <h2>{{'pageBuilder.businessHours' | translate}}</h2>
-    <ng-business-hours
+    <ng-business-hours-lm
         [(ngModel)]="businessHours"
         [ngModelOptions]="{standalone: true}"
         [timeFromLabel]="'pageBuilder.opens' | translate"
         [timeToLabel]="'pageBuilder.closes' | translate">
-    </ng-business-hours>
+    </ng-business-hours-lm>
   </mat-card>
 
   <mat-card *ngIf="authService.isAuthenticated()">
