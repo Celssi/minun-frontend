@@ -286,12 +286,14 @@
 
   <mat-card *ngIf="isCompanyForm() && authService.isAuthenticated()" class="my-2">
     <h2>{{'pageBuilder.businessHours' | translate}}</h2>
-    <ng-business-hours-lm
-        [(ngModel)]="businessHours"
-        [ngModelOptions]="{standalone: true}"
-        [timeFromLabel]="'pageBuilder.opens' | translate"
-        [timeToLabel]="'pageBuilder.closes' | translate">
-    </ng-business-hours-lm>
+    <div class="p-2">
+      <ng-business-hours-lm
+          [(ngModel)]="businessHours"
+          [ngModelOptions]="{standalone: true}"
+          [timeFromLabel]="'pageBuilder.opens' | translate"
+          [timeToLabel]="'pageBuilder.closes' | translate">
+      </ng-business-hours-lm>
+    </div>
   </mat-card>
 
   <mat-card *ngIf="authService.isAuthenticated()">
