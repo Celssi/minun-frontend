@@ -17,7 +17,7 @@
     <app-image-selector #imageSelector (imageChangedEmitter)="updateImage($event)" [defaultImage]="user?.image"></app-image-selector>
   </div>
 
-  <div class="my-4">
+  <div class="my-4" *ngIf="user">
     <app-subscription-manager></app-subscription-manager>
   </div>
 
