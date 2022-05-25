@@ -158,5 +158,18 @@
     "password": "Salasana",
     "passwordAgain": "Salasana uudelleen",
     "reset": "Nollaa salasana"
+  },
+  "subscription": {
+    "title": "Tilauksen hallinta",
+    "status": "Tilauksen tila",
+    "subscribe": "Päivitä tilaus",
+    "cancel": "Peruuta tilaus",
+    "valid": "Voimassa",
+    "ending": "Päättymässä",
+    "notValid": "Ei voimassa",
+    "nextPayment": "Seuraava maksupäivä",
+    "endingDate": "Päättymispäivä",
+    "resubscribe": "Palauta tilaus",
+    "updateSubscription": "Päivitä maksutapa"
   }
 }

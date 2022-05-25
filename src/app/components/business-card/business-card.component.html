@@ -1,8 +1,5 @@
 <div (click)="toggleShare()" *ngIf="isShareMode" class="share-overlay">
-  <ngx-qrcode
-      [elementType]="qrElementType"
-      [errorCorrectionLevel]="qrCorrectionLevel"
-      [value]="qrValue"></ngx-qrcode>
+  <qr-code [value]="qrValue"  size="300" errorCorrectionLevel="M"></qr-code>
 </div>
 <div *ngIf="user" [ngClass]="getContainerClasses()" class="container print-full-width">
   <div class="row">

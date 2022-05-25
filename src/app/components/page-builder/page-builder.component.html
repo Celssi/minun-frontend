@@ -17,6 +17,10 @@
     <app-image-selector #imageSelector (imageChangedEmitter)="updateImage($event)" [defaultImage]="user?.image"></app-image-selector>
   </div>
 
+  <div class="my-4">
+    <app-subscription-manager></app-subscription-manager>
+  </div>
+
   <mat-card class="my-2">
     <h2>{{'pageBuilder.basicInfo' | translate}}</h2>
     <mat-form-field appearance="fill" class="width-all-available">

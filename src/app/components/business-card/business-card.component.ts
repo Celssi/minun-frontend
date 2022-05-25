@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
-import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { LoadingService } from '../../services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -16,8 +15,6 @@ export class BusinessCardComponent implements OnInit {
   public WEEKDAYS = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'];
 
   isShareMode = false;
-  qrElementType = NgxQrcodeElementTypes.URL;
-  qrCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   qrValue = document.location.href;
 
   constructor(private dataService: DataService, private route: ActivatedRoute, public loadingService: LoadingService, private translate: TranslateService) {

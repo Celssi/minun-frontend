@@ -412,11 +412,4 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     this.sendDisabled = false;
     this.snackBar.open(this.translate.instant('miscellaneous.errorHappened'), this.translate.instant('miscellaneous.close'));
   }
-
-  public processChiplist(event: Event): void {
-    console.log(event);
-    const target = event.currentTarget as HTMLElement;
-    target.blur();
-    target.focus();
-  }
 }

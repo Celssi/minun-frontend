@@ -34,8 +34,6 @@ import { NotLoggedInInterceptor } from './interceptors/not-logged-in.interceptor
 import { MatChipsModule } from '@angular/material/chips';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoadingInterceptor } from './interceptors/load.interceptor';
@@ -63,6 +61,8 @@ import { GoogleComponent } from './components/google/google.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 import { Observable } from 'rxjs';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { SubscriptionManagerComponent } from './components/subscription-manager/subscription-manager.component';
+import { QrCodeModule } from 'ng-qrcode';
 
 registerLocaleData(localeFI);
 
@@ -125,7 +125,8 @@ export function appInitializerFactory(translate: TranslateService): () => Observ
     FacebookComponent,
     SocialRegisterComponent,
     GoogleComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    SubscriptionManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -150,8 +151,7 @@ export function appInitializerFactory(translate: TranslateService): () => Observ
     FontAwesomeModule,
     FormsModule,
     MatButtonToggleModule,
-    NgxQRCodeModule,
-    NgxMaterialTimepickerModule.setLocale('fi-FI'),
+    QrCodeModule,
     MatToolbarModule,
     NgBusinessHoursLmModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
