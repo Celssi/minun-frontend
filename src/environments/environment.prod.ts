@@ -5,5 +5,5 @@ export const environment = {
   googleLoginUrl: 'https://backend.minun.info/google',
   domain: 'minun.info',
   useAnalytics: true,
-  stripePK: 'pk_test_51KEy7lEZi4iuQhFbOqgmatFIxfsyujrEnems1IsoULFPnTF8fWrekaDfMlYYXcXnokwCTS9JncVlXEvYbDeUadXj00Mob0v2fW'
+  stripePK: 'pk_live_51KEy7lEZi4iuQhFbWnTSVy56zPAgUGWfkcyzOhWRRjcbzL1zVcs2Yzbt77ENwsrBrAhlkIVg056In0AReYy2oQFM00eYlih2c4'
 };
