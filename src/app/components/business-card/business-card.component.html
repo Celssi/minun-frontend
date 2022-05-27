@@ -103,7 +103,7 @@
         </div>
       </div>
 
-      <div *ngIf="user.accountType === 'company' && user.businessHours" class="detailed-information mb-4">
+      <div *ngIf="user.accountType === 'company' && user.businessHours && user.hasPremium" class="detailed-information mb-4">
         <h2>{{'businessCard.businessHours' | translate}}</h2>
         <div class="information-row">
           <table class="table table-borderless">
