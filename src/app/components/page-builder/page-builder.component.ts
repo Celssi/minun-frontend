@@ -211,6 +211,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
       values.languages = this.languages.join(', ');
       values.specialSkills = this.specialSkills.join(', ');
       values.id = this.user?.id;
+      values.handle = values.handle ?? this.user?.handle;
 
       this.setOrderNumbers(this.workHistories?.controls);
       this.setOrderNumbers(this.educations?.controls);
@@ -348,7 +349,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
         twitter: [this.user ? this.getSocialMediaLink(this.user, LinkType.Twitter) : ''],
         github: [this.user ? this.getSocialMediaLink(this.user, LinkType.Github) : ''],
         linkedin: [this.user ? this.getSocialMediaLink(this.user, LinkType.Linkedin) : ''],
-        handle: [this.user ? this.user.handle : ''],
+        handle: [{ value: this.user ? this.user.handle : '', disabled: !this.user.hasPremium }],
         public: [this.user ? this.user.public : false],
         allowFacebookLogin: [this.user ? this.user.allowFacebookLogin : false],
         allowGoogleLogin: [this.user ? this.user.allowGoogleLogin : false]

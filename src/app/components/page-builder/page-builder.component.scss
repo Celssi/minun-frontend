@@ -141,6 +141,10 @@ mat-form-field {
   margin: 0 5px;
 }
 
+.grayed-out {
+  filter: blur(1px) grayscale(1);
+}
+
 @media (max-device-width: 800px) {
   h2 {
     margin-left: 10px;

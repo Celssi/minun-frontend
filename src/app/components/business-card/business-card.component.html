@@ -54,7 +54,7 @@
 
       <div *ngIf="user.workHistories?.length > 0" class="detailed-information">
         <h2>{{'businessCard.workHistories' | translate}}</h2>
-        <div *ngFor="let workHistory of user.workHistories; let i = index" class="information-row">
+        <div *ngFor="let workHistory of getWorkHistories(); let i = index" class="information-row">
           <div class="information-icon-container">
             <div [ngClass]="{'vertical-line-half-height': i > 0}" class="vertical-line vertical-line-green"></div>
             <div class="horizontal-line horizontal-line-green"></div>
@@ -75,7 +75,7 @@
 
       <div *ngIf="user.educations?.length > 0" class="detailed-information">
         <h2>{{'businessCard.education' | translate}}</h2>
-        <div *ngFor="let education of user.educations; let i  = index" class="information-row">
+        <div *ngFor="let education of getEducations(); let i  = index" class="information-row">
           <div class="information-icon-container">
             <div [ngClass]="{'vertical-line-half-height': i > 0}" class="vertical-line vertical-line-orange"></div>
             <div class="horizontal-line horizontal-line-orange"></div>

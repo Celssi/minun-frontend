@@ -4,6 +4,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
 import { LoadingService } from '../../services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
+import { WorkHistory } from '../../models/workHistory';
+import { Education } from '../../models/education';
 
 @Component({
   selector: 'app-business-card',
@@ -63,6 +65,14 @@ export class BusinessCardComponent implements OnInit {
   }
 
   getContainerClasses(): string {
-    return this.user.theme + (!this.hasMainContent() ? ' max-width-400 transparent-background' : '');
+    return (this.user.hasPremium ? this.user.theme : 'light') + (!this.hasMainContent() ? ' max-width-400 transparent-background' : '');
+  }
+
+  getWorkHistories(): WorkHistory[] {
+    return this.user.hasPremium ? this.user.workHistories : [this.user.workHistories[0]];
+  }
+
+  getEducations(): Education[] {
+    return this.user.hasPremium ? this.user.educations : [this.user.educations[0]];
   }
 }

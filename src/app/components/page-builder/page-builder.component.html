@@ -192,6 +192,7 @@
 
       <div *ngFor="let workHistory of workHistories.controls; let i = index" [ngClass]="{'mb-4': i < workHistories.controls.length - 1}" class="work-history" formArrayName="workHistories">
         <mat-card class="mat-elevation-z0">
+          <div class="text-warning" *ngIf="i > 0 && !user.hasPremium">{{'pageBuilder.updateToPremium' | translate}}</div>
           <mat-card-actions>
             <button (click)="moveUp(workHistories, i)" *ngIf="i - 1 >= 0" [matTooltip]="'pageBuilder.moveUp' | translate" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab>
               <mat-icon>arrow_upward</mat-icon>
@@ -203,7 +204,7 @@
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
-          <div [formGroupName]="i">
+          <div [formGroupName]="i" [ngClass]="{'grayed-out': i > 0 && !user.hasPremium}">
             <div class="group-row">
               <mat-form-field appearance="fill" class="width-all-available">
                 <mat-label>{{'pageBuilder.workPlace' | translate}}</mat-label>
@@ -243,6 +244,7 @@
 
       <div *ngFor="let education of educations.controls; let i = index" [ngClass]="{'mb-4': i < educations.controls.length - 1}" class="education" formArrayName="educations">
         <mat-card class="mat-elevation-z0">
+          <div class="text-warning" *ngIf="i > 0 && !user.hasPremium">{{'pageBuilder.updateToPremium' | translate}}</div>
           <mat-card-actions>
             <button (click)="moveUp(educations, i)" *ngIf="i - 1 >= 0" [matTooltip]="'pageBuilder.moveUp' | translate" class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab>
               <mat-icon>arrow_upward</mat-icon>
@@ -254,7 +256,7 @@
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
-          <div [formGroupName]="i">
+          <div [formGroupName]="i" [ngClass]="{'grayed-out': i > 0 && !user.hasPremium}">
             <div class="group-row">
               <mat-form-field appearance="fill" class="width-all-available">
                 <mat-label>{{'pageBuilder.educationPlace' | translate}}</mat-label>
@@ -290,7 +292,8 @@
 
   <mat-card *ngIf="isCompanyForm() && authService.isAuthenticated()" class="my-2">
     <h2>{{'pageBuilder.businessHours' | translate}}</h2>
-    <div class="p-2">
+    <div class="text-warning mb-4" *ngIf="!user.hasPremium">{{'pageBuilder.updateToPremium' | translate}}</div>
+    <div class="p-2" [ngClass]="{'grayed-out': !user.hasPremium}">
       <ng-business-hours-lm
           [(ngModel)]="businessHours"
           [ngModelOptions]="{standalone: true}"
@@ -303,10 +306,13 @@
   <mat-card *ngIf="authService.isAuthenticated()">
     <div class="theme-selector">
       <h2>{{'pageBuilder.pickTheme' | translate}}</h2>
-      <input checked="checked" formControlName="theme" id="light" name="theme" type="radio" value="light"/>
-      <label class="theme light" for="light" [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'light'}">{{'pageBuilder.lightTheme' | translate}}</label>
-      <input formControlName="theme" id="dark" name="theme" type="radio" value="dark"/>
-      <label class="theme dark" for="dark" [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'dark'}">{{'pageBuilder.darkTheme' | translate}}</label>
+      <div class="text-warning mb-4" *ngIf="!user.hasPremium">{{'pageBuilder.updateToPremium' | translate}}</div>
+      <div [ngClass]="{'grayed-out': !user.hasPremium}">
+        <input checked="checked" formControlName="theme" id="light" name="theme" type="radio" value="light"/>
+        <label class="theme light" for="light" [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'light'}">{{'pageBuilder.lightTheme' | translate}}</label>
+        <input formControlName="theme" id="dark" name="theme" type="radio" value="dark"/>
+        <label class="theme dark" for="dark" [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'dark'}">{{'pageBuilder.darkTheme' | translate}}</label>
+      </div>
     </div>
   </mat-card>
 

@@ -25,6 +25,7 @@ export class User {
   public: boolean;
   allowFacebookLogin: boolean;
   allowGoogleLogin: boolean;
+  hasPremium: boolean;
 
   socialMediaLinks: SocialMediaLink[];
   workHistories: WorkHistory[];
