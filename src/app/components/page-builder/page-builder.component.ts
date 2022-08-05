@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,7 +19,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 
-// TODO Kuukausimaksu
 // TODO Kartta
 // TODO Ota yhteyttä
 
@@ -34,7 +33,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
 
   readonly separatorKeysCodes = [COMMA] as const;
 
-  editFormGroup: FormGroup;
+  editFormGroup: UntypedFormGroup;
   image: string;
   sendDisabled = false;
   faFacebook = faFacebook;
