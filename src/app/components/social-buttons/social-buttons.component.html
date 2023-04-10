@@ -1,0 +1,18 @@
+<div [ngClass]="{'dark': colorClass === 'dark', 'light': colorClass === 'light'}" class="social-buttons">
+  <a *ngIf="getFacebookLink(user.socialMediaLinks)" [href]="getFacebookLink(user.socialMediaLinks)" mat-icon-button
+     target="_blank">
+    <fa-icon [icon]="faFacebook"></fa-icon>
+  </a>
+  <a *ngIf="getTwitterLink(user.socialMediaLinks)" [href]="getTwitterLink(user.socialMediaLinks)" mat-icon-button
+     target="_blank">
+    <fa-icon [icon]="faTwitter"></fa-icon>
+  </a>
+  <a *ngIf="getLinkedinLink(user.socialMediaLinks)" [href]="getLinkedinLink(user.socialMediaLinks)" mat-icon-button
+     target="_blank">
+    <fa-icon [icon]="faLinkedin"></fa-icon>
+  </a>
+  <a *ngIf="getGithubLink(user.socialMediaLinks)" [href]="getGithubLink(user.socialMediaLinks)" mat-icon-button
+     target="_blank">
+    <fa-icon [icon]="faGithub"></fa-icon>
+  </a>
+</div>

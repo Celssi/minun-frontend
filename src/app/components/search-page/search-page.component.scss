@@ -1,0 +1,64 @@
+.search-container {
+  background-image: linear-gradient(-225deg, #025174 0%, #3584A7 51%, #30D2BE 100%);
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar fa-icon {
+  position: absolute;
+  left: 20px;
+  color: #9ca3af;
+}
+
+.form-input {
+  height: 50px;
+  text-indent: 33px;
+  border-radius: 5px;
+}
+
+.form-input:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.user-description {
+  height: 30px;
+  text-overflow: ellipsis;
+}
+
+.card-image-container {
+  padding: 5px;
+
+  img {
+    margin-top: -5px;
+    border-radius: 5px;
+    border: 2px solid white;
+  }
+}
+
+mat-card-content {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.bio-item {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+
+  span {
+    margin-left: 0.3rem;
+  }
+
+  a {
+    color: var(--bs-body-color);
+  }
+}
+
+.search-card {
+  background-color: #FAF8F6;
+}

@@ -1,0 +1,385 @@
+<form [formGroup]="editFormGroup" [ngClass.md]="{'pt-4': authService.isAuthenticated()}"
+      [ngClass.xs]="{'pt-2': authService.isAuthenticated()}">
+  <mat-toolbar *ngIf="authService.isAuthenticated()">
+    <h2 class="text-white">{{'pageBuilder.title' | translate}}</h2>
+    <div class="action-buttons">
+      <button (click)="openBusinessCard()" class="me-2" color="primary" mat-raised-button>
+        <span>{{'pageBuilder.openBusinessCard' | translate}}</span>
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+      <button (click)="save()" color="primary" mat-raised-button>
+        <span>{{'miscellaneous.save' | translate}}</span>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="my-4">
+    <app-image-selector #imageSelector (imageChangedEmitter)="updateImage($event)"
+                        [defaultImage]="user?.image"></app-image-selector>
+  </div>
+
+  <div *ngIf="user" class="my-4">
+    <app-subscription-manager></app-subscription-manager>
+  </div>
+
+  <mat-card class="my-2">
+    <h2>{{'pageBuilder.basicInfo' | translate}}</h2>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.accountType' | translate}}</mat-label>
+      <mat-select (selectionChange)="accountTypeChanged()" autofocus formControlName="accountType">
+        <mat-option value="user">{{'pageBuilder.user' | translate}}</mat-option>
+        <mat-option value="company">{{'pageBuilder.company' | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isUserForm()" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.firstName' | translate}}</mat-label>
+      <input autocomplete="given-name" formControlName="firstName" matInput maxlength="100" type="text">
+      <mat-error *ngIf="editForm.firstName.errors?.required">Tieto on pakollinen</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isUserForm()" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.lastName' | translate}}</mat-label>
+      <input autocomplete="family-name" formControlName="lastName" matInput maxlength="100" type="text">
+      <mat-error *ngIf="editForm.lastName.errors?.required">Tieto on pakollinen</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isUserForm() && user" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.workTitle' | translate}}</mat-label>
+      <input autocomplete="off" formControlName="title" matInput maxlength="300" type="text">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isCompanyForm()" appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.companyName' | translate}}</mat-label>
+      <input autocomplete="organization" formControlName="companyName" matInput maxlength="100" type="text">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="user" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.phone' | translate}}</mat-label>
+      <input autocomplete="tel" formControlName="phone" matInput maxlength="300" type="text">
+      <mat-error *ngIf="editForm.phone.errors?.wrongNumber">{{'pageBuilder.phoneWrongFormat' | translate}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [ngClass]="{'width-half-available': user, 'width-all-available': !user}" appearance="fill">
+      <mat-label>{{'pageBuilder.email' | translate}}</mat-label>
+      <input (focusout)="validateEmail()" autocomplete="email" email formControlName="email" matInput maxlength="300"
+             type="text">
+      <mat-icon [matTooltip]="'pageBuilder.usedForLogin' | translate" matSuffix>info</mat-icon>
+      <mat-error *ngIf="editForm.email.errors?.emailNotValid">{{'pageBuilder.emailWrongFormat' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.email.errors?.alreadyExists">{{'pageBuilder.emailAlreadyUsed' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.email.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="user" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.webpage' | translate}}</mat-label>
+      <input autocomplete="url" formControlName="website" matInput maxlength="300" type="text">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="user" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.location' | translate}}</mat-label>
+      <input autocomplete="address-level2" formControlName="location" matInput maxlength="300" type="text">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="user" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.handle' | translate}}</mat-label>
+      <input (focusout)="validateHandle()" autocomplete="off" formControlName="handle" matInput maxlength="300"
+             type="text">
+      <mat-icon [matTooltip]="'pageBuilder.handleUsedForSharing' | translate" matSuffix>info</mat-icon>
+      <mat-error *ngIf="editForm.handle.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+      <mat-error
+        *ngIf="editForm.handle.errors?.alreadyExists">{{'pageBuilder.handleAlreadyUsed' | translate}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!user" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.password' | translate}}</mat-label>
+      <input autocomplete="new-password" formControlName="password" matInput maxlength="300" type="password">
+      <mat-icon [matTooltip]="'pageBuilder.passwordDescription' | translate" matSuffix>info</mat-icon>
+      <mat-error *ngIf="editForm.password.errors?.pattern">{{'pageBuilder.passwordWrongFormat' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.password.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!user" appearance="fill" class="width-half-available">
+      <mat-label>{{'pageBuilder.passwordAgain' | translate}}</mat-label>
+      <input autocomplete="new-password" formControlName="passwordAgain" matInput maxlength="300" type="password">
+      <mat-error
+        *ngIf="editForm.passwordAgain.errors?.noMatch">{{'pageBuilder.passwordNoMatch' | translate}}</mat-error>
+      <mat-error *ngIf="editForm.passwordAgain.errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+    </mat-form-field>
+
+    <div *ngIf="!authService.isAuthenticated()" class="mt-2 form-text-block">
+      {{'pageBuilder.privacyPolicy' | translate}} <a routerLink="/tutustu">{{'pageBuilder.here' | translate}}</a>
+    </div>
+
+    <div *ngIf="!authService.isAuthenticated()" class="mt-2 form-text-block">
+      {{'pageBuilder.confirmationReminder' | translate}}
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="authService.isAuthenticated()" class="my-2">
+    <h2>{{'pageBuilder.description' | translate}}</h2>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.describe' | translate}}</mat-label>
+      <textarea #description (keyup)="limitDescriptionSize()" formControlName="description" matInput
+                rows="10"></textarea>
+      <mat-hint align="end">{{description.value?.length || 0}}/1000</mat-hint>
+      <mat-error *ngIf="editForm.description.errors?.max">{{'pageBuilder.textTooLong' | translate}}</mat-error>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card *ngIf="authService.isAuthenticated()" class="my-2">
+    <div class="social-media-links">
+      <h2>{{'pageBuilder.socialMediaLinks' | translate}}</h2>
+      <mat-form-field appearance="fill" class="width-all-available">
+        <mat-label>Facebook</mat-label>
+        <span class="me-2" matPrefix><fa-icon [icon]="faFacebook"></fa-icon></span>
+        <input autocomplete="off" formControlName="facebook" matInput maxlength="300" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="width-all-available">
+        <mat-label>Twitter</mat-label>
+        <span class="me-2" matPrefix><fa-icon [icon]="faTwitter"></fa-icon></span>
+        <input autocomplete="off" formControlName="twitter" matInput maxlength="300" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="width-all-available">
+        <mat-label>LinkedIn</mat-label>
+        <span class="me-2" matPrefix><fa-icon [icon]="faLinkedin"></fa-icon></span>
+        <input autocomplete="off" formControlName="linkedin" matInput maxlength="300" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="width-all-available">
+        <mat-label>GitHub</mat-label>
+        <span class="me-2" matPrefix><fa-icon [icon]="faGithub"></fa-icon></span>
+        <input autocomplete="off" formControlName="github" matInput maxlength="300" type="text">
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="authService.isAuthenticated()" class="my-2">
+    <div class="skills">
+      <h2>{{isUserForm() ? ('pageBuilder.mySkills' | translate) : ('pageBuilder.ourServices' | translate)}}</h2>
+      <small>{{'pageBuilder.pleaseSeparateWithComma' | translate}}</small>
+      <mat-form-field *ngIf="isUserForm()" appearance="fill" class="width-all-available">
+        <mat-label>{{'pageBuilder.languages' | translate}}</mat-label>
+        <mat-chip-list #languagesChipList>
+          <mat-chip (removed)="removeFromList(languages, i)" *ngFor="let language of languages; let i = index"
+                    [removable]="true" [selectable]="true">
+            {{language}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input (matChipInputTokenEnd)="addChipToList(languages, $event)"
+                 [(ngModel)]="languageToAdd"
+                 [matChipInputAddOnBlur]="true"
+                 [matChipInputFor]="languagesChipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [ngModelOptions]="{standalone: true}" [placeholder]="'pageBuilder.writeAndPressComma' | translate"
+                 autocomplete="off">
+        </mat-chip-list>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="width-all-available">
+        <mat-label>{{isUserForm() ? ('pageBuilder.specialSkills' | translate) : ('pageBuilder.companySpecialSkills' | translate)}}</mat-label>
+        <mat-chip-list #specialSkillsChipList>
+          <mat-chip (removed)="removeFromList(specialSkills, i)"
+                    *ngFor="let specialSkill of specialSkills; let i = index" [removable]="true" [selectable]="true">
+            {{specialSkill}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input (matChipInputTokenEnd)="addChipToList(specialSkills, $event)"
+                 [(ngModel)]="skillToAdd"
+                 [matChipInputAddOnBlur]="true"
+                 [matChipInputFor]="specialSkillsChipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [ngModelOptions]="{standalone: true}" [placeholder]="'pageBuilder.writeAndPressComma' | translate"
+                 autocomplete="off">
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="authService.isAuthenticated() && isUserForm()" class="my-2">
+    <div class="work-histories">
+      <h2>{{'pageBuilder.workHistory' | translate}}</h2>
+
+      <div *ngFor="let workHistory of workHistories.controls; let i = index"
+           [ngClass]="{'mb-4': i < workHistories.controls.length - 1}" class="work-history"
+           formArrayName="workHistories">
+        <mat-card class="mat-elevation-z0">
+          <div *ngIf="i > 0 && !user.hasPremium"
+               class="text-warning">{{'pageBuilder.updateToPremium' | translate}}</div>
+          <mat-card-actions>
+            <button (click)="moveUp(workHistories, i)" *ngIf="i - 1 >= 0"
+                    [matTooltip]="'pageBuilder.moveUp' | translate" class="mat-elevation-z2 mx-1" color="primary"
+                    mat-mini-fab>
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button (click)="moveDown(workHistories, i)" *ngIf="i + 1 < educations.controls.length"
+                    [matTooltip]="'pageBuilder.moveUp' | translate" class="mat-elevation-z2 mx-1" color="primary"
+                    mat-mini-fab>
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <button (click)="removeFromList(workHistories, i)" [matTooltip]="'miscellaneous.delete' | translate"
+                    class="mat-elevation-z2" color="warn" mat-mini-fab>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+          <div [formGroupName]="i" [ngClass]="{'grayed-out': i > 0 && !user.hasPremium}">
+            <div class="group-row">
+              <mat-form-field appearance="fill" class="width-all-available">
+                <mat-label>{{'pageBuilder.workPlace' | translate}}</mat-label>
+                <input autocomplete="organization" formControlName="workplace" matInput type="text">
+                <mat-error
+                  *ngIf="workHistory.get('workplace').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>{{'pageBuilder.workTitle' | translate}}</mat-label>
+              <input autocomplete="organization-title" formControlName="title" matInput maxlength="300" type="text">
+              <mat-error
+                *ngIf="workHistory.get('title').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>{{'pageBuilder.period' | translate}}</mat-label>
+              <input autocomplete="off" formControlName="period" matInput maxlength="300" type="text">
+              <mat-error
+                *ngIf="workHistory.get('period').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>{{'pageBuilder.description' | translate}}</mat-label>
+              <textarea formControlName="description" matInput maxlength="1000" rows="5"></textarea>
+              <mat-error
+                *ngIf="workHistory.get('description').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="button-row my-3">
+      <button (click)="addWorkHistoryFormGroup()" class="add-button" color="primary" mat-raised-button>
+        {{'pageBuilder.addWorkHistory' | translate}}
+      </button>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="authService.isAuthenticated() && isUserForm()" class="my-2">
+    <div class="educations">
+      <h2>{{'pageBuilder.education' | translate}}</h2>
+
+      <div *ngFor="let education of educations.controls; let i = index"
+           [ngClass]="{'mb-4': i < educations.controls.length - 1}" class="education" formArrayName="educations">
+        <mat-card class="mat-elevation-z0">
+          <div *ngIf="i > 0 && !user.hasPremium"
+               class="text-warning">{{'pageBuilder.updateToPremium' | translate}}</div>
+          <mat-card-actions>
+            <button (click)="moveUp(educations, i)" *ngIf="i - 1 >= 0" [matTooltip]="'pageBuilder.moveUp' | translate"
+                    class="mat-elevation-z2 mx-1" color="primary" mat-mini-fab>
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <button (click)="moveDown(educations, i)" *ngIf="i + 1 < educations.controls.length"
+                    [matTooltip]="'pageBuilder.moveDown' | translate" class="mat-elevation-z2 mx-1" color="primary"
+                    mat-mini-fab>
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <button (click)="removeFromList(educations, i)" [matTooltip]="'miscellaneous.delete' | translate"
+                    class="mat-elevation-z2 mx-1" color="warn" mat-mini-fab>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+          <div [formGroupName]="i" [ngClass]="{'grayed-out': i > 0 && !user.hasPremium}">
+            <div class="group-row">
+              <mat-form-field appearance="fill" class="width-all-available">
+                <mat-label>{{'pageBuilder.educationPlace' | translate}}</mat-label>
+                <input autocomplete="off" formControlName="educationPlace" matInput type="text">
+                <mat-error
+                  *ngIf="education.get('educationPlace').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>{{'pageBuilder.degree' | translate}}</mat-label>
+              <input autocomplete="off" formControlName="title" matInput maxlength="300" type="text">
+              <mat-error
+                *ngIf="education.get('title').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>{{'pageBuilder.period' | translate}}</mat-label>
+              <input autocomplete="off" formControlName="period" matInput maxlength="300" type="text">
+              <mat-error
+                *ngIf="education.get('period').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-all-available">
+              <mat-label>{{'pageBuilder.description' | translate}}</mat-label>
+              <textarea formControlName="description" matInput maxlength="1000" rows="5"></textarea>
+              <mat-error
+                *ngIf="education.get('description').errors?.required">{{'pageBuilder.requiredField' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="button-row my-3">
+      <button (click)="addEducationFormGroup()" class="add-button" color="primary" mat-raised-button>
+        {{'pageBuilder.addEducation' | translate}}
+      </button>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="isCompanyForm() && authService.isAuthenticated()" class="my-2">
+    <h2>{{'pageBuilder.businessHours' | translate}}</h2>
+    <div *ngIf="!user.hasPremium" class="text-warning mb-4">{{'pageBuilder.updateToPremium' | translate}}</div>
+    <div [ngClass]="{'grayed-out': !user.hasPremium}" class="p-2">
+      <ng-business-hours-lm
+        [(ngModel)]="businessHours"
+        [ngModelOptions]="{standalone: true}"
+        [timeFromLabel]="'pageBuilder.opens' | translate"
+        [timeToLabel]="'pageBuilder.closes' | translate">
+      </ng-business-hours-lm>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="authService.isAuthenticated()">
+    <div class="theme-selector">
+      <h2>{{'pageBuilder.pickTheme' | translate}}</h2>
+      <div *ngIf="!user.hasPremium" class="text-warning mb-4">{{'pageBuilder.updateToPremium' | translate}}</div>
+      <div [ngClass]="{'grayed-out': !user.hasPremium}">
+        <input checked="checked" formControlName="theme" id="light" name="theme" type="radio" value="light" />
+        <label [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'light'}" class="theme light"
+               for="light">{{'pageBuilder.lightTheme' | translate}}</label>
+        <input formControlName="theme" id="dark" name="theme" type="radio" value="dark" />
+        <label [ngClass]="{'mat-elevation-z8' : editForm.theme.value === 'dark'}" class="theme dark"
+               for="dark">{{'pageBuilder.darkTheme' | translate}}</label>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="authService.isAuthenticated()" class="my-2">
+    <h2>{{'pageBuilder.settings' | translate}}</h2>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.showMyProfileOnSearchPage' | translate}}</mat-label>
+      <mat-select formControlName="public">
+        <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
+        <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.allowFacebookLogin' | translate}}</mat-label>
+      <mat-select formControlName="allowFacebookLogin">
+        <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
+        <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
+      </mat-select>
+      <mat-icon [matTooltip]="'pageBuilder.emailMustMatchFacebook' | translate" matSuffix>info</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="width-all-available">
+      <mat-label>{{'pageBuilder.allowGoogleLogin' | translate}}</mat-label>
+      <mat-select formControlName="allowGoogleLogin">
+        <mat-option [value]="true">{{'miscellaneous.yes' | translate}}</mat-option>
+        <mat-option [value]="false">{{'miscellaneous.no' | translate}}</mat-option>
+      </mat-select>
+      <mat-icon [matTooltip]="'pageBuilder.emailMustMatchGoogle' | translate" matSuffix>info</mat-icon>
+    </mat-form-field>
+  </mat-card>
+
+  <div class="button-row mt-2">
+    <button (click)="deleteProfile()" *ngIf="authService.isAuthenticated()" class="me-2" color="warn"
+            mat-raised-button>{{'pageBuilder.deleteMyProfile' | translate}}</button>
+    <button (click)="save()" color="primary"
+            mat-raised-button>{{authService.isAuthenticated() ? ('pageBuilder.save' | translate) : ('pageBuilder.register' | translate)}}</button>
+  </div>
+</form>

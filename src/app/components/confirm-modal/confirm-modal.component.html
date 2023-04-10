@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+  {{message}}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="close()" mat-raised-button>{{'miscellaneous.close' | translate}}</button>
+  <button (click)="confirm()" [color]="buttonColor" mat-raised-button>{{'miscellaneous.yes' | translate}}</button>
+</mat-dialog-actions>

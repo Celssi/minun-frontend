@@ -1,0 +1,55 @@
+<nav #navcontainer class="navbar">
+  <div (click)="scrollLeft()" *ngIf="showArrowLeft" class="arrow-left">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </div>
+  <ul class="navbar-nav">
+    <li class="logo">
+      <a class="nav-link" href="#">
+        <span class="link-text logo-text">
+          <img alt="logo" height="45" src="assets/logo.png" />
+          Minun.info
+        </span>
+        <mat-icon>double_arrow</mat-icon>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a [routerLinkActive]="['active-link']" class="nav-link" routerLink="/etusivu">
+        <mat-icon>dashboard</mat-icon>
+        <span class="link-text">{{'navbar.frontPage' | translate}}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a [routerLinkActive]="['active-link']" class="nav-link" routerLink="/etsi">
+        <mat-icon>search</mat-icon>
+        <span class="link-text">{{'navbar.search' | translate}}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a [routerLinkActive]="['active-link']" class="nav-link" routerLink="/tutustu">
+        <mat-icon>menu_book</mat-icon>
+        <span class="link-text">{{'navbar.getToKnow' | translate}}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a (click)="logout()" *ngIf="authService.isAuthenticated()" class="nav-link">
+        <mat-icon>logout</mat-icon>
+        <span class="link-text">{{'navbar.logout' | translate}}</span>
+      </a>
+      <a *ngIf="!authService.isAuthenticated()" class="nav-link" routerLink="/kirjaudu">
+        <mat-icon>login</mat-icon>
+        <span class="link-text">{{'navbar.login' | translate}}</span>
+      </a>
+    </li>
+    <li class="nav-item version-info">
+      <span>&copy; minun.info - v.{{appVersion}} ({{backendVersion}})</span>
+    </li>
+  </ul>
+
+  <div (click)="scrollRight()" *ngIf="showArrowRight" class="arrow-right">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </div>
+</nav>

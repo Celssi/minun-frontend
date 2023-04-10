@@ -1,0 +1,32 @@
+<mat-card *ngIf="!authService.isAuthenticated()" class="jumbotron">
+  <div class="overlay">
+    <div class="text-white text-center py-5 px-4">
+      <div class="py-5 ad-container">
+        <h1>{{'frontPage.title' | translate}}</h1>
+        <h2 class="card-title h2 my-4 py-2 text-center">{{'frontPage.subtitle' | translate}}</h2>
+        <p class="mb-4 pb-2 px-md-5 mx-md-5 description">{{'frontPage.description' | translate}}</p>
+        <a [routerLink]="['/tutustu']" color="primary" mat-raised-button>{{'frontPage.readMore' | translate}}</a>
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card *ngIf="!authService.isAuthenticated()" class="mt-2 main-card">
+  <mat-card-header class="border-bottom p-2">
+    <mat-card-title class="text-white">{{'frontPage.notLoggedInWelcome' | translate}}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <h2 class="text-white my-4 text-center">{{'frontPage.registerSocialMediaHeader' | translate}}</h2>
+    <app-social-register></app-social-register>
+
+    <h2 class="text-white my-4 text-center">{{'frontPage.registerFormHeader' | translate}}</h2>
+    <app-page-builder></app-page-builder>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="authService.isAuthenticated() && this.authService.user" class="pt-0 main-card">
+  <mat-card-content>
+    <app-page-builder [user]="authService.user"></app-page-builder>
+  </mat-card-content>
+</mat-card>

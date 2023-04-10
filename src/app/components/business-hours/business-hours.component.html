@@ -1,0 +1,39 @@
+<form *ngIf="form" [formGroup]="form">
+  <div [ngClass]="disabled ? 'business-hours--disabled' : ''"
+       class="business-hours">
+    <div *ngFor="let day of weekdays; index as i" [formGroupName]="i" class="day">
+      <div class="business-hours__left">
+        <div class="day__weekday">{{getDateForWeekDay(i) | localizedDate | titlecase}}</div>
+        <div (click)="onChangeOperationState(i)"
+             [ngClass]="businessHours[i]['open'] ? 'day__box--open' : 'day__box--closed'"
+             class="day__box">
+          <input class="invisible" formControlName="open" type="checkbox" />
+        </div>
+      </div>
+      <div class="business-hours__right">
+        <div class="operation-time">
+          <div class="operation-time__input">
+            <mat-form-field [ngClass]="!businessHours[i]['open'] ? 'invisible' : ''">
+              <mat-label>{{timeFromLabel ? timeFromLabel : 'From'}}</mat-label>
+              <mat-select formControlName="from" value="{{businessHours[i]['from']}}">
+                <mat-option *ngFor="let timeOption of timeOptions" [value]="timeOption">{{timeOption}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="operation-time__input">
+            <mat-form-field [ngClass]="!businessHours[i]['open'] ? 'invisible' : ''">
+              <mat-label>{{timeToLabel ? timeToLabel : 'To'}}</mat-label>
+              <mat-select formControlName="to" value="{{businessHours[i]['to']}}">
+                <mat-option *ngFor="let timeOption of timeOptions" [value]="timeOption">{{timeOption}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-error *ngIf="form.get(i.toString())?.hasError('timeToMustBeGreaterThenTimeFrom')"
+                     class="text-small-error">
+            {{validationErrorMessage ? validationErrorMessage : 'The "From" must be earlier than the "To"'}}
+          </mat-error>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

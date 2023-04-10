@@ -1,0 +1,139 @@
+<div (click)="toggleShare()" *ngIf="isShareMode" class="share-overlay">
+  <qr-code [value]="qrValue" errorCorrectionLevel="M" size="300"></qr-code>
+</div>
+<div *ngIf="user" [ngClass]="getContainerClasses()" class="container print-full-width">
+  <div class="row">
+    <div [ngClass]="{'col-12 max-width-400': !hasMainContent(), 'col-md-4': hasMainContent()}"
+         class="col-md-4 bg-info col-sm-12 pt-3">
+      <div class="business-card-header">
+        <button (click)="toggleShare()" class="share-button" mat-icon-button>
+          <mat-icon>share</mat-icon>
+        </button>
+
+        <span class="text-white">@{{user.handle}}</span>
+      </div>
+
+      <div class="image-container mb-4">
+        <img [src]="user.image" alt="" />
+      </div>
+
+      <h1 class="text-center text-white">{{getUserName()}}</h1>
+      <h5 class="text-center text-white">{{user.title}}</h5>
+
+      <div class="bio text-white p-3">
+        <div *ngIf="user.email" class="bio-item">
+          <mat-icon>email</mat-icon>
+          <span><a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></span></div>
+        <div *ngIf="user.website" class="bio-item">
+          <mat-icon>web</mat-icon>
+          <span><a [href]="user.website" target="_blank">{{user.website}}</a></span></div>
+        <div *ngIf="user.phone" class="bio-item">
+          <mat-icon>phone</mat-icon>
+          <span><a href="tel:{{user.phone}}">{{user.phone}}</a></span></div>
+        <div *ngIf="user.location" class="bio-item">
+          <mat-icon>location_on</mat-icon>
+          <span>{{user.location}}</span></div>
+      </div>
+
+      <div class="p-3">
+        <app-social-buttons [user]="user" colorClass="light"></app-social-buttons>
+      </div>
+    </div>
+
+    <div *ngIf="hasMainContent()" class="main-content col-md-8 col-sm-12 px-lg-4">
+      <h2 *ngIf="user.description" class="mt-3">{{'businessCard.shortDescription' | translate}}</h2>
+      <div class="description">{{user.description}}</div>
+
+      <div *ngIf="user.specialSkills" class="detailed-information mb-4">
+        <h2>{{'businessCard.specialSkills' | translate}}</h2>
+        <div class="information-row">
+          <mat-chip-list>
+            <mat-chip *ngFor="let specialSkill of splitToChipList(user.specialSkills)">{{specialSkill}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div *ngIf="user.workHistories?.length > 0" class="detailed-information">
+        <h2>{{'businessCard.workHistories' | translate}}</h2>
+        <div *ngFor="let workHistory of getWorkHistories(); let i = index" class="information-row">
+          <div class="information-icon-container">
+            <div [ngClass]="{'vertical-line-half-height': i > 0}" class="vertical-line vertical-line-green"></div>
+            <div class="horizontal-line horizontal-line-green"></div>
+            <div class="information-icon information-icon-green">
+              <mat-icon>business_center</mat-icon>
+            </div>
+            <div class="horizontal-line horizontal-line-green"></div>
+            <div [ngClass]="{'vertical-line-half-height': i < (user.workHistories.length - 1)}"
+                 class="vertical-line vertical-line-green"></div>
+          </div>
+          <div class="information-content">
+            <small>{{workHistory.period}}</small>
+            <h3>{{workHistory.title}}</h3>
+            <h4>{{workHistory.workplace}}</h4>
+            <span>{{workHistory.description}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="user.educations?.length > 0" class="detailed-information">
+        <h2>{{'businessCard.education' | translate}}</h2>
+        <div *ngFor="let education of getEducations(); let i  = index" class="information-row">
+          <div class="information-icon-container">
+            <div [ngClass]="{'vertical-line-half-height': i > 0}" class="vertical-line vertical-line-orange"></div>
+            <div class="horizontal-line horizontal-line-orange"></div>
+            <div class="information-icon information-icon-orange">
+              <mat-icon>history_edu</mat-icon>
+            </div>
+            <div class="horizontal-line horizontal-line-orange"></div>
+            <div [ngClass]="{'vertical-line-half-height': i < (user.educations.length - 1)}"
+                 class="vertical-line vertical-line-orange"></div>
+          </div>
+          <div class="information-content">
+            <small>{{education.period}}</small>
+            <h3>{{education.title}}</h3>
+            <h4>{{education.educationPlace}}</h4>
+            <span>{{education.description}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="user.languages" class="detailed-information mb-4">
+        <h2>{{'businessCard.languages' | translate}}</h2>
+        <div class="information-row">
+          <mat-chip-list>
+            <mat-chip *ngFor="let language of splitToChipList(user.languages)">{{language}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div *ngIf="user.accountType === 'company' && user.businessHours && user.hasPremium"
+           class="detailed-information mb-4">
+        <h2>{{'businessCard.businessHours' | translate}}</h2>
+        <div class="information-row">
+          <table class="table table-borderless">
+            <thead>
+            <tr>
+              <th scope="col">{{'businessCard.dayOfWeek' | translate}}</th>
+              <th scope="col">{{'businessCard.opens' | translate}}</th>
+              <th scope="col">{{'businessCard.closes' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let businessHour of user.businessHours">
+              <td>{{WEEKDAYS[businessHour.order]}}</td>
+              <td>{{businessHour.open ? businessHour.from : ('businessCard.closed' | translate)}}</td>
+              <td>{{businessHour.open ? businessHour.to : ('businessCard.closed' | translate)}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!user && !(loadingService.isLoading$ | async)">
+  <mat-card>
+    <h2>{{'businessCard.errorHeader' | translate}}</h2>
+    {{'businessCard.errorMessage' | translate}}
+  </mat-card>
+</div>

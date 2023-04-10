@@ -1,0 +1,29 @@
+<mat-card class="my-2">
+  <h2>{{'subscription.title' | translate}}</h2>
+
+  <div class="subscription-info">
+    <div>
+      <b>{{'subscription.status' | translate}}</b>
+      <p *ngIf="isActive()" class="text-success">{{'subscription.valid' | translate}}</p>
+      <p *ngIf="isCancelled()" class="text-warning">{{'subscription.ending' | translate}}</p>
+      <p *ngIf="!subscription" class="text-danger">{{'subscription.notValid' | translate}}</p>
+    </div>
+
+    <div *ngIf="isActive() || isCancelled()">
+      <b *ngIf="isActive()">{{'subscription.nextPayment' | translate}}</b>
+      <b *ngIf="isCancelled()">{{'subscription.endingDate' | translate}}</b>
+      <p>{{subscription?.current_period_end * 1000 | date: 'dd.MM.yyyy'}}</p>
+    </div>
+
+    <div>
+      <button (click)="updateSubscription()" *ngIf="isActive() || isCancelled()" class="me-2" color="primary"
+              mat-raised-button>{{'subscription.updateSubscription' | translate}}</button>
+      <button (click)="subscribe()" *ngIf="!subscription" color="primary"
+              mat-raised-button>{{'subscription.subscribe' | translate}}</button>
+      <button (click)="resubscribe()" *ngIf="isCancelled()" color="primary"
+              mat-raised-button>{{'subscription.resubscribe' | translate}}</button>
+      <button (click)="cancelSubscription()" *ngIf="isActive()" color="warn"
+              mat-raised-button>{{'subscription.cancel' | translate}}</button>
+    </div>
+  </div>
+</mat-card>

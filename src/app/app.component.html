@@ -1,0 +1,22 @@
+<ng-container *ngIf="(loadingService.isLoading$ | async)">
+  <div class="spinner-overlay">
+    <div *ngIf="(loadingService.isLoading$ | async)" class="spinner">
+      <mat-progress-spinner diameter="200" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+</ng-container>
+
+<app-navbar *ngIf="!isOnSharePage"></app-navbar>
+
+<div #wrapper
+     (scrolled)="onScroll()"
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="50"
+     [ngClass]="{'logged-in-wrapper': !isOnSharePage}"
+     [scrollWindow]="false"
+     class="wrapper"
+     infiniteScroll>
+  <div [ngClass]="{'login-container': isOnLoginPage}" class="container p-1">
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
+</div>

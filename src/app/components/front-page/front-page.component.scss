@@ -1,0 +1,48 @@
+.jumbotron {
+  background-image: url("~src/assets/business.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+}
+
+.mat-card-header {
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.main-card {
+  background-image: linear-gradient(-225deg, #025174 0%, #3584A7 51%, #30D2BE 100%);
+}
+
+.description {
+  max-width: 600px;;
+}
+
+.ad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 800px) {
+  h2 {
+    text-align: left !important;
+    line-height: 20px;
+  }
+
+  .card-title {
+    text-align: center !important;
+  }
+}
